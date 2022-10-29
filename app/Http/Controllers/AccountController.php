@@ -173,7 +173,7 @@ class AccountController extends Controller
 
             $account = new Account;
 
-            $account->id = $this->generateId('acct', $account);
+            $account->id = $this->generateId('account', $account);
             $account->gender = $request->input('gender');
             $account->accountNumber = $account->generateAccountNumber();
             $account->firstName = $request->input('firstName');
@@ -195,19 +195,14 @@ class AccountController extends Controller
             Bugsnag::notifyException($e);
             throw new PDOException($e);
         }
-        catch (ModelNotFoundException $e) {
+        catch (ModelNotFoundException | ValidationException $e) {
             Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 409);
         }
         catch (JsonEncodingException $e) {
             Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), $e->getCode());
-        }
-        catch (ValidationException $e) {
-            Bugsnag::notifyException($e);
-            return response()->json($e->getMessage(), 409);
-        }
-        catch (DecryptException | Exception $e) {
+        } catch (DecryptException | Exception $e) {
             Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 500);
         }
@@ -352,15 +347,7 @@ class AccountController extends Controller
             Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), $e->getCode());
         }
-        catch (ValidationException $e) {
-            Bugsnag::notifyException($e);
-            return response()->json($e->getMessage(), 409);
-        }
-        catch (AuthenticationException $e) {
-            Bugsnag::notifyException($e);
-            return response()->json($e->getMessage(), 403);
-        }
-        catch (Exception $e) {
+        catch (ValidationException | Exception $e) {
             Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 409);
         }
@@ -408,15 +395,7 @@ class AccountController extends Controller
             Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), $e->getCode());
         }
-        catch (ValidationException $e) {
-            Bugsnag::notifyException($e);
-            return response()->json($e->getMessage(), 409);
-        }
-        catch (AuthenticationException $e) {
-            Bugsnag::notifyException($e);
-            return response()->json($e->getMessage(), 403);
-        }
-        catch (Exception $e) {
+        catch (ValidationException | Exception $e) {
             Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 409);
         }
