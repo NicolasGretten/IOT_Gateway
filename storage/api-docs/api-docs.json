@@ -1,6 +1,7 @@
 {
     "openapi": "3.0.0",
     "info": {
+<<<<<<< HEAD
         "title": "Account API Collect&Verything",
         "version": "0.1"
     },
@@ -770,6 +771,21 @@
                 "name": "Authorization",
                 "in": "header"
             }
+=======
+        "title": "Template API Collect&Verything",
+        "version": "0.1"
+    },
+    "paths": {
+        "/": {
+            "get": {
+                "description": "Home page",
+                "responses": {
+                    "default": {
+                        "description": "Welcome page"
+                    }
+                }
+            }
+>>>>>>> template/master
         }
     },
     "security": [

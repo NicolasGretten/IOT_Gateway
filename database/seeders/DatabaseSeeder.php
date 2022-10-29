@@ -3,8 +3,11 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+<<<<<<< HEAD
 use App\Models\Account;
 use Illuminate\Contracts\Container\BindingResolutionException;
+=======
+>>>>>>> template/master
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,6 +16,7 @@ class DatabaseSeeder extends Seeder
      * Seed the application's database.
      *
      * @return void
+<<<<<<< HEAD
      * @throws BindingResolutionException
      */
     public function run()
@@ -30,5 +34,16 @@ class DatabaseSeeder extends Seeder
             'locale' => 'fr-fr',
             'keepLogging' => '1',
          ]);
+=======
+     */
+    public function run()
+    {
+        // \App\Models\User::factory(10)->create();
+
+        // \App\Models\User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        // ]);
+>>>>>>> template/master
     }
 }

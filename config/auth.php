@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     'defaults' => [
         'guard' => 'account',
         'passwords' => 'account',
