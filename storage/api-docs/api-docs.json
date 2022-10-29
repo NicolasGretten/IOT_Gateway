@@ -1,0 +1,588 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Account API Collect&Verything",
+        "version": "0.1"
+    },
+    "paths": {
+        "/api/accounts/{id}": {
+            "get": {
+                "tags": [
+                    "Accounts"
+                ],
+                "summary": "Get account information",
+                "description": "Returns account data",
+                "operationId": "retrieve",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Account id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Account not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Accounts"
+                ],
+                "summary": "Delete an account",
+                "description": "Soft delete an account",
+                "operationId": "delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Account id",
+                        "required": true,
+                        "schema": {
+                            "type": "String"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Account deleted"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Accounts"
+                ],
+                "summary": "Patch an account",
+                "description": "Update an account",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "firstName",
+                        "in": "query",
+                        "description": "First name"
+                    },
+                    {
+                        "name": "lastName",
+                        "in": "query",
+                        "description": "Last name"
+                    },
+                    {
+                        "name": "gender",
+                        "in": "query",
+                        "description": "gender"
+                    },
+                    {
+                        "name": "phone",
+                        "in": "query",
+                        "description": "Phone number"
+                    },
+                    {
+                        "name": "birthday",
+                        "in": "query",
+                        "description": "Birthday date"
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Email"
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "Locale needed for the account translations"
+                    },
+                    {
+                        "name": "keepLogging",
+                        "in": "query",
+                        "description": "If the account stay logging"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Account updated"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/accounts": {
+            "get": {
+                "tags": [
+                    "Accounts"
+                ],
+                "summary": "Get all account information",
+                "description": "Returns accounts data",
+                "operationId": "list",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Accounts"
+                ],
+                "summary": "Post a new account",
+                "description": "Create a new account",
+                "operationId": "create",
+                "parameters": [
+                    {
+                        "name": "firstName",
+                        "in": "query",
+                        "description": "First name",
+                        "required": true
+                    },
+                    {
+                        "name": "lastName",
+                        "in": "query",
+                        "description": "Last name",
+                        "required": true
+                    },
+                    {
+                        "name": "gender",
+                        "in": "query",
+                        "description": "gender",
+                        "required": true
+                    },
+                    {
+                        "name": "phone",
+                        "in": "query",
+                        "description": "Phone number",
+                        "required": true
+                    },
+                    {
+                        "name": "birthday",
+                        "in": "query",
+                        "description": "Birthday date",
+                        "required": true,
+                        "schema": {
+                            "type": "Date"
+                        }
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Email",
+                        "required": true
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "Password",
+                        "required": true
+                    },
+                    {
+                        "name": "password_confirmation",
+                        "in": "query",
+                        "description": "Password confirmation",
+                        "required": true
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "Locale needed for the account translations",
+                        "required": true
+                    },
+                    {
+                        "name": "keepLogging",
+                        "in": "query",
+                        "description": "If the account stay logging",
+                        "required": true,
+                        "schema": {
+                            "type": "Boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Account created"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/accounts/{id}/restore": {
+            "patch": {
+                "tags": [
+                    "Accounts"
+                ],
+                "summary": "Patch an account",
+                "description": "Restore an account",
+                "operationId": "restore",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/accounts/email-is-available": {
+            "get": {
+                "tags": [
+                    "Accounts"
+                ],
+                "summary": "Get an email verification",
+                "description": "Check if email is available",
+                "operationId": "checkIfEmailIsAvailable",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Email",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/accounts/password-forgotten": {
+            "post": {
+                "tags": [
+                    "Accounts"
+                ],
+                "summary": "Get an email verification",
+                "description": "Check if email is available",
+                "operationId": "checkIfEmailIsAvailable",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Email",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            }
+        },
+        "/api/accounts/sign-in": {
+            "post": {
+                "tags": [
+                    "Accounts"
+                ],
+                "summary": "Sign In",
+                "description": "SignIn",
+                "operationId": "signIn",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Email",
+                        "required": true
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "Password",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            }
+        },
+        "/api/accounts/me": {
+            "get": {
+                "tags": [
+                    "Accounts"
+                ],
+                "summary": "Get me information",
+                "description": "Me",
+                "operationId": "me",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/accounts/refresh-token": {
+            "post": {
+                "tags": [
+                    "Accounts"
+                ],
+                "summary": "Refresh a token",
+                "description": "Refresh JWT token",
+                "operationId": "refreshToken",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/accounts/sign-out": {
+            "post": {
+                "tags": [
+                    "Accounts"
+                ],
+                "summary": "Sign out a user",
+                "description": "Sign out a user",
+                "operationId": "signOut",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/accounts/search": {
+            "get": {
+                "tags": [
+                    "Accounts"
+                ],
+                "summary": "Search an account by email",
+                "description": "Search an account by email",
+                "operationId": "search",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Email",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearer_token": {
+                "type": "apiKey",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}
