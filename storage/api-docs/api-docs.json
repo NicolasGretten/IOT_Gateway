@@ -570,6 +570,196 @@
                     }
                 }
             }
+        },
+        "/api/users/{id}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get user information",
+                "description": "Returns user data",
+                "operationId": "retrieve",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Account not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Delete a user",
+                "description": "Soft delete a user",
+                "operationId": "delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Account id",
+                        "required": true,
+                        "schema": {
+                            "type": "String"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Account deleted"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Patch a user",
+                "description": "Update a user",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "addressId",
+                        "in": "query",
+                        "description": "First name"
+                    },
+                    {
+                        "name": "storeId",
+                        "in": "query",
+                        "description": "Last name"
+                    },
+                    {
+                        "name": "accountId",
+                        "in": "query",
+                        "description": "gender"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Account updated"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/users": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get all users information",
+                "description": "Returns user data",
+                "operationId": "list",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Post a new user",
+                "description": "Create a new user",
+                "operationId": "create",
+                "parameters": [
+                    {
+                        "name": "addressId",
+                        "in": "query",
+                        "description": "User's address",
+                        "required": true
+                    },
+                    {
+                        "name": "storeId",
+                        "in": "query",
+                        "description": "User's store",
+                        "required": true
+                    },
+                    {
+                        "name": "accountId",
+                        "in": "query",
+                        "description": "User's account",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Account created"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
         }
     },
     "components": {
