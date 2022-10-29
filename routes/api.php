@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AddressController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,4 +39,13 @@ Route::controller(UserController::class)->group(function () {
     Route::patch("users/{id}", 'update')->middleware('auth');
     Route::delete("users/{id}", 'delete')->middleware('auth');
     Route::get("users/{id}", 'retrieve')->middleware('auth');
+});
+
+
+Route::controller(AddressController::class)->group(function () {
+    Route::get("addresses/", 'list')->middleware('auth');
+    Route::post("addresses/", 'create');
+    Route::patch("addresses/{id}", 'update')->middleware('auth');
+    Route::delete("addresses/{id}", 'delete')->middleware('auth');
+    Route::get("addresses/{id}", 'retrieve')->middleware('auth');
 });

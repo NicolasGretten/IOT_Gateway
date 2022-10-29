@@ -36,6 +36,8 @@ class Account extends Model implements AuthenticatableContract, AuthorizableCont
 
     protected $dates = ['lastLoginAt', 'createdAt, updatedAt, deletedAt'];
     const DELETED_AT = 'deletedAt';
+    const UPDATED_AT = 'updatedAt';
+    const CREATED_AT = 'createdAt';
     protected $connection = 'data';
     protected $table = 'accounts';
     protected $primaryKey = 'id';

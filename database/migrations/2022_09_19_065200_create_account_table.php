@@ -29,7 +29,8 @@ return new class extends Migration
             $table->text('passwordForgottenToken')->nullable();
             $table->text('passwordForgottenTokenLimit')->nullable();
             $table->timestamp('deletedAt')->nullable();
-            $table->timestamps();
+            $table->timestamp('updatedAt')->nullable();
+            $table->timestamp('createdAt')->nullable();
         });
     }
 

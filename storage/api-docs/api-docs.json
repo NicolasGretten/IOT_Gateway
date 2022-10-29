@@ -1,7 +1,6 @@
 {
     "openapi": "3.0.0",
     "info": {
-<<<<<<< HEAD
         "title": "Account API Collect&Verything",
         "version": "0.1"
     },
@@ -572,6 +571,228 @@
                 }
             }
         },
+        "/api/addresses/{id}": {
+            "get": {
+                "tags": [
+                    "Addresses"
+                ],
+                "summary": "Get address information",
+                "description": "Returns address data",
+                "operationId": "retrieve",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Address id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Account not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Addresses"
+                ],
+                "summary": "Delete a address",
+                "description": "Soft delete a address",
+                "operationId": "delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Account id",
+                        "required": true,
+                        "schema": {
+                            "type": "String"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Account deleted"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Addresses"
+                ],
+                "summary": "Patch a address",
+                "description": "Update an address",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "description": "Address title"
+                    },
+                    {
+                        "name": "addressLine1",
+                        "in": "query",
+                        "description": "Address line 1"
+                    },
+                    {
+                        "name": "addressLine2",
+                        "in": "query",
+                        "description": "Address line 2"
+                    },
+                    {
+                        "name": "zipCode",
+                        "in": "query",
+                        "description": "Zip code"
+                    },
+                    {
+                        "name": "city",
+                        "in": "query",
+                        "description": "City"
+                    },
+                    {
+                        "name": "country",
+                        "in": "query",
+                        "description": "Address country"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Account updated"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/addresses": {
+            "get": {
+                "tags": [
+                    "Addresses"
+                ],
+                "summary": "Get all addresses information",
+                "description": "Returns address data",
+                "operationId": "list",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Addresses"
+                ],
+                "summary": "Post a new address",
+                "description": "Create a new address",
+                "operationId": "create",
+                "parameters": [
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "description": "Address title",
+                        "required": true
+                    },
+                    {
+                        "name": "addressLine1",
+                        "in": "query",
+                        "description": "Address line 1",
+                        "required": true
+                    },
+                    {
+                        "name": "addressLine2",
+                        "in": "query",
+                        "description": "Address line 2"
+                    },
+                    {
+                        "name": "zipCode",
+                        "in": "query",
+                        "description": "Zip code",
+                        "required": true
+                    },
+                    {
+                        "name": "city",
+                        "in": "query",
+                        "description": "City",
+                        "required": true
+                    },
+                    {
+                        "name": "country",
+                        "in": "query",
+                        "description": "Address country",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Account created"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
         "/api/users/{id}": {
             "get": {
                 "tags": [
@@ -771,21 +992,6 @@
                 "name": "Authorization",
                 "in": "header"
             }
-=======
-        "title": "Template API Collect&Verything",
-        "version": "0.1"
-    },
-    "paths": {
-        "/": {
-            "get": {
-                "description": "Home page",
-                "responses": {
-                    "default": {
-                        "description": "Welcome page"
-                    }
-                }
-            }
->>>>>>> template/master
         }
     },
     "security": [
