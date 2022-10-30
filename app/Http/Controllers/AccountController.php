@@ -63,18 +63,10 @@ class AccountController extends Controller
 
             return response()->json($account, 200);
         }
-        catch (PDOException $e) {
-            Bugsnag::notifyException($e);
-        }
-        catch (ValidationException $e) {
+        catch (ValidationException | ModelNotFoundException $e) {
             Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 409);
-        }
-        catch (ModelNotFoundException $e) {
-            Bugsnag::notifyException($e);
-            return response()->json($e->getMessage(), 409);
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 500);
         }
@@ -99,7 +91,7 @@ class AccountController extends Controller
     public function list(Request $request): JsonResponse
     {
         try {
-            $this->validate($request, [
+            $request->validate([
                 'limit' => 'int|required_with:page',
                 'page' => 'int|required_with:limit',
             ]);
@@ -157,7 +149,7 @@ class AccountController extends Controller
                 'email' => Str::lower($request->input('email'))
             ]);
 
-            $this->validate($request, [
+            $request->validate([
                 'firstName' => 'required|string',
                 'lastName' => 'required|string',
                 'gender' => 'required|in:female,male,other',
@@ -195,7 +187,7 @@ class AccountController extends Controller
             Bugsnag::notifyException($e);
             throw new PDOException($e);
         }
-        catch (ModelNotFoundException | ValidationException $e) {
+        catch (ModelNotFoundException $e) {
             Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 409);
         }
@@ -235,7 +227,7 @@ class AccountController extends Controller
     public function update(Request $request): JsonResponse
     {
         try {
-            $this->validate($request, [
+            $request->validate([
                 'firstName' => 'string',
                 'lastName' => 'string',
                 'gender' => 'in:female,male,other',
@@ -421,7 +413,7 @@ class AccountController extends Controller
     public function checkIfEmailIsAvailable(Request $request): JsonResponse
     {
         try {
-            $this->validate($request, [
+            $request->validate([
                 'email' => 'required|email'
             ]);
 
@@ -468,7 +460,7 @@ class AccountController extends Controller
     public function passwordForgotten(Request $request): JsonResponse
     {
         try {
-            $this->validate($request, [
+            $request->validate([
                 'email' => 'required|string|email'
             ]);
 
@@ -517,7 +509,7 @@ class AccountController extends Controller
     public function passwordReset(Request $request): JsonResponse
     {
         try {
-            $this->validate($request, [
+            $request->validate([
                 'email' => 'required|email',
                 'token' => 'required|string',
                 'password' => 'required|between:8,255|confirmed'
@@ -549,11 +541,7 @@ class AccountController extends Controller
             Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), $e->getCode());
         }
-        catch (ValidationException $e) {
-            Bugsnag::notifyException($e);
-            return response()->json($e->getMessage(), 409);
-        }
-        catch (Exception $e) {
+        catch (ValidationException | Exception $e) {
             Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 409);
         }
@@ -579,7 +567,7 @@ class AccountController extends Controller
     public function signIn(Request $request): JsonResponse
     {
         try {
-            $this->validate($request, [
+            $request->validate([
                 'email' => 'required|email',
                 'password' => 'required|string',
             ]);
@@ -767,11 +755,7 @@ class AccountController extends Controller
             Bugsnag::notifyException($e);
             throw new PDOException($e);
         }
-        catch (AuthenticationException $e) {
-            Bugsnag::notifyException($e);
-            return response()->json($e->getMessage(), 409);
-        }
-        catch (Exception $e) {
+        catch (AuthenticationException | Exception $e) {
             Bugsnag::notifyException($e);
             return response()->json($e->getMessage(), 409);
         }
@@ -796,7 +780,7 @@ class AccountController extends Controller
     public function search(Request $request): JsonResponse
     {
         try{
-            $this->validate($request, [
+            $request->validate([
                 'email' => 'required|email',
             ]);
 
