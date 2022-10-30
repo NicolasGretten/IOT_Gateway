@@ -127,8 +127,8 @@ class AccountController extends Controller
      *      tags={"Accounts"},
      *      summary="Post a new account",
      *      description="Create a new account",
-     *      @OA\Parameter(name="firstName", description="First name", required=true, in="query"),
-     *      @OA\Parameter(name="lastName", description="Last name", required=true, in="query"),
+     *      @OA\Parameter(name="first_name", description="First name", required=true, in="query"),
+     *      @OA\Parameter(name="last_name", description="Last name", required=true, in="query"),
      *      @OA\Parameter(name="gender", description="gender", required=true, in="query"),
      *      @OA\Parameter(name="phone", description="Phone number", required=true, in="query"),
      *      @OA\Parameter(name="birthday", description="Birthday date", required=true, in="query", @OA\Schema(type="Date")),
@@ -136,7 +136,7 @@ class AccountController extends Controller
      *      @OA\Parameter(name="password", description="Password", required=true, in="query"),
      *      @OA\Parameter(name="password_confirmation", description="Password confirmation", required=true, in="query"),
      *      @OA\Parameter(name="locale", description="Locale needed for the account translations", required=true, in="query"),
-     *      @OA\Parameter(name="keepLogging", description="If the account stay logging", required=true, in="query", @OA\Schema(type="Boolean")),
+     *      @OA\Parameter(name="keep_logging", description="If the account stay logging", required=true, in="query", @OA\Schema(type="Boolean")),
      *      @OA\Response(response=201,description="Account created"),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found")
@@ -150,15 +150,15 @@ class AccountController extends Controller
             ]);
 
             $request->validate([
-                'firstName' => 'required|string',
-                'lastName' => 'required|string',
+                'first_name' => 'required|string',
+                'last_name' => 'required|string',
                 'gender' => 'required|in:female,male,other',
                 'phone' => 'string',
                 'birthday' => 'required|date_format:Y-m-d',
                 'email' => 'required|email|unique:accounts,email',
                 'password' => 'required|between:8,255|confirmed',
                 'locale' => 'required|string|in:' . env('LOCALES_ALLOWED'),
-                'keepLogging' => 'required|boolean',
+                'keep_logging' => 'required|boolean',
             ]);
 
             DB::beginTransaction();
@@ -168,14 +168,14 @@ class AccountController extends Controller
             $account->id = $this->generateId('account', $account);
             $account->gender = $request->input('gender');
             $account->accountNumber = $account->generateAccountNumber();
-            $account->firstName = $request->input('firstName');
-            $account->lastName = $request->input('lastName');
+            $account->first_name = $request->input('first_name');
+            $account->last_name = $request->input('last_name');
             $account->birthday = $request->input('birthday');
             $account->email = Str::lower($request->input('email'));
             $account->phone = $request->input('phone');
             $account->locale = $request->input('locale');
             $account->password = app('hash')->make($request->input('password'));
-            $account->keepLogging = $request->input('keepLogging');
+            $account->keep_logging = $request->input('keep_logging');
 
             $account->save();
 
@@ -207,14 +207,14 @@ class AccountController extends Controller
      *      tags={"Accounts"},
      *      summary="Patch an account",
      *      description="Update an account",
-     *      @OA\Parameter(name="firstName", description="First name", in="query"),
-     *      @OA\Parameter(name="lastName", description="Last name", in="query"),
+     *      @OA\Parameter(name="first_name", description="First name", in="query"),
+     *      @OA\Parameter(name="last_name", description="Last name", in="query"),
      *      @OA\Parameter(name="gender", description="gender", in="query"),
      *      @OA\Parameter(name="phone", description="Phone number", in="query"),
      *      @OA\Parameter(name="birthday", description="Birthday date", in="query"),
      *      @OA\Parameter(name="email", description="Email", in="query"),
      *      @OA\Parameter(name="locale", description="Locale needed for the account translations", in="query"),
-     *      @OA\Parameter(name="keepLogging", description="If the account stay logging", in="query"),
+     *      @OA\Parameter(name="keep_logging", description="If the account stay logging", in="query"),
      *      @OA\Response(
      *          response=200,
      *          description="Account updated"
@@ -228,14 +228,14 @@ class AccountController extends Controller
     {
         try {
             $request->validate([
-                'firstName' => 'string',
-                'lastName' => 'string',
+                'first_name' => 'string',
+                'last_name' => 'string',
                 'gender' => 'in:female,male,other',
                 'birthday' => 'date_format:Y-m-d',
                 'phone' => 'string',
                 'email' => 'email|unique:accounts,email,' . $request->id,
                 'locale' => 'string|in:' . env('LOCALES_ALLOWED'),
-                'keepLogging' => 'boolean',
+                'keep_logging' => 'boolean',
             ]);
 
             DB::beginTransaction();
@@ -249,14 +249,14 @@ class AccountController extends Controller
                 throw new ModelNotFoundException('Account not found.', 404);
             }
 
-            $account->firstName = $request->input('firstName', $account->getOriginal('firstName'));
-            $account->lastName = $request->input('lastName', $account->getOriginal('lastName'));
+            $account->first_name = $request->input('first_name', $account->getOriginal('first_name'));
+            $account->last_name = $request->input('last_name', $account->getOriginal('last_name'));
             $account->gender = $request->input('gender', $account->getOriginal('gender'));
             $account->birthday = $request->input('birthday', $account->getOriginal('birthday'));
             $account->phone = $request->input('phone', $account->getOriginal('phone'));
             $account->email = Str::lower($request->input('email', $account->getOriginal('email')));
             $account->locale = $request->input('locale', $account->getOriginal('locale'));
-            $account->keepLogging = $request->input('keepLogging', $account->getOriginal('keepLogging'));
+            $account->keep_logging = $request->input('keep_logging', $account->getOriginal('keep_logging'));
 
             $account->save();
 
@@ -475,15 +475,15 @@ class AccountController extends Controller
                 throw new ModelNotFoundException('Account not found.', 404);
             }
 
-            $account->passwordForgottenTokenLimit = Carbon::now()->addMinutes(env('PASSWORD_TOKEN_LIMIT'));
-            $account->passwordForgottenToken = md5(Str::uuid());
+            $account->password_forgotten_token_limit = Carbon::now()->addMinutes(env('PASSWORD_TOKEN_LIMIT'));
+            $account->password_forgotten_token = md5(Str::uuid());
 
             $account->update();
 
             DB::commit();
 
             return response()->json([
-                'tokenDuration' => $account->passwordForgottenTokenLimit,
+                'token_duration' => $account->password_forgotten_token_limit,
                 'id' => $account->id
             ], 200);
 
@@ -517,8 +517,8 @@ class AccountController extends Controller
 
             $resultSet = Account::select('*')
                 ->where('email', $request->input('email'))
-                ->where('passwordForgottenToken', $request->input('token'))
-                ->where('passwordForgottenTokenLimit', '>', Carbon::now());
+                ->where('password_forgotten_token', $request->input('token'))
+                ->where('password_forgotten_token_limit', '>', Carbon::now());
 
             $account = $resultSet->first();
 
@@ -527,8 +527,8 @@ class AccountController extends Controller
             }
 
             $account->password = app('hash')->make($request->input('password'));
-            $account->passwordForgottenTokenLimit = null;
-            $account->passwordForgottenToken = null;
+            $account->password_forgotten_token_limit = null;
+            $account->password_forgotten_token = null;
             $account->update();
 
             return response()->json($account->fresh(), 200);
@@ -615,7 +615,7 @@ class AccountController extends Controller
                 throw new AuthenticationException('You are unauthorized to access this resource.');
             }
 
-            $account->lastLoginAt = Carbon::now();
+            $account->last_login_at = Carbon::now();
             $account->save();
 
             $response = auth('account')->user();

@@ -17,27 +17,24 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 /**
  * @method static where(string $string, mixed $accountId)
  * @method static select(string $string)
- * @property mixed keepLogging
- * @property Carbon|mixed lastLoginAt
  * @property mixed email
  * @property mixed password
  * @property mixed locale
  * @property mixed phone
  * @property mixed birthday
- * @property mixed lastName
- * @property mixed firstName
  * @property mixed gender
  * @property mixed|string id
  * @property mixed|string|null accountNumber
+ * @property mixed keep_logging
+ * @property mixed last_name
+ * @property mixed first_name
+ * @property Carbon|mixed last_login_at
  */
 class Account extends Model implements AuthenticatableContract, AuthorizableContract, JWTSubject
 {
     use HasFactory, Authenticatable, Authorizable, SoftDeletes, JwtTrait;
 
-    protected $dates = ['lastLoginAt', 'createdAt, updatedAt, deletedAt'];
-    const DELETED_AT = 'deletedAt';
-    const UPDATED_AT = 'updatedAt';
-    const CREATED_AT = 'createdAt';
+    protected $dates = ['last_login_at', 'created_at, updated_at, deleted_at'];
     protected $connection = 'data';
     protected $table = 'accounts';
     protected $primaryKey = 'id';
@@ -50,8 +47,8 @@ class Account extends Model implements AuthenticatableContract, AuthorizableCont
      * @var array<int, string>
      */
     protected $fillable = [
-        'firstName',
-        'lastName',
+        'first_name',
+        'last_name',
         'email',
         'password',
         'phone',
@@ -64,8 +61,8 @@ class Account extends Model implements AuthenticatableContract, AuthorizableCont
      */
     protected $hidden = [
         'password',
-        'passwordForgottenToken',
-        'passwordForgottenTokenLimit'
+        'password_forgotten_token',
+        'password_forgotten_token_limit'
     ];
 
     /**

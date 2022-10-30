@@ -17,8 +17,8 @@ class AccountFactory extends Factory
     public function definition()
     {
         return [
-            'firstName' => fake()->firstName(),
-            'lastName' => fake()->lastName(),
+            'first_name' => fake()->firstName(),
+            'last_name' => fake()->lastName(),
             'email' => fake()->unique()->safeEmail(),
             'password' => fake()->password(), // password
             'phone' => fake()->phoneNumber(),

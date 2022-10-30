@@ -15,22 +15,22 @@ return new class extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->string('id')->primary();
-            $table->string('accountNumber');
-            $table->string('firstName');
-            $table->string('lastName');
+            $table->string('account_number');
+            $table->string('first_name');
+            $table->string('last_name');
             $table->string('email');
             $table->string('password');
             $table->string('birthday');
             $table->string('gender');
             $table->string('phone');
             $table->string('locale');
-            $table->boolean('keepLogging')->default('1');
-            $table->timestamp('lastLoginAt')->nullable();
-            $table->text('passwordForgottenToken')->nullable();
-            $table->text('passwordForgottenTokenLimit')->nullable();
-            $table->timestamp('deletedAt')->nullable();
-            $table->timestamp('updatedAt')->nullable();
-            $table->timestamp('createdAt')->nullable();
+            $table->boolean('keep_logging')->default('1');
+            $table->timestamp('last_login_at')->nullable();
+            $table->text('password_forgotten_token')->nullable();
+            $table->text('password_forgotten_token_limit')->nullable();
+            $table->timestamp('deleted_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
+            $table->timestamp('created_at')->nullable();
         });
     }
 
