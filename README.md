@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # API GATEWAY
 Point d'entrée et routeur de l'API Collect&Verything.
 
@@ -38,7 +37,6 @@ Lancer le serveur:
 ```bash
 php artisan serve --port=optionalport
 ```
-=======
 # Collect&Verything API
 ## Créer un nouveau projet
 ```bash
@@ -246,5 +244,3 @@ Sur le lien /docs/api-docs.json il est possible de récupérer le texte brut et 
 ````bash
 git remote add template https://github.com/NicolasGretten/template.api.collect.verything.git
 ````
-
->>>>>>> template/master
