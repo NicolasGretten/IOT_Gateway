@@ -88,12 +88,12 @@
                 "operationId": "update",
                 "parameters": [
                     {
-                        "name": "firstName",
+                        "name": "first_name",
                         "in": "query",
                         "description": "First name"
                     },
                     {
-                        "name": "lastName",
+                        "name": "last_name",
                         "in": "query",
                         "description": "Last name"
                     },
@@ -123,7 +123,7 @@
                         "description": "Locale needed for the account translations"
                     },
                     {
-                        "name": "keepLogging",
+                        "name": "keep_logging",
                         "in": "query",
                         "description": "If the account stay logging"
                     }
@@ -189,13 +189,13 @@
                 "operationId": "create",
                 "parameters": [
                     {
-                        "name": "firstName",
+                        "name": "first_name",
                         "in": "query",
                         "description": "First name",
                         "required": true
                     },
                     {
-                        "name": "lastName",
+                        "name": "last_name",
                         "in": "query",
                         "description": "Last name",
                         "required": true
@@ -246,7 +246,7 @@
                         "required": true
                     },
                     {
-                        "name": "keepLogging",
+                        "name": "keep_logging",
                         "in": "query",
                         "description": "If the account stay logging",
                         "required": true,
@@ -659,17 +659,17 @@
                         "description": "Address title"
                     },
                     {
-                        "name": "addressLine1",
+                        "name": "address_line_1",
                         "in": "query",
                         "description": "Address line 1"
                     },
                     {
-                        "name": "addressLine2",
+                        "name": "address_line_2",
                         "in": "query",
                         "description": "Address line 2"
                     },
                     {
-                        "name": "zipCode",
+                        "name": "zip_code",
                         "in": "query",
                         "description": "Zip code"
                     },
@@ -751,18 +751,18 @@
                         "required": true
                     },
                     {
-                        "name": "addressLine1",
+                        "name": "address_line_1",
                         "in": "query",
                         "description": "Address line 1",
                         "required": true
                     },
                     {
-                        "name": "addressLine2",
+                        "name": "address_line_2",
                         "in": "query",
                         "description": "Address line 2"
                     },
                     {
-                        "name": "zipCode",
+                        "name": "zip_code",
                         "in": "query",
                         "description": "Zip code",
                         "required": true
@@ -876,17 +876,17 @@
                 "operationId": "update",
                 "parameters": [
                     {
-                        "name": "addressId",
+                        "name": "address_id",
                         "in": "query",
                         "description": "First name"
                     },
                     {
-                        "name": "storeId",
+                        "name": "store_id",
                         "in": "query",
                         "description": "Last name"
                     },
                     {
-                        "name": "accountId",
+                        "name": "account_id",
                         "in": "query",
                         "description": "gender"
                     }
@@ -952,19 +952,19 @@
                 "operationId": "create",
                 "parameters": [
                     {
-                        "name": "addressId",
+                        "name": "address_id",
                         "in": "query",
                         "description": "User's address",
                         "required": true
                     },
                     {
-                        "name": "storeId",
+                        "name": "store_id",
                         "in": "query",
                         "description": "User's store",
                         "required": true
                     },
                     {
-                        "name": "accountId",
+                        "name": "account_id",
                         "in": "query",
                         "description": "User's account",
                         "required": true

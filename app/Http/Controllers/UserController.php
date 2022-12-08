@@ -59,9 +59,9 @@ class UserController extends Controller
      *      tags={"Users"},
      *      summary="Post a new user",
      *      description="Create a new user",
-     *      @OA\Parameter(name="addressId", description="User's address", required=true, in="query"),
-     *      @OA\Parameter(name="storeId", description="User's store", required=true, in="query"),
-     *      @OA\Parameter(name="accountId", description="User's account", required=true, in="query"),
+     *      @OA\Parameter(name="address_id", description="User's address", required=true, in="query"),
+     *      @OA\Parameter(name="store_id", description="User's store", required=true, in="query"),
+     *      @OA\Parameter(name="account_id", description="User's account", required=true, in="query"),
      *      @OA\Response(response=201,description="Account created"),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found")
@@ -79,9 +79,9 @@ class UserController extends Controller
      *      tags={"Users"},
      *      summary="Patch a user",
      *      description="Update a user",
-     *      @OA\Parameter(name="addressId", description="First name", in="query"),
-     *      @OA\Parameter(name="storeId", description="Last name", in="query"),
-     *      @OA\Parameter(name="accountId", description="gender", in="query"),
+     *      @OA\Parameter(name="address_id", description="First name", in="query"),
+     *      @OA\Parameter(name="store_id", description="Last name", in="query"),
+     *      @OA\Parameter(name="account_id", description="gender", in="query"),
      *      @OA\Response(
      *          response=200,
      *          description="Account updated"
