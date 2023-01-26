@@ -15,13 +15,9 @@
         "bugsnag/bugsnag-laravel": "^2.0",
         "ext-pdo": "*",
         "ext-json": "*",
-<<<<<<< HEAD
         "doctrine/dbal": "^2.0",
         "robthree/twofactorauth": "^1.7",
         "tymon/jwt-auth": "dev-develop"
-=======
-        "doctrine/dbal": "^2.0"
->>>>>>> template/master
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

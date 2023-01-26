@@ -1,0 +1,1 @@
+FROM hopnspace/nginx:latest
