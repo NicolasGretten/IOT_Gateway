@@ -2,6 +2,13 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AddressController;
+use App\Http\Controllers\ImageController;
+use App\Http\Controllers\Store\StoreClosingController;
+use App\Http\Controllers\Store\StoreController;
+use App\Http\Controllers\Store\StoreImageController;
+use App\Http\Controllers\Store\StoreMediaController;
+use App\Http\Controllers\Store\StoreSlotController;
+use App\Http\Controllers\Store\StoreTranslationController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -48,4 +55,45 @@ Route::controller(AddressController::class)->group(function () {
     Route::patch("addresses/{id}", 'update')->middleware('auth');
     Route::delete("addresses/{id}", 'delete')->middleware('auth');
     Route::get("addresses/{id}", 'retrieve')->middleware('auth');
+});
+
+Route::controller(StoreController::class)->group(function () {
+    Route::get("stores/", 'list');
+    Route::post("stores/", 'create')->middleware('auth');
+    Route::patch("stores/{id}", 'update')->middleware('auth');
+    Route::delete("stores/{id}", 'delete')->middleware('auth');
+    Route::get("stores/{id}", 'retrieve');
+});
+
+Route::controller(StoreClosingController::class)->group(function () {
+    Route::post("stores/{id}/closings", 'addClosing')->middleware('auth');
+    Route::delete("stores/{id}/closings/{closing_id}", 'removeClosing')->middleware('auth');
+});
+
+Route::controller(StoreImageController::class)->group(function () {
+    Route::post("stores/{id}/images", 'addImage')->middleware('auth');
+    Route::delete("stores/{id}/images/{store_image_id}", 'removeImage')->middleware('auth');
+});
+
+Route::controller(StoreMediaController::class)->group(function () {
+    Route::post("stores/{id}/medias", 'addMedia')->middleware('auth');
+    Route::delete("stores/{id}/medias/{media_id}", 'removeMedia')->middleware('auth');
+});
+
+Route::controller(StoreSlotController::class)->group(function () {
+    Route::post("stores/{id}/slots", 'addSlot')->middleware('auth');
+    Route::patch("stores/{id}/slots/{slot_id}", 'updateSlot')->middleware('auth');
+    Route::delete("stores/{id}/slots/{slot_id}", 'removeSlot')->middleware('auth');
+});
+
+Route::controller(StoreTranslationController::class)->group(function () {
+    Route::post("stores/{id}/translations", 'addTranslation')->middleware('auth');
+    Route::delete("stores/{id}/translations", 'removeTranslation')->middleware('auth');
+});
+
+Route::controller(ImageController::class)->group(function () {
+    Route::get("images/", 'list');
+    Route::post("images/", 'upload');
+    Route::delete("images/{id}", 'delete');
+    Route::get("images/{id}", 'retrieve');
 });

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Traits\MicroserviceTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use OpenApi\Annotations as OA;
 
 class UserController extends Controller
 {
