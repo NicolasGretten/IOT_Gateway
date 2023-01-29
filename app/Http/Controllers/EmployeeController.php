@@ -76,7 +76,7 @@ class EmployeeController extends Controller
      *      @OA\Parameter(name="role", description="Employee's role", required=true, in="query"),
      *      @OA\Parameter(name="store_id", description="Employee's store", required=true, in="query"),
      *      @OA\Parameter(name="account_id", description="Employee's account", required=true, in="query"),
-     *      @OA\Response(response=201,description="Account created"),
+     *      @OA\Response(response=201,description="Employee created"),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
      *      security={{"bearer_token":{}}}
@@ -94,10 +94,11 @@ class EmployeeController extends Controller
      *      tags={"Employees"},
      *      summary="Patch a employee",
      *      description="Update a employee",
+     *      @OA\Parameter(name="id", description="Employee id", in="query"),
      *      @OA\Parameter(name="role", description="Role", in="query"),
      *      @OA\Response(
      *          response=200,
-     *          description="Account updated"
+     *          description="Employee updated"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
@@ -118,7 +119,7 @@ class EmployeeController extends Controller
      *      description="Soft delete a employee",
      *      @OA\Parameter(
      *          name="id",
-     *          description="Account id",
+     *          description="Employee id",
      *          required=true,
      *          in="path",
      *          @OA\Schema(
@@ -127,7 +128,7 @@ class EmployeeController extends Controller
      *      ),
      *      @OA\Response(
      *          response=200,
-     *          description="Account deleted"
+     *          description="Employee deleted"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),

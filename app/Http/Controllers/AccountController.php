@@ -20,12 +20,13 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use OpenApi\Annotations as OA;
 use PDOException;
 use Exception;
 use RobThree\Auth\TwoFactorAuthException;
 
 /**
- * @OA\Info(title="Account API Collect&Verything", version="0.1")
+ * @OA\Info(title="API Collect&Verything", version="0.1")
  */
 class AccountController extends Controller
 {

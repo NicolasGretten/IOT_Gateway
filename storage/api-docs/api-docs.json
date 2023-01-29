@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Account API Collect&Verything",
+        "title": "API Collect&Verything",
         "version": "0.1"
     },
     "paths": {
@@ -843,7 +843,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Account id",
+                        "description": "Employee id",
                         "required": true,
                         "schema": {
                             "type": "String"
@@ -852,7 +852,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Account deleted"
+                        "description": "Employee deleted"
                     },
                     "400": {
                         "description": "Bad request"
@@ -876,6 +876,11 @@
                 "operationId": "update",
                 "parameters": [
                     {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Employee id"
+                    },
+                    {
                         "name": "role",
                         "in": "query",
                         "description": "Role"
@@ -883,7 +888,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Account updated"
+                        "description": "Employee updated"
                     },
                     "400": {
                         "description": "Bad request"
@@ -962,7 +967,7 @@
                 ],
                 "responses": {
                     "201": {
-                        "description": "Account created"
+                        "description": "Employee created"
                     },
                     "400": {
                         "description": "Bad request"

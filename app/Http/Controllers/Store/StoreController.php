@@ -25,7 +25,7 @@ class StoreController extends Controller
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Store not found."),
      *      @OA\Response(response=409, description="Conflict"),
-     *      @OA\Response(response=500, description="Servor Error"),
+     *      @OA\Response(response=500, description="Servor Error")
      * )
      */
     public function retrieve(Request $request): JsonResponse
@@ -46,7 +46,7 @@ class StoreController extends Controller
      *      @OA\Response(response=403, description="Forbidden"),
      *      @OA\Response(response=404, description="Resource Not Found"),
      *      @OA\Response(response=409, description="Conflict"),
-     *      @OA\Response(response=500, description="Servor Error"),
+     *      @OA\Response(response=500, description="Servor Error")
      * )
      */
     public function list(Request $request): JsonResponse
@@ -108,7 +108,7 @@ class StoreController extends Controller
      *          description="Store updated"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      @OA\Response(response=404, description="Resource Not Found")
      * )
      */
     public function update(Request $request): JsonResponse
@@ -134,7 +134,7 @@ class StoreController extends Controller
      *          description="Store deleted"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      @OA\Response(response=404, description="Resource Not Found")
      * )
      */
     public function delete(Request $request): JsonResponse

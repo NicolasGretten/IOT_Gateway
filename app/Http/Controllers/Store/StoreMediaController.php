@@ -65,7 +65,7 @@ class StoreMediaController extends Controller
      *      ),
      *      @OA\Response(response=200, description="Media deleted"),
      *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      @OA\Response(response=404, description="Resource Not Found")
      * )
      */
     public function removeMedia(Request $request): JsonResponse

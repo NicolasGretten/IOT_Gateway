@@ -66,7 +66,7 @@ class StoreSlotController extends Controller
      *      @OA\Parameter(name="available", description="Availability", required=true, in="query"),
      *      @OA\Response(response=200, description="Slot updated"),
      *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      @OA\Response(response=404, description="Resource Not Found")
      * )
      */
     public function updateSlot(Request $request): JsonResponse
@@ -95,7 +95,7 @@ class StoreSlotController extends Controller
      *      ),
      *      @OA\Response(response=200, description="Slot deleted"),
      *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      @OA\Response(response=404, description="Resource Not Found")
      * )
      */
     public function removeSlot(Request $request): JsonResponse
