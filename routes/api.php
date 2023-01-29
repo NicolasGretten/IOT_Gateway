@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AddressController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\Store\StoreClosingController;
 use App\Http\Controllers\Store\StoreController;
@@ -96,4 +97,12 @@ Route::controller(ImageController::class)->group(function () {
     Route::post("images/", 'upload');
     Route::delete("images/{id}", 'delete');
     Route::get("images/{id}", 'retrieve');
+});
+
+Route::controller(EmployeeController::class)->group(function () {
+    Route::get("employees/", 'list');
+    Route::post("employees/", 'create');
+    Route::patch("employees/{id}", 'update');
+    Route::delete("employees/{id}", 'delete');
+    Route::get("employees/{id}", 'retrieve');
 });
