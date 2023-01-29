@@ -793,6 +793,165 @@
                 }
             }
         },
+        "/api/admins/{id}": {
+            "get": {
+                "tags": [
+                    "Admins"
+                ],
+                "summary": "Get admin information",
+                "description": "Returns admin data",
+                "operationId": "retrieve",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Admin id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Admin not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Admins"
+                ],
+                "summary": "Delete a admin",
+                "description": "Soft delete a admin",
+                "operationId": "delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Admin id",
+                        "required": true,
+                        "schema": {
+                            "type": "String"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Admin deleted"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Admins"
+                ],
+                "summary": "Patch a admin",
+                "description": "Update a admin",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Admin id"
+                    },
+                    {
+                        "name": "role",
+                        "in": "query",
+                        "description": "Role"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Admin updated"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/admins": {
+            "get": {
+                "tags": [
+                    "Admins"
+                ],
+                "summary": "Get all admins information",
+                "description": "Returns admin data",
+                "operationId": "list",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Admins"
+                ],
+                "summary": "Post a new admin",
+                "description": "Create a new admin",
+                "operationId": "create",
+                "parameters": [
+                    {
+                        "name": "role",
+                        "in": "query",
+                        "description": "Admin's role",
+                        "required": true
+                    },
+                    {
+                        "name": "account_id",
+                        "in": "query",
+                        "description": "Admin's account",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Admin created"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
         "/api/employees/{id}": {
             "get": {
                 "tags": [

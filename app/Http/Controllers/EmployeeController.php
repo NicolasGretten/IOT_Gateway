@@ -2,23 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Traits\IdTrait;
 use App\Traits\MicroserviceTrait;
-use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
-use Exception;
-use Illuminate\Auth\AuthenticationException;
-use Illuminate\Contracts\Encryption\DecryptException;
-use Illuminate\Database\Eloquent\JsonEncodingException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\ValidationException;
 use OpenApi\Annotations as OA;
-use PDOException;
 
 class EmployeeController extends Controller
 {

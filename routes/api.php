@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AddressController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\Store\StoreClosingController;
@@ -105,4 +106,12 @@ Route::controller(EmployeeController::class)->group(function () {
     Route::patch("employees/{id}", 'update');
     Route::delete("employees/{id}", 'delete');
     Route::get("employees/{id}", 'retrieve');
+});
+
+Route::controller(AdminController::class)->group(function () {
+    Route::get("admins/", 'list');
+    Route::post("admins/", 'create');
+    Route::patch("admins/{id}", 'update');
+    Route::delete("admins/{id}", 'delete');
+    Route::get("admins/{id}", 'retrieve');
 });
