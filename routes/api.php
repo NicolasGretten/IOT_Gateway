@@ -36,7 +36,7 @@ Route::controller(AccountController::class)->group(function () {
     Route::get("accounts/me", 'me')->middleware('auth');
     Route::get("accounts/search", 'search');
     Route::get("accounts/{id}", 'retrieve')->middleware('auth');
-    Route::post("accounts/{id}", 'create');
+    Route::post("accounts/", 'create');
     Route::patch("accounts/{id}", 'update')->middleware('auth');
     Route::delete("accounts/{id}", 'delete')->middleware('auth');
     Route::patch("accounts/{id}/restore", 'restore');

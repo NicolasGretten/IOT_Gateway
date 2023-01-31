@@ -29,6 +29,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property mixed last_name
  * @property mixed first_name
  * @property Carbon|mixed last_login_at
+ * @property mixed|string|null $account_number
  */
 class Account extends Model implements AuthenticatableContract, AuthorizableContract, JWTSubject
 {
@@ -86,7 +87,7 @@ class Account extends Model implements AuthenticatableContract, AuthorizableCont
             str_pad($dd, 2, 0, STR_PAD_LEFT) .
             str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
 
-        $checkAvailability = Account::where('accountNumber', $nextAccountNumber)->withTrashed();
+        $checkAvailability = Account::where('account_number', $nextAccountNumber)->withTrashed();
 
         if ($checkAvailability->count() == 0) {
             return $nextAccountNumber;

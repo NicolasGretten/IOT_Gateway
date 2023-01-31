@@ -218,7 +218,8 @@
                         "description": "Birthday date",
                         "required": true,
                         "schema": {
-                            "type": "Date"
+                            "type": "string",
+                            "format": "date"
                         }
                     },
                     {
@@ -251,7 +252,7 @@
                         "description": "If the account stay logging",
                         "required": true,
                         "schema": {
-                            "type": "Boolean"
+                            "type": "string"
                         }
                     }
                 ],
