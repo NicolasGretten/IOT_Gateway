@@ -136,4 +136,5 @@ Route::controller(ProductController::class)->group(function () {
     Route::post('products/{id}/translate', 'addTranslation');
     Route::delete('products/{id}/translate', 'removeTranslation');
     Route::patch('products/{id}/price', 'updatePrice');
+    Route::post('products/{id}/cart', 'addToCart');
 });

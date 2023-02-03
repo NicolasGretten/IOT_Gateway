@@ -1623,6 +1623,12 @@
                         "in": "query",
                         "description": "Category Id",
                         "required": false
+                    },
+                    {
+                        "name": "image_id",
+                        "in": "query",
+                        "description": "Image Id",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -1711,6 +1717,12 @@
                         "name": "category_id",
                         "in": "query",
                         "description": "Category Id",
+                        "required": true
+                    },
+                    {
+                        "name": "image_id",
+                        "in": "query",
+                        "description": "Image Id",
                         "required": true
                     },
                     {
@@ -1856,6 +1868,41 @@
                 "responses": {
                     "200": {
                         "description": "Store updated"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/products/{id}/cart": {
+            "post": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Add a product to a shopping cart",
+                "description": "Send pub to cart API",
+                "operationId": "addToCart",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Product id",
+                        "required": true
+                    },
+                    {
+                        "name": "cart_id",
+                        "in": "query",
+                        "description": "Cart Id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Added to Cart updated"
                     },
                     "400": {
                         "description": "Bad request"

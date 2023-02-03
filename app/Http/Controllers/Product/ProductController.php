@@ -67,6 +67,7 @@ class ProductController extends Controller
      *      @OA\Parameter(name="locale", description="Locale", required=true, in="query"),
      *      @OA\Parameter(name="text", description="Description", required=true, in="query"),
      *      @OA\Parameter(name="category_id", description="Category Id", required=true, in="query"),
+     *      @OA\Parameter(name="image_id", description="Image Id", required=true, in="query"),
      *      @OA\Parameter(name="store_id", description="Store Id", required=true, in="query"),
      *      @OA\Parameter(name="available", description="Available", required=true, in="query"),
      *      @OA\Parameter(name="ht", description="HT", required=true, in="query"),
@@ -91,6 +92,7 @@ class ProductController extends Controller
      *      @OA\Parameter(name="id",description="Product id", required=true, in="query"),
      *      @OA\Parameter(name="available", description="available", required=false, in="query"),
      *      @OA\Parameter(name="category_id", description="Category Id", required=false, in="query"),
+     *      @OA\Parameter(name="image_id", description="Image Id", required=true, in="query"),
      *      @OA\Response(
      *          response=200,
      *          description="Store updated"
