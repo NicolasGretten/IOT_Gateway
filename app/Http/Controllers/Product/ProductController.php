@@ -201,4 +201,26 @@ class ProductController extends Controller
     {
         return $this->uri($request, env("PRODUCT_API"));
     }
+
+    /**
+     * @OA\Post (
+     *      path="/api/products/{id}/cart",
+     *      operationId="addToCart",
+     *      tags={"Products"},
+     *      summary="Add a product to a shopping cart",
+     *      description="Send pub to cart API",
+     *      @OA\Parameter(name="id",description="Product id", required=true, in="query"),
+     *      @OA\Parameter(name="cart_id", description="Cart Id", required=true, in="query"),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Added to Cart updated"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
+    public function addToCart(Request $request): JsonResponse
+    {
+        return $this->uri($request, env("PRODUCT_API"));
+    }
 }
