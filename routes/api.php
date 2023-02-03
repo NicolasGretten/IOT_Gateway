@@ -5,6 +5,8 @@ use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\Product\CategoryController;
+use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Store\StoreClosingController;
 use App\Http\Controllers\Store\StoreController;
 use App\Http\Controllers\Store\StoreImageController;
@@ -114,4 +116,24 @@ Route::controller(AdminController::class)->group(function () {
     Route::patch("admins/{id}", 'update');
     Route::delete("admins/{id}", 'delete');
     Route::get("admins/{id}", 'retrieve');
+});
+
+Route::controller(CategoryController::class)->group(function () {
+    Route::get('categories/{id}', 'retrieve');
+    Route::get('categories/', 'list');
+    Route::post('categories/', 'create');
+    Route::delete('categories/{id}', 'delete');
+    Route::post('categories/{id}/translate', 'addTranslation');
+    Route::delete('categories/{id}/translate', 'removeTranslation');
+});
+
+Route::controller(ProductController::class)->group(function () {
+    Route::get('products/{id}', 'retrieve');
+    Route::get('products/', 'list');
+    Route::post('products/', 'create');
+    Route::delete('products/{id}', 'delete');
+    Route::patch('products/{id}', 'update');
+    Route::post('products/{id}/translate', 'addTranslation');
+    Route::delete('products/{id}/translate', 'removeTranslation');
+    Route::patch('products/{id}/price', 'updatePrice');
 });
