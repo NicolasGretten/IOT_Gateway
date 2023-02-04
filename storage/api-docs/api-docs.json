@@ -1669,7 +1669,7 @@
                         "name": "category_id",
                         "in": "query",
                         "description": "Category Id",
-                        "required": true
+                        "required": false
                     }
                 ],
                 "responses": {
@@ -1891,6 +1891,12 @@
                         "name": "id",
                         "in": "query",
                         "description": "Product id",
+                        "required": true
+                    },
+                    {
+                        "name": "quantity",
+                        "in": "query",
+                        "description": "Quantity",
                         "required": true
                     },
                     {

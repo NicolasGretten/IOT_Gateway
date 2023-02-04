@@ -43,7 +43,7 @@ class ProductController extends Controller
      *      description="Returns product data",
      *      @OA\Parameter(name="locale",description="Locale", required=false, in="query"),
      *      @OA\Parameter(name="store_id",description="Store Id", required=true, in="query"),
-     *      @OA\Parameter(name="category_id",description="Category Id", required=true, in="query"),
+     *      @OA\Parameter(name="category_id",description="Category Id", required=false, in="query"),
      *      @OA\Response(response=200, description="successful operation"),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=403, description="Forbidden"),
@@ -212,6 +212,7 @@ class ProductController extends Controller
      *      summary="Add a product to a shopping cart",
      *      description="Send pub to cart API",
      *      @OA\Parameter(name="id",description="Product id", required=true, in="query"),
+     *      @OA\Parameter(name="quantity",description="Quantity", required=true, in="query"),
      *      @OA\Parameter(name="cart_id", description="Cart Id", required=true, in="query"),
      *      @OA\Response(
      *          response=200,
