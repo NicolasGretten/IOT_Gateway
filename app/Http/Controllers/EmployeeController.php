@@ -7,18 +7,18 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use OpenApi\Annotations as OA;
 
-class UserController extends Controller
+class EmployeeController extends Controller
 {
     use MicroserviceTrait;
 
     /**
      * @OA\Get(
-     *      path="/api/users/{id}",
+     *      path="/api/employees/{id}",
      *      operationId="retrieve",
-     *      tags={"Users"},
-     *      summary="Get user information",
-     *      description="Returns user data",
-     *      @OA\Parameter(name="id",description="User id",required=true,in="path"),
+     *      tags={"Employees"},
+     *      summary="Get employee information",
+     *      description="Returns employee data",
+     *      @OA\Parameter(name="id",description="Employee id",required=true,in="path"),
      *      @OA\Response(response=200, description="successful operation"),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Account not found."),
@@ -29,16 +29,16 @@ class UserController extends Controller
      */
     public function retrieve(Request $request): JsonResponse
     {
-        return $this->uri($request, env("USER_API"));
+        return $this->uri($request, env("EMPLOYEE_API"));
     }
 
     /**
      * @OA\Get(
-     *      path="/api/users",
+     *      path="/api/employees",
      *      operationId="list",
-     *      tags={"Users"},
-     *      summary="Get all users information",
-     *      description="Returns user data",
+     *      tags={"Employees"},
+     *      summary="Get all employees information",
+     *      description="Returns employee data",
      *      @OA\Response(response=200, description="successful operation"),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=403, description="Forbidden"),
@@ -50,42 +50,42 @@ class UserController extends Controller
      */
     public function list(Request $request): JsonResponse
     {
-        return $this->uri($request, env("USER_API"));
+        return $this->uri($request, env("EMPLOYEE_API"));
     }
 
     /**
      * @OA\Post(
-     *      path="/api/users",
+     *      path="/api/employees",
      *      operationId="create",
-     *      tags={"Users"},
-     *      summary="Post a new user",
-     *      description="Create a new user",
-     *      @OA\Parameter(name="address_id", description="User's address", required=true, in="query"),
-     *      @OA\Parameter(name="store_id", description="User's store", required=true, in="query"),
-     *      @OA\Parameter(name="account_id", description="User's account", required=true, in="query"),
-     *      @OA\Response(response=201,description="Account created"),
+     *      tags={"Employees"},
+     *      summary="Post a new employee",
+     *      description="Create a new employee",
+     *      @OA\Parameter(name="role", description="Employee's role", required=true, in="query"),
+     *      @OA\Parameter(name="store_id", description="Employee's store", required=true, in="query"),
+     *      @OA\Parameter(name="account_id", description="Employee's account", required=true, in="query"),
+     *      @OA\Response(response=201,description="Employee created"),
      *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found")
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      security={{"bearer_token":{}}}
      * )
      */
     public function create(Request $request): JsonResponse
     {
-        return $this->uri($request, env("USER_API"));
+        return $this->uri($request, env("EMPLOYEE_API"));
     }
 
     /**
      * @OA\Patch (
-     *      path="/api/users/{id}",
+     *      path="/api/employees/{id}",
      *      operationId="update",
-     *      tags={"Users"},
-     *      summary="Patch a user",
-     *      description="Update a user",
-     *      @OA\Parameter(name="address_id", description="First name", in="query"),
-     *      @OA\Parameter(name="store_id", description="Last name", in="query"),
-     *      @OA\Parameter(name="account_id", description="gender", in="query"),
+     *      tags={"Employees"},
+     *      summary="Patch a employee",
+     *      description="Update a employee",
+     *      @OA\Parameter(name="id", description="Employee id", in="query"),
+     *      @OA\Parameter(name="role", description="Role", in="query"),
      *      @OA\Response(
      *          response=200,
-     *          description="Account updated"
+     *          description="Employee updated"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
@@ -94,19 +94,19 @@ class UserController extends Controller
      */
     public function update(Request $request): JsonResponse
     {
-        return $this->uri($request, env("USER_API"));
+        return $this->uri($request, env("EMPLOYEE_API"));
     }
 
     /**
      * @OA\Delete  (
-     *      path="/api/users/{id}",
+     *      path="/api/employees/{id}",
      *      operationId="delete",
-     *      tags={"Users"},
-     *      summary="Delete a user",
-     *      description="Soft delete a user",
+     *      tags={"Employees"},
+     *      summary="Delete a employee",
+     *      description="Soft delete a employee",
      *      @OA\Parameter(
      *          name="id",
-     *          description="Account id",
+     *          description="Employee id",
      *          required=true,
      *          in="path",
      *          @OA\Schema(
@@ -115,7 +115,7 @@ class UserController extends Controller
      *      ),
      *      @OA\Response(
      *          response=200,
-     *          description="Account deleted"
+     *          description="Employee deleted"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
@@ -124,6 +124,6 @@ class UserController extends Controller
      */
     public function delete(Request $request): JsonResponse
     {
-        return $this->uri($request, env("USER_API"));
+        return $this->uri($request, env("EMPLOYEE_API"));
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\MailCreatedJob;
 use App\Models\Account;
 use App\Traits\FiltersTrait;
 use App\Traits\IdTrait;
@@ -20,12 +21,13 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use OpenApi\Annotations as OA;
 use PDOException;
 use Exception;
 use RobThree\Auth\TwoFactorAuthException;
 
 /**
- * @OA\Info(title="Account API Collect&Verything", version="0.1")
+ * @OA\Info(title="API Collect&Verything", version="0.1")
  */
 class AccountController extends Controller
 {
@@ -131,12 +133,12 @@ class AccountController extends Controller
      *      @OA\Parameter(name="last_name", description="Last name", required=true, in="query"),
      *      @OA\Parameter(name="gender", description="gender", required=true, in="query"),
      *      @OA\Parameter(name="phone", description="Phone number", required=true, in="query"),
-     *      @OA\Parameter(name="birthday", description="Birthday date", required=true, in="query", @OA\Schema(type="Date")),
+     *      @OA\Parameter(name="birthday", description="Birthday date", required=true, in="query", @OA\Schema(type="string", format="date")),
      *      @OA\Parameter(name="email", description="Email", required=true, in="query"),
      *      @OA\Parameter(name="password", description="Password", required=true, in="query"),
      *      @OA\Parameter(name="password_confirmation", description="Password confirmation", required=true, in="query"),
      *      @OA\Parameter(name="locale", description="Locale needed for the account translations", required=true, in="query"),
-     *      @OA\Parameter(name="keep_logging", description="If the account stay logging", required=true, in="query", @OA\Schema(type="Boolean")),
+     *      @OA\Parameter(name="keep_logging", description="If the account stay logging", required=true, in="query", @OA\Schema(type="string")),
      *      @OA\Response(response=201,description="Account created"),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found")
@@ -167,7 +169,7 @@ class AccountController extends Controller
 
             $account->id = $this->generateId('account', $account);
             $account->gender = $request->input('gender');
-            $account->accountNumber = $account->generateAccountNumber();
+            $account->account_number = $account->generateAccountNumber();
             $account->first_name = $request->input('first_name');
             $account->last_name = $request->input('last_name');
             $account->birthday = $request->input('birthday');
@@ -180,6 +182,12 @@ class AccountController extends Controller
             $account->save();
 
             DB::commit();
+
+            MailCreatedJob::dispatch([
+                'to' => $account->email,
+                'subject' => "Bienvenue chez Collect&Verything ". $account->first_name,
+                'template_id' => env('MAIL_TEMPLATE_WELCOME'),
+            ])->onQueue('email_created');
 
             return response()->json($account->fresh(), 201);
         }
