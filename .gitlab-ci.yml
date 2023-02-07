@@ -14,7 +14,7 @@ staging-build-job:
   tags:
     - staging
   script:
-    - cd /home/admin/docker.collect.verything/api/ && sudo docker-compose build --no-cache
+    - cd /home/admin/docker.collect.verything/api/ && sudo docker compose build --no-cache
 
 staging-deploy-job:
   stage: staging-deploy
@@ -24,7 +24,7 @@ staging-deploy-job:
   tags:
     - staging
   script:
-    - cd /home/admin/docker.collect.verything/api/ && sudo docker-compose up -d
+    - cd /home/admin/docker.collect.verything/api/ && sudo docker compose up -d
 
 staging-clean-job:
   stage: staging-clean
@@ -44,7 +44,7 @@ prod-build-job:
   tags:
     - production
   script:
-    - cd /home/admin/docker.collect.verything/api/ && sudo docker-compose build --no-cache
+    - cd /home/admin/docker.collect.verything/api/ && sudo docker compose build --no-cache
 
 prod-deploy-job:
   stage: prod-deploy
@@ -54,7 +54,7 @@ prod-deploy-job:
   tags:
     - production
   script:
-    - cd /home/admin/docker.collect.verything/api/ && sudo docker-compose up -d
+    - cd /home/admin/docker.collect.verything/api/ && sudo docker compose up -d
 
 prod-clean-job:
   stage: prod-clean
