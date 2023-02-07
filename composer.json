@@ -10,7 +10,7 @@
         "ext-pdo": "*",
         "astrotomic/laravel-translatable": "^11.8",
         "bugsnag/bugsnag-laravel": "^2.0",
-        "darkaonline/l5-swagger": "8.1",
+        "darkaonline/l5-swagger": "*",
         "doctrine/dbal": "^2.0",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.19",
@@ -19,7 +19,7 @@
         "robthree/twofactorauth": "^1.7",
         "tymon/jwt-auth": "dev-develop",
         "vladimir-yuldashev/laravel-queue-rabbitmq": "^13.1",
-        "zircote/swagger-php": "3.3.7"
+        "zircote/swagger-php": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
