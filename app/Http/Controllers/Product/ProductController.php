@@ -34,7 +34,7 @@ class ProductController extends Controller
         return $this->uri($request, env("PRODUCT_API"));
     }
 
-    /**d
+    /**
      * @OA\Get(
      *      path="/api/products",
      *      operationId="list",
