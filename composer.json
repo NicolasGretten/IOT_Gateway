@@ -57,7 +57,7 @@
             "@php artisan key:generate --ansi"
         ],
         "post-install-cmd": [
-            "cp -a vendor/swagger-api/swagger-ui/dist public/swagger-ui-assets"
+            "cp -a storage/api-docs/api-docs.json public/docs"
         ]
 },
     "extra": {

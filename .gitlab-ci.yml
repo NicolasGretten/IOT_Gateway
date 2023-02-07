@@ -1,38 +1,38 @@
 stages:
-  - test-build
-  - test-deploy
-  - test-clean
+  - staging-build
+  - staging-deploy
+  - staging-clean
   - prod-build
   - prod-deploy
   - prod-clean
 
-test-build-job:
-  stage: test-build
+staging-build-job:
+  stage: staging-build
   allow_failure: false
   rules:
-    - if: $CI_COMMIT_BRANCH == "test"
+    - if: $CI_COMMIT_BRANCH == "staging"
   tags:
-    - srv-test
+    - staging
   script:
-    - cd /home/admin/docker/weu1-d-001.docker.io/ws-api/ && sudo docker-compose build --no-cache
+    - cd /home/admin/docker.collect.verything/api/ && sudo docker-compose build --no-cache
 
-test-deploy-job:
-  stage: test-deploy
+staging-deploy-job:
+  stage: staging-deploy
   allow_failure: false
   rules:
-    - if: $CI_COMMIT_BRANCH == "test"
+    - if: $CI_COMMIT_BRANCH == "staging"
   tags:
-    - srv-test
+    - staging
   script:
-    - cd /home/admin/docker/weu1-d-001.docker.io/ws-api/ && sudo docker-compose up -d
+    - cd /home/admin/docker.collect.verything/api/ && sudo docker-compose up -d
 
-test-clean-job:
-  stage: test-clean
+staging-clean-job:
+  stage: staging-clean
   allow_failure: false
   rules:
-    - if: $CI_COMMIT_BRANCH == "test"
+    - if: $CI_COMMIT_BRANCH == "staging"
   tags:
-    - srv-test
+    - staging
   script:
     - sudo docker image prune --force
 
@@ -40,28 +40,28 @@ prod-build-job:
   stage: prod-build
   allow_failure: false
   rules:
-    - if: $CI_COMMIT_BRANCH == "prod"
+    - if: $CI_COMMIT_BRANCH == "production"
   tags:
-    - srv-prod
+    - production
   script:
-    - cd /home/admin/docker/weu1-d-001.docker.io/ws-api/ && sudo docker-compose build --no-cache
+    - cd /home/admin/docker.collect.verything/api/ && sudo docker-compose build --no-cache
 
 prod-deploy-job:
   stage: prod-deploy
   allow_failure: false
   rules:
-    - if: $CI_COMMIT_BRANCH == "prod"
+    - if: $CI_COMMIT_BRANCH == "production"
   tags:
-    - srv-prod
+    - production
   script:
-    - cd /home/admin/docker/weu1-d-001.docker.io/ws-api/ && sudo docker-compose up -d
+    - cd /home/admin/docker.collect.verything/api/ && sudo docker-compose up -d
 
 prod-clean-job:
   stage: prod-clean
   allow_failure: false
   rules:
-    - if: $CI_COMMIT_BRANCH == "prod"
+    - if: $CI_COMMIT_BRANCH == "production"
   tags:
-    - srv-prod
+    - production
   script:
     - sudo docker image prune --force
