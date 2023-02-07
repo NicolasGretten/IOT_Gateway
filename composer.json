@@ -55,8 +55,11 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
+        ],
+        "post-install-cmd": [
+            "cp -a vendor/swagger-api/swagger-ui/dist public/swagger-ui-assets"
         ]
-    },
+},
     "extra": {
         "laravel": {
             "dont-discover": []
