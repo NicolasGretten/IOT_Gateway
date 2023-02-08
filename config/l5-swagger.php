@@ -220,7 +220,7 @@ return [
          * Set this to `true` in development mode so that docs would be regenerated on each request
          * Set this to `false` to disable swagger generation on production
         */
-        'generate_always' => env('L5_SWAGGER_GENERATE_ALWAYS', false),
+        'generate_always' => env('L5_SWAGGER_GENERATE_ALWAYS', true),
 
         /*
          * Set this to `true` to generate a copy of documentation in yaml format
@@ -231,7 +231,11 @@ return [
          * Edit to trust the proxy's ip address - needed for AWS Load Balancer
          * string[]
         */
-        'proxy' => false,
+        'proxy' => [
+            'proxy',
+            '127.0.0.1',
+            '0.0.0.0'
+        ],
 
         /*
          * Configs plugin allows to fetch external configs instead of passing them to SwaggerUIBundle.
