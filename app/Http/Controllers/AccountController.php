@@ -586,6 +586,10 @@ class AccountController extends Controller
                 throw new AuthenticationException('You are unauthorized to access this resource.');
             }
 
+            if (!$account->role && !$account->role_id) {
+                throw new AuthenticationException('You are unauthorized to access this resource.');
+            }
+
             if (!Hash::check($request->input('password'), $account->password)) {
                 throw new AuthenticationException('You are unauthorized to access this resource.');
             }

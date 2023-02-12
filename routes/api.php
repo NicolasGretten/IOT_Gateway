@@ -46,7 +46,7 @@ Route::controller(AccountController::class)->group(function () {
 
 Route::controller(UserController::class)->group(function () {
     Route::get("users/", 'list')->middleware('auth');
-    Route::post("users/", 'create')->middleware('auth');
+    Route::post("users/", 'create');
     Route::patch("users/{id}", 'update')->middleware('auth');
     Route::delete("users/{id}", 'delete')->middleware('auth');
     Route::get("users/{id}", 'retrieve')->middleware('auth');
@@ -104,7 +104,7 @@ Route::controller(ImageController::class)->group(function () {
 
 Route::controller(EmployeeController::class)->group(function () {
     Route::get("employees/", 'list');
-    Route::post("employees/", 'create');
+    Route::post("employees/", 'create')->middleware(['auth','auth.role:admin,super_admin,store_owner']);
     Route::patch("employees/{id}", 'update');
     Route::delete("employees/{id}", 'delete');
     Route::get("employees/{id}", 'retrieve');
