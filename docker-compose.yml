@@ -24,7 +24,7 @@ services:
         tty: true
         working_dir: /var/www
         networks:
-            - app-collectandverything
+            - collectandverything
 networks:
     collectandverything:
         external: true
