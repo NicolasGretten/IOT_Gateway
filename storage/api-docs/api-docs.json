@@ -2700,12 +2700,9 @@
                 "parameters": [
                     {
                         "name": "id",
-                        "in": "path",
-                        "description": "Account id",
-                        "required": true,
-                        "schema": {
-                            "type": "String"
-                        }
+                        "in": "query",
+                        "description": "User id",
+                        "required": true
                     }
                 ],
                 "responses": {
