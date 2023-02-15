@@ -35,6 +35,7 @@ class StoreOwnerCreatedJob implements ShouldQueue
     {
         try{
             $data = json_decode(json_encode($this->data), true);
+            var_dump($data);
             $account = Account::where('id', $data['account_id'])->first();
             if(!empty($account) && $account->role === null){
                 $account->role = "STORE_OWNER";
