@@ -43,7 +43,6 @@ class StoreOwnerCreatedJob implements ShouldQueue
             }
         }
         catch (\Exception $e){
-            dd($e->getMessage());
             Bugsnag::notifyException($e);
         }
     }
