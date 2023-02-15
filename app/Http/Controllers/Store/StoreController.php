@@ -76,7 +76,8 @@ class StoreController extends Controller
      *      @OA\Parameter(name="description", description="Description", required=true, in="query"),
      *      @OA\Response(response=201,description="Store created"),
      *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found")
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      security={{"bearer_token":{}}}
      * )
      */
     public function create(Request $request): JsonResponse
@@ -103,12 +104,10 @@ class StoreController extends Controller
      *      @OA\Parameter(name="primary_color", description="Store primary color", required=false, in="query"),
      *      @OA\Parameter(name="secondary_color", description="Store secondary color", required=false, in="query"),
      *      @OA\Parameter(name="logo", description="Store logo", required=false, in="query"),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Store updated"
-     *       ),
+     *      @OA\Response(response=200, description="Store updated"),
      *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found")
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      security={{"bearer_token":{}}}
      * )
      */
     public function update(Request $request): JsonResponse
@@ -123,18 +122,11 @@ class StoreController extends Controller
      *      tags={"Stores"},
      *      summary="Delete a store",
      *      description="Soft delete a store",
-     *      @OA\Parameter(
-     *          name="id",
-     *          description="Store id",
-     *          required=true,
-     *          in="query",
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Store deleted"
-     *       ),
+     *      @OA\Parameter(name="id",description="Store id",required=true,in="query"),
+     *      @OA\Response(response=200,description="Store deleted"),
      *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found")
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      security={{"bearer_token":{}}}
      * )
      */
     public function delete(Request $request): JsonResponse
