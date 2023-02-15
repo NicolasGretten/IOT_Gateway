@@ -2005,7 +2005,7 @@
                 "parameters": [
                     {
                         "name": "id",
-                        "in": "query",
+                        "in": "path",
                         "description": "Store id",
                         "required": true
                     },

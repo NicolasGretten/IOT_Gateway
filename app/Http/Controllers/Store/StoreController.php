@@ -19,7 +19,7 @@ class StoreController extends Controller
      *      tags={"Stores"},
      *      summary="Get store information",
      *      description="Returns store data",
-     *      @OA\Parameter(name="id",description="Store id", required=true, in="query"),
+     *      @OA\Parameter(name="id",description="Store id", required=true, in="path"),
      *      @OA\Parameter(name="locale",description="Locale", required=false, in="query"),
      *      @OA\Response(response=200, description="successful operation"),
      *      @OA\Response(response=400, description="Bad request"),
