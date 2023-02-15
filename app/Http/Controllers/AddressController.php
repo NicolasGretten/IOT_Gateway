@@ -114,10 +114,7 @@ class AddressController extends Controller
      *          name="id",
      *          description="Account id",
      *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="String"
-     *          )
+     *          in="path"
      *      ),
      *      @OA\Response(
      *          response=200,

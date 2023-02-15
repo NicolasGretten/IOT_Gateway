@@ -56,10 +56,7 @@
                         "name": "id",
                         "in": "path",
                         "description": "Account id",
-                        "required": true,
-                        "schema": {
-                            "type": "String"
-                        }
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -87,6 +84,12 @@
                 "description": "Update an account",
                 "operationId": "update",
                 "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Account id",
+                        "required": true
+                    },
                     {
                         "name": "first_name",
                         "in": "query",
@@ -277,6 +280,14 @@
                 "summary": "Patch an account",
                 "description": "Restore an account",
                 "operationId": "restore",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Account id",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -623,10 +634,7 @@
                         "name": "id",
                         "in": "path",
                         "description": "Account id",
-                        "required": true,
-                        "schema": {
-                            "type": "String"
-                        }
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -840,10 +848,7 @@
                         "name": "id",
                         "in": "path",
                         "description": "Admin id",
-                        "required": true,
-                        "schema": {
-                            "type": "String"
-                        }
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -1004,10 +1009,7 @@
                         "name": "id",
                         "in": "path",
                         "description": "Employee id",
-                        "required": true,
-                        "schema": {
-                            "type": "String"
-                        }
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -1264,10 +1266,7 @@
                         "name": "id",
                         "in": "path",
                         "description": "Image id",
-                        "required": true,
-                        "schema": {
-                            "type": "String"
-                        }
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -2060,7 +2059,12 @@
                     "404": {
                         "description": "Resource Not Found"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
             },
             "patch": {
                 "tags": [
@@ -2153,7 +2157,12 @@
                     "404": {
                         "description": "Resource Not Found"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
             }
         },
         "/api/stores": {
@@ -2290,7 +2299,12 @@
                     "404": {
                         "description": "Resource Not Found"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
             }
         },
         "/api/stores/{id}/images": {

@@ -108,10 +108,7 @@ class EmployeeController extends Controller
      *          name="id",
      *          description="Employee id",
      *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="String"
-     *          )
+     *          in="path"
      *      ),
      *      @OA\Response(
      *          response=200,

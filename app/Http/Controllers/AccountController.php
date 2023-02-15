@@ -215,6 +215,7 @@ class AccountController extends Controller
      *      tags={"Accounts"},
      *      summary="Patch an account",
      *      description="Update an account",
+     *      @OA\Parameter(name="id",description="Account id",required=true,in="path"),
      *      @OA\Parameter(name="first_name", description="First name", in="query"),
      *      @OA\Parameter(name="last_name", description="Last name", in="query"),
      *      @OA\Parameter(name="gender", description="gender", in="query"),
@@ -223,10 +224,7 @@ class AccountController extends Controller
      *      @OA\Parameter(name="email", description="Email", in="query"),
      *      @OA\Parameter(name="locale", description="Locale needed for the account translations", in="query"),
      *      @OA\Parameter(name="keep_logging", description="If the account stay logging", in="query"),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Account updated"
-     *       ),
+     *      @OA\Response(response=200,description="Account updated"),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
      *      security={{"bearer_token":{}}}
@@ -301,19 +299,8 @@ class AccountController extends Controller
      *      tags={"Accounts"},
      *      summary="Delete an account",
      *      description="Soft delete an account",
-     *      @OA\Parameter(
-     *          name="id",
-     *          description="Account id",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="String"
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Account deleted"
-     *       ),
+     *      @OA\Parameter(name="id",description="Account id",required=true,in="path"),
+     *      @OA\Response(response=200,description="Account deleted"),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
      *      security={{"bearer_token":{}}}
@@ -360,6 +347,7 @@ class AccountController extends Controller
      *      tags={"Accounts"},
      *      summary="Patch an account",
      *      description="Restore an account",
+     *      @OA\Parameter(name="id",description="Account id",required=true,in="path"),
      *      @OA\Response(response=200, description="successful operation"),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=403, description="Forbidden"),

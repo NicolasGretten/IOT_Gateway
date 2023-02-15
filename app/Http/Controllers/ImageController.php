@@ -111,10 +111,7 @@ class ImageController extends Controller
      *          name="id",
      *          description="Image id",
      *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="String"
-     *          )
+     *          in="path"
      *      ),
      *      @OA\Response(
      *          response=200,
