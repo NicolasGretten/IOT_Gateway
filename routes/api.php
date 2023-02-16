@@ -3,8 +3,10 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Product\CategoryController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Store\StoreClosingController;
@@ -97,44 +99,68 @@ Route::controller(StoreTranslationController::class)->group(function () {
 
 Route::controller(ImageController::class)->group(function () {
     Route::get("images/", 'list');
-    Route::post("images/", 'upload');
-    Route::delete("images/{id}", 'delete');
+    Route::post("images/", 'upload')->middleware('auth');
+    Route::delete("images/{id}", 'delete')->middleware('auth');
     Route::get("images/{id}", 'retrieve');
 });
 
 Route::controller(EmployeeController::class)->group(function () {
-    Route::get("employees/", 'list');
+    Route::get("employees/", 'list')->middleware(['auth','auth.role:admin,super_admin,store_owner']);
     Route::post("employees/", 'create')->middleware(['auth','auth.role:admin,super_admin,store_owner']);
-    Route::patch("employees/{id}", 'update');
-    Route::delete("employees/{id}", 'delete');
-    Route::get("employees/{id}", 'retrieve');
+    Route::patch("employees/{id}", 'update')->middleware(['auth','auth.role:admin,super_admin,store_owner']);
+    Route::delete("employees/{id}", 'delete')->middleware(['auth','auth.role:admin,super_admin,store_owner']);
+    Route::get("employees/{id}", 'retrieve')->middleware(['auth','auth.role:admin,super_admin,store_owner']);
 });
 
 Route::controller(AdminController::class)->group(function () {
-    Route::get("admins/", 'list');
-    Route::post("admins/", 'create');
-    Route::patch("admins/{id}", 'update');
-    Route::delete("admins/{id}", 'delete');
-    Route::get("admins/{id}", 'retrieve');
+    Route::get("admins/", 'list')->middleware('auth');
+    Route::post("admins/", 'create')->middleware('auth');
+    Route::patch("admins/{id}", 'update')->middleware('auth');
+    Route::delete("admins/{id}", 'delete')->middleware('auth');
+    Route::get("admins/{id}", 'retrieve')->middleware('auth');
 });
 
 Route::controller(CategoryController::class)->group(function () {
     Route::get('categories/{id}', 'retrieve');
     Route::get('categories/', 'list');
-    Route::post('categories/', 'create');
-    Route::delete('categories/{id}', 'delete');
-    Route::post('categories/{id}/translate', 'addTranslation');
-    Route::delete('categories/{id}/translate', 'removeTranslation');
+    Route::post('categories/', 'create')->middleware('auth');
+    Route::delete('categories/{id}', 'delete')->middleware('auth');
+    Route::post('categories/{id}/translate', 'addTranslation')->middleware('auth');
+    Route::delete('categories/{id}/translate', 'removeTranslation')->middleware('auth');
 });
 
 Route::controller(ProductController::class)->group(function () {
     Route::get('products/{id}', 'retrieve');
     Route::get('products/', 'list');
-    Route::post('products/', 'create');
-    Route::delete('products/{id}', 'delete');
-    Route::patch('products/{id}', 'update');
-    Route::post('products/{id}/translate', 'addTranslation');
-    Route::delete('products/{id}/translate', 'removeTranslation');
-    Route::patch('products/{id}/price', 'updatePrice');
+    Route::post('products/', 'create')->middleware('auth');
+    Route::delete('products/{id}', 'delete')->middleware('auth');
+    Route::patch('products/{id}', 'update')->middleware('auth');
+    Route::post('products/{id}/translate', 'addTranslation')->middleware('auth');
+    Route::delete('products/{id}/translate', 'removeTranslation')->middleware('auth');
+    Route::patch('products/{id}/price', 'updatePrice')->middleware('auth');
     Route::post('products/{id}/cart', 'addToCart');
+});
+
+Route::controller(CartController::class)->group(function () {
+    Route::get('carts/{id}', 'retrieve');
+    Route::get('carts/', 'list')->middleware('auth');
+    Route::get('carts/users/{user_id}', 'listUserId')->middleware('auth');
+    Route::get('carts/stores/{store_id}', 'listStoreId')->middleware('auth');
+    Route::post('carts/', 'create');
+    Route::patch('carts/{id}', 'update');
+    Route::delete('carts/{id}', 'delete');
+    Route::patch('carts/{id}/confirm', 'confirm');
+    Route::patch('carts/{id}/refund', 'refund');
+    Route::patch('carts/{id}/contents/{cart_content_id}', 'updateContent');
+    Route::delete('carts/{id}/contents/{cart_content_id}', 'removeContent');
+});
+
+Route::controller(OrderController::class)->group(function () {
+    Route::get('orders/{id}', 'retrieve')->middleware('auth');
+    Route::get('orders/', 'list')->middleware('auth');
+    Route::get('orders/users/{user_id}', 'listUserId')->middleware('auth');
+    Route::get('orders/stores/{store_id}', 'listStoreId')->middleware('auth');
+    Route::post('orders/', 'create')->middleware('auth');
+    Route::patch('orders/{id}', 'update')->middleware('auth');
+    Route::delete('orders/{id}', 'delete')->middleware('auth');
 });

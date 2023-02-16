@@ -48,7 +48,7 @@ class CategoryController extends Controller
      *      @OA\Response(response=403, description="Forbidden"),
      *      @OA\Response(response=404, description="Resource Not Found"),
      *      @OA\Response(response=409, description="Conflict"),
-     *      @OA\Response(response=500, description="Servor Error"),
+     *      @OA\Response(response=500, description="Servor Error")
      * )
      */
     public function list(Request $request): JsonResponse
@@ -69,7 +69,8 @@ class CategoryController extends Controller
      *      @OA\Parameter(name="default", description="Default", required=true, in="query"),
      *      @OA\Response(response=201,description="Category created"),
      *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found")
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      security={{"bearer_token":{}}}
      * )
      */
     public function create(Request $request): JsonResponse
@@ -96,6 +97,7 @@ class CategoryController extends Controller
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
+     *      security={{"bearer_token":{}}}
      * )
      */
     public function delete(Request $request):JsonResponse
@@ -115,7 +117,8 @@ class CategoryController extends Controller
      *      @OA\Parameter(name="text", description="Text", required=true, in="query"),
      *      @OA\Response(response=201,description="Translation created"),
      *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found")
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      security={{"bearer_token":{}}}
      * )
      */
     public function addTranslation(Request $request): JsonResponse
@@ -145,6 +148,7 @@ class CategoryController extends Controller
      *      @OA\Response(response=200, description="Translation deleted"),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
+     *      security={{"bearer_token":{}}}
      * )
      */
     public function removeTranslation(Request $request): JsonResponse

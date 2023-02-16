@@ -26,7 +26,7 @@ class ProductController extends Controller
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Product not found."),
      *      @OA\Response(response=409, description="Conflict"),
-     *      @OA\Response(response=500, description="Servor Error"),
+     *      @OA\Response(response=500, description="Servor Error")
      * )
      */
     public function retrieve(Request $request): JsonResponse
@@ -49,7 +49,7 @@ class ProductController extends Controller
      *      @OA\Response(response=403, description="Forbidden"),
      *      @OA\Response(response=404, description="Resource Not Found"),
      *      @OA\Response(response=409, description="Conflict"),
-     *      @OA\Response(response=500, description="Servor Error"),
+     *      @OA\Response(response=500, description="Servor Error")
      * )
      */
     public function list(Request $request): JsonResponse
@@ -74,7 +74,8 @@ class ProductController extends Controller
      *      @OA\Parameter(name="tva_rate", description="TVA rate", required=false, in="query"),
      *      @OA\Response(response=201,description="Product created"),
      *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found")
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      security={{"bearer_token":{}}}
      * )
      */
     public function create(Request $request): JsonResponse
@@ -99,6 +100,7 @@ class ProductController extends Controller
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
+     *      security={{"bearer_token":{}}}
      * )
      */
     public function update(Request $request): JsonResponse
@@ -125,6 +127,8 @@ class ProductController extends Controller
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
+     *      security={{"bearer_token":{}}}
+     *
      * )
      */
     public function delete(Request $request): JsonResponse
@@ -144,7 +148,8 @@ class ProductController extends Controller
      *      @OA\Parameter(name="text", description="Description", required=true, in="query"),
      *      @OA\Response(response=201,description="Translation created"),
      *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found")
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      security={{"bearer_token":{}}}
      * )
      */
     public function addTranslation(Request $request): JsonResponse
@@ -174,6 +179,7 @@ class ProductController extends Controller
      *      @OA\Response(response=200, description="Translation deleted"),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
+     *      security={{"bearer_token":{}}}
      * )
      */
     public function removeTranslation(Request $request): JsonResponse
@@ -197,6 +203,7 @@ class ProductController extends Controller
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
+     *      security={{"bearer_token":{}}}
      * )
      */
     public function updatePrice(Request $request): JsonResponse
@@ -219,7 +226,7 @@ class ProductController extends Controller
      *          description="Added to Cart updated"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      @OA\Response(response=404, description="Resource Not Found")
      * )
      */
     public function addToCart(Request $request): JsonResponse

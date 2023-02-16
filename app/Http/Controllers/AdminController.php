@@ -23,7 +23,8 @@ class AdminController extends Controller
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Admin not found."),
      *      @OA\Response(response=409, description="Conflict"),
-     *      @OA\Response(response=500, description="Servor Error")
+     *      @OA\Response(response=500, description="Servor Error"),
+     *      security={{"bearer_token":{}}}
      * )
      */
     public function retrieve(Request $request): JsonResponse
@@ -43,7 +44,8 @@ class AdminController extends Controller
      *      @OA\Response(response=403, description="Forbidden"),
      *      @OA\Response(response=404, description="Resource Not Found"),
      *      @OA\Response(response=409, description="Conflict"),
-     *      @OA\Response(response=500, description="Servor Error")
+     *      @OA\Response(response=500, description="Servor Error"),
+     *      security={{"bearer_token":{}}}
      * )
      */
     public function list(Request $request): JsonResponse
@@ -62,7 +64,8 @@ class AdminController extends Controller
      *      @OA\Parameter(name="account_id", description="Admin's account", required=true, in="query"),
      *      @OA\Response(response=201,description="Admin created"),
      *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found")
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      security={{"bearer_token":{}}}
      * )
      */
     public function create(Request $request): JsonResponse
@@ -84,7 +87,8 @@ class AdminController extends Controller
      *          description="Admin updated"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found")
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      security={{"bearer_token":{}}}
      * )
      */
     public function update(Request $request): JsonResponse
@@ -110,7 +114,8 @@ class AdminController extends Controller
      *          description="Admin deleted"
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found")
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      security={{"bearer_token":{}}}
      * )
      */
     public function delete(Request $request): JsonResponse
