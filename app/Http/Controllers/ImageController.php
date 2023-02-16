@@ -87,7 +87,7 @@ class ImageController extends Controller
      *      tags={"Images"},
      *      summary="Get an image",
      *      description="Returns an image",
-     *      @OA\Parameter(name="id",description="Image id",required=true,in="query"),
+     *      @OA\Parameter(name="id",description="Image id",required=true,in="path"),
      *      @OA\Response(response=200, description="successful operation"),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Account not found."),

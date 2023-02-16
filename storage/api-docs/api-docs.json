@@ -1673,7 +1673,7 @@
                 "parameters": [
                     {
                         "name": "id",
-                        "in": "query",
+                        "in": "path",
                         "description": "Image id",
                         "required": true
                     }
