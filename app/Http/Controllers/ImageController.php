@@ -107,16 +107,8 @@ class ImageController extends Controller
      *      tags={"Images"},
      *      summary="Delete an image",
      *      description="Soft delete an image",
-     *      @OA\Parameter(
-     *          name="id",
-     *          description="Image id",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Image deleted"
-     *       ),
+     *      @OA\Parameter(name="id",description="Image id",required=true,in="path"),
+     *      @OA\Response(response=200,description="Image deleted"),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
      *      security={{"bearer_token":{}}}

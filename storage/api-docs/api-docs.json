@@ -103,7 +103,7 @@
                     {
                         "name": "gender",
                         "in": "query",
-                        "description": "gender"
+                        "description": "male, female, other"
                     },
                     {
                         "name": "phone",
@@ -113,7 +113,12 @@
                     {
                         "name": "birthday",
                         "in": "query",
-                        "description": "Birthday date"
+                        "description": "YYYY-MM-DD example : 1995-07-16",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        }
                     },
                     {
                         "name": "email",
@@ -123,7 +128,7 @@
                     {
                         "name": "locale",
                         "in": "query",
-                        "description": "Locale needed for the account translations"
+                        "description": "fr or en"
                     },
                     {
                         "name": "keep_logging",
@@ -206,7 +211,7 @@
                     {
                         "name": "gender",
                         "in": "query",
-                        "description": "gender",
+                        "description": "male, female, other",
                         "required": true
                     },
                     {
@@ -218,7 +223,7 @@
                     {
                         "name": "birthday",
                         "in": "query",
-                        "description": "Birthday date",
+                        "description": "YYYY-MM-DD example : 1995-07-16",
                         "required": true,
                         "schema": {
                             "type": "string",
@@ -234,7 +239,7 @@
                     {
                         "name": "password",
                         "in": "query",
-                        "description": "Password",
+                        "description": "8 character min.",
                         "required": true
                     },
                     {
@@ -246,7 +251,7 @@
                     {
                         "name": "locale",
                         "in": "query",
-                        "description": "Locale needed for the account translations",
+                        "description": "fr or en",
                         "required": true
                     },
                     {
@@ -446,7 +451,7 @@
                     "Accounts"
                 ],
                 "summary": "Get me information",
-                "description": "Me",
+                "description": "Use to get Me information",
                 "operationId": "me",
                 "responses": {
                     "200": {
@@ -895,7 +900,7 @@
                     {
                         "name": "role",
                         "in": "query",
-                        "description": "Role"
+                        "description": "SUPER_ADMIN or ADMIN"
                     }
                 ],
                 "responses": {
@@ -961,7 +966,7 @@
                     {
                         "name": "role",
                         "in": "query",
-                        "description": "Admin's role",
+                        "description": "SUPER_ADMIN or ADMIN",
                         "required": true
                     },
                     {
@@ -1487,7 +1492,7 @@
                     {
                         "name": "role",
                         "in": "query",
-                        "description": "Role"
+                        "description": "EMPLOYEE_ORDER or EMPLOYEE_STOCK"
                     }
                 ],
                 "responses": {
@@ -1553,7 +1558,7 @@
                     {
                         "name": "role",
                         "in": "query",
-                        "description": "Employee's role",
+                        "description": "EMPLOYEE_ORDER or EMPLOYEE_STOCK",
                         "required": true
                     },
                     {
@@ -2046,7 +2051,7 @@
                     {
                         "name": "locale",
                         "in": "query",
-                        "description": "Locale",
+                        "description": "fr or en",
                         "required": false
                     },
                     {
@@ -2125,7 +2130,7 @@
                     {
                         "name": "locale",
                         "in": "query",
-                        "description": "Locale",
+                        "description": "fr or en",
                         "required": false
                     },
                     {
@@ -2167,7 +2172,7 @@
                     {
                         "name": "locale",
                         "in": "query",
-                        "description": "Locale",
+                        "description": "fr or en",
                         "required": true
                     },
                     {
@@ -2219,7 +2224,7 @@
                     {
                         "name": "locale",
                         "in": "query",
-                        "description": "Locale",
+                        "description": "fr or en",
                         "required": true
                     },
                     {
@@ -2263,7 +2268,7 @@
                     {
                         "name": "locale",
                         "in": "query",
-                        "description": "Locale",
+                        "description": "fr or en",
                         "required": true
                     },
                     {
@@ -2516,14 +2521,14 @@
                     {
                         "name": "ht",
                         "in": "query",
-                        "description": "HT",
+                        "description": "HT, in cent example: 1€ = 100",
                         "required": true
                     },
                     {
                         "name": "tva_rate",
                         "in": "query",
-                        "description": "TVA rate",
-                        "required": false
+                        "description": "TVA rate, in cent example: 10% = 1000",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -2646,13 +2651,13 @@
                     {
                         "name": "ht",
                         "in": "query",
-                        "description": "HT",
+                        "description": "HT, in cent example: 1€ = 100",
                         "required": true
                     },
                     {
                         "name": "tva_rate",
                         "in": "query",
-                        "description": "TVA rate",
+                        "description": "TVA rate, in cent example: 10% = 1000",
                         "required": true
                     }
                 ],
@@ -2932,25 +2937,25 @@
                     {
                         "name": "openings",
                         "in": "query",
-                        "description": "Store openings",
+                        "description": "Store openings json format",
                         "required": false
                     },
                     {
                         "name": "primary_color",
                         "in": "query",
-                        "description": "Store primary color",
+                        "description": "Store primary color in hexa, example: #FFFFFF",
                         "required": false
                     },
                     {
                         "name": "secondary_color",
                         "in": "query",
-                        "description": "Store secondary color",
+                        "description": "Store secondary color in hexa, example: #FFFFFF",
                         "required": false
                     },
                     {
                         "name": "logo",
                         "in": "query",
-                        "description": "Store logo",
+                        "description": "Store logo, image Id",
                         "required": false
                     }
                 ],
@@ -3062,31 +3067,31 @@
                     {
                         "name": "openings",
                         "in": "query",
-                        "description": "Store openings",
+                        "description": "Store openings json format",
                         "required": false
                     },
                     {
                         "name": "primary_color",
                         "in": "query",
-                        "description": "Store primary color",
+                        "description": "Store primary color in hexa, example: #FFFFFF",
                         "required": false
                     },
                     {
                         "name": "secondary_color",
                         "in": "query",
-                        "description": "Store secondary color",
+                        "description": "Store secondary color in hexa, example: #FFFFFF",
                         "required": false
                     },
                     {
                         "name": "logo",
                         "in": "query",
-                        "description": "Store logo",
+                        "description": "Store logo, image Id",
                         "required": false
                     },
                     {
                         "name": "locale",
                         "in": "query",
-                        "description": "Locale",
+                        "description": "fr or en",
                         "required": true
                     },
                     {
@@ -3441,7 +3446,7 @@
                     {
                         "name": "locale",
                         "in": "query",
-                        "description": "Locale",
+                        "description": "fr or en",
                         "required": true
                     },
                     {
@@ -3485,7 +3490,7 @@
                     {
                         "name": "locale",
                         "in": "query",
-                        "description": "Locale",
+                        "description": "fr or en",
                         "required": true
                     }
                 ],

@@ -70,8 +70,8 @@ class ProductController extends Controller
      *      @OA\Parameter(name="image_id", description="Image Id", required=true, in="query"),
      *      @OA\Parameter(name="store_id", description="Store Id", required=true, in="query"),
      *      @OA\Parameter(name="available", description="Available", required=true, in="query"),
-     *      @OA\Parameter(name="ht", description="HT", required=true, in="query"),
-     *      @OA\Parameter(name="tva_rate", description="TVA rate", required=false, in="query"),
+     *      @OA\Parameter(name="ht", description="HT, in cent example: 1€ = 100", required=true, in="query"),
+     *      @OA\Parameter(name="tva_rate", description="TVA rate, in cent example: 10% = 1000", required=true, in="query"),
      *      @OA\Response(response=201,description="Product created"),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
@@ -195,8 +195,8 @@ class ProductController extends Controller
      *      summary="Patch a product price",
      *      description="Update a product price",
      *      @OA\Parameter(name="id",description="Product id", required=true, in="query"),
-     *      @OA\Parameter(name="ht", description="HT", required=true, in="query"),
-     *      @OA\Parameter(name="tva_rate", description="TVA rate", required=true, in="query"),
+     *      @OA\Parameter(name="ht", description="HT, in cent example: 1€ = 100", required=true, in="query"),
+     *      @OA\Parameter(name="tva_rate", description="TVA rate, in cent example: 10% = 1000", required=true, in="query"),
      *      @OA\Response(
      *          response=200,
      *          description="Store updated"
@@ -221,10 +221,7 @@ class ProductController extends Controller
      *      @OA\Parameter(name="id",description="Product id", required=true, in="query"),
      *      @OA\Parameter(name="quantity",description="Quantity", required=true, in="query"),
      *      @OA\Parameter(name="cart_id", description="Cart Id", required=true, in="query"),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Added to Cart updated"
-     *       ),
+     *      @OA\Response(response=200,description="Added to Cart updated"),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found")
      * )
