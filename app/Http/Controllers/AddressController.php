@@ -83,6 +83,7 @@ class AddressController extends Controller
      *      tags={"Addresses"},
      *      summary="Patch a address",
      *      description="Update an address",
+     *      @OA\Parameter(name="id",description="Address id",required=true,in="path"),
      *      @OA\Parameter(name="title", description="Address title", in="query"),
      *      @OA\Parameter(name="address_line_1", description="Address line 1", in="query"),
      *      @OA\Parameter(name="address_line_2", description="Address line 2", in="query"),
@@ -110,16 +111,8 @@ class AddressController extends Controller
      *      tags={"Addresses"},
      *      summary="Delete a address",
      *      description="Soft delete a address",
-     *      @OA\Parameter(
-     *          name="id",
-     *          description="Account id",
-     *          required=true,
-     *          in="path"
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Account deleted"
-     *       ),
+     *      @OA\Parameter(name="id",description="Address id",required=true,in="path"),
+     *      @OA\Response(response=200,description="Account deleted"),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
      *      security={{"bearer_token":{}}}

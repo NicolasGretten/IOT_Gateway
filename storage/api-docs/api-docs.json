@@ -633,7 +633,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Account id",
+                        "description": "Address id",
                         "required": true
                     }
                 ],
@@ -662,6 +662,12 @@
                 "description": "Update an address",
                 "operationId": "update",
                 "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Address id",
+                        "required": true
+                    },
                     {
                         "name": "title",
                         "in": "query",
