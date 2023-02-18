@@ -2307,7 +2307,7 @@
                 "parameters": [
                     {
                         "name": "locale",
-                        "in": "path",
+                        "in": "query",
                         "description": "Locale",
                         "required": false
                     },
@@ -2436,7 +2436,7 @@
                 "parameters": [
                     {
                         "name": "locale",
-                        "in": "path",
+                        "in": "query",
                         "description": "Locale",
                         "required": false
                     },
@@ -2823,7 +2823,7 @@
                     },
                     {
                         "name": "locale",
-                        "in": "path",
+                        "in": "query",
                         "description": "Locale",
                         "required": false
                     }
@@ -2988,7 +2988,7 @@
                 "parameters": [
                     {
                         "name": "locale",
-                        "in": "path",
+                        "in": "query",
                         "description": "Locale",
                         "required": false
                     }
