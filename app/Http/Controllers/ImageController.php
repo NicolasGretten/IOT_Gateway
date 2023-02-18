@@ -56,6 +56,7 @@ class ImageController extends Controller
      *      @OA\Response(response=201,description="Image uploaded"),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
+     *      security={{"bearer_token":{}}},
      *      @OA\RequestBody(
      *       @OA\MediaType(
      *           mediaType="multipart/form-data",
@@ -72,8 +73,7 @@ class ImageController extends Controller
      *           ),
      *       )
      *     ),
-     * ),
-     *      security={{"bearer_token":{}}}
+     * )
      */
     public function upload(Request $request): JsonResponse
     {
