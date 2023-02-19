@@ -411,7 +411,7 @@ class AccountController extends Controller
     {
         try {
 
-            return Cache::remember('post-text-' . $request->input('email'), 10, function () use ($request) {
+            return Cache::tags('checkIfEmailIsAvailable')->remember('check-id-email-is-available-' . $request->input('email'), 600, function () use ($request) {
 
                 $request->validate([
                     'email' => 'required|email'
@@ -420,6 +420,7 @@ class AccountController extends Controller
                 $resultSet = Account::select('accounts.*')
                     ->where('accounts.email', $request->input('email'));
 
+                var_dump('request');
                 if(empty($resultSet->first())) {
                     return response()->json(['available' => true]);
                 }
