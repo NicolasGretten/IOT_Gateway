@@ -36,7 +36,8 @@ class StoreMediaController extends Controller
      *      @OA\Parameter(name="type", description="Media type", required=true, in="query"),
      *      @OA\Response(response=201,description="Media created"),
      *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found")
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      security={{"bearer_token":{}}}
      * )
      */
     public function addMedia(Request $request): JsonResponse
@@ -65,7 +66,8 @@ class StoreMediaController extends Controller
      *      ),
      *      @OA\Response(response=200, description="Media deleted"),
      *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found")
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      security={{"bearer_token":{}}}
      * )
      */
     public function removeMedia(Request $request): JsonResponse

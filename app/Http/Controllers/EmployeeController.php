@@ -60,7 +60,7 @@ class EmployeeController extends Controller
      *      tags={"Employees"},
      *      summary="Post a new employee",
      *      description="Create a new employee",
-     *      @OA\Parameter(name="role", description="Employee's role", required=true, in="query"),
+     *      @OA\Parameter(name="role", description="EMPLOYEE_ORDER or EMPLOYEE_STOCK", required=true, in="query"),
      *      @OA\Parameter(name="store_id", description="Employee's store", required=true, in="query"),
      *      @OA\Parameter(name="account_id", description="Employee's account", required=true, in="query"),
      *      @OA\Response(response=201,description="Employee created"),
@@ -82,11 +82,8 @@ class EmployeeController extends Controller
      *      summary="Patch a employee",
      *      description="Update a employee",
      *      @OA\Parameter(name="id", description="Employee id", in="query"),
-     *      @OA\Parameter(name="role", description="Role", in="query"),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Employee updated"
-     *       ),
+     *      @OA\Parameter(name="role", description="EMPLOYEE_ORDER or EMPLOYEE_STOCK", in="query"),
+     *      @OA\Response(response=200,description="Employee updated"),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
      *      security={{"bearer_token":{}}}
@@ -104,19 +101,8 @@ class EmployeeController extends Controller
      *      tags={"Employees"},
      *      summary="Delete a employee",
      *      description="Soft delete a employee",
-     *      @OA\Parameter(
-     *          name="id",
-     *          description="Employee id",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="String"
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Employee deleted"
-     *       ),
+     *      @OA\Parameter(name="id",description="Employee id",required=true,in="path"),
+     *      @OA\Response(response=200,description="Employee deleted"),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
      *      security={{"bearer_token":{}}}

@@ -11,12 +11,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Crypt;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
  * @method static where(string $string, mixed $accountId)
  * @method static select(string $string)
+ * @method static find($postId)
  * @property mixed email
  * @property mixed password
  * @property mixed locale
@@ -127,5 +129,14 @@ class Account extends Model implements AuthenticatableContract, AuthorizableCont
         return [
             'profile' => (Crypt::encrypt($profile))
         ];
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::saving(function() {
+            Cache::tags('checkIfEmailIsAvailable')->flush();
+        });
     }
 }
