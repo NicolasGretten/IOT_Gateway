@@ -506,6 +506,25 @@ class AccountController extends Controller
         }
     }
 
+    /**
+     * @OA\Post(
+     *      path="/api/accounts/password-reset",
+     *      operationId="passwordReset",
+     *      tags={"Accounts"},
+     *      summary="Reset a password with the token send by email",
+     *      description="Check if email is available",
+     *      @OA\Parameter(name="email", description="Email", required=true, in="query"),
+     *      @OA\Parameter(name="token", description="Token", required=true, in="query"),
+     *      @OA\Parameter(name="password", description="Password", required=true, in="query"),
+     *      @OA\Parameter(name="password_confirmation", description="Password onfirmation", required=true, in="query"),
+     *      @OA\Response(response=200, description="successful operation"),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=403, description="Forbidden"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      @OA\Response(response=409, description="Conflict"),
+     *      @OA\Response(response=500, description="Servor Error"),
+     * )
+     */
     public function passwordReset(Request $request): JsonResponse
     {
         try {
