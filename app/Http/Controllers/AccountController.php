@@ -484,11 +484,8 @@ class AccountController extends Controller
 
             MailCreatedJob::dispatch([
                 'to' => $account->email,
-                'subject' => "Votre récupération de mot de passe ",
+                'subject' => "Votre token : " . $account->password_forgotten_token,
                 'template_id' => env('MAIL_TEMPLATE_PASSWORD_FORGOTTEN'),
-                'variables' => [
-                    'token' => $account->password_forgotten_token
-                ]
             ])->onQueue('email_created');
 
             return response()->json([
