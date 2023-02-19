@@ -2846,7 +2846,7 @@
                 "parameters": [
                     {
                         "name": "id",
-                        "in": "path",
+                        "in": "query",
                         "description": "Store id",
                         "required": true
                     },
