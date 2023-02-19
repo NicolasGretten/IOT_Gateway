@@ -475,7 +475,7 @@ class AccountController extends Controller
                 throw new ModelNotFoundException('Account not found.', 404);
             }
 
-            $account->password_forgotten_token_limit = Carbon::now()->addMinutes(env('PASSWORD_TOKEN_LIMIT'));
+            $account->password_forgotten_token_limit = Carbon::now()->addMinutes('10');
             $account->password_forgotten_token = md5(Str::uuid());
 
             $account->update();
@@ -540,8 +540,7 @@ class AccountController extends Controller
                 'password' => 'required|between:8,255|confirmed'
             ]);
 
-            $resultSet = Account::select('*')
-                ->where('email', $request->input('email'))
+            $resultSet = Account::where('email', $request->input('email'))
                 ->where('password_forgotten_token', $request->input('token'))
                 ->where('password_forgotten_token_limit', '>', Carbon::now());
 
