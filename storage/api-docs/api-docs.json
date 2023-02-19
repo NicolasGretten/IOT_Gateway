@@ -2409,7 +2409,13 @@
                         "name": "image_id",
                         "in": "query",
                         "description": "Image Id",
-                        "required": true
+                        "required": false
+                    },
+                    {
+                        "name": "reference",
+                        "in": "query",
+                        "description": "Reference",
+                        "required": false
                     }
                 ],
                 "responses": {
@@ -2494,10 +2500,22 @@
                         "required": true
                     },
                     {
-                        "name": "text",
+                        "name": "label",
+                        "in": "query",
+                        "description": "Label",
+                        "required": true
+                    },
+                    {
+                        "name": "description",
                         "in": "query",
                         "description": "Description",
                         "required": true
+                    },
+                    {
+                        "name": "reference",
+                        "in": "query",
+                        "description": "Reference",
+                        "required": false
                     },
                     {
                         "name": "category_id",
@@ -2506,15 +2524,15 @@
                         "required": true
                     },
                     {
-                        "name": "image_id",
-                        "in": "query",
-                        "description": "Image Id",
-                        "required": true
-                    },
-                    {
                         "name": "store_id",
                         "in": "query",
                         "description": "Store Id",
+                        "required": true
+                    },
+                    {
+                        "name": "image_id",
+                        "in": "query",
+                        "description": "Image Id",
                         "required": true
                     },
                     {
@@ -2526,14 +2544,14 @@
                     {
                         "name": "ht",
                         "in": "query",
-                        "description": "HT, in cent example: 1€ = 100",
+                        "description": "HT",
                         "required": true
                     },
                     {
                         "name": "tva_rate",
                         "in": "query",
-                        "description": "TVA rate, in cent example: 10% = 1000",
-                        "required": true
+                        "description": "TVA rate",
+                        "required": false
                     }
                 ],
                 "responses": {
@@ -2576,10 +2594,16 @@
                         "required": true
                     },
                     {
-                        "name": "text",
+                        "name": "label",
+                        "in": "query",
+                        "description": "Label",
+                        "required": false
+                    },
+                    {
+                        "name": "description",
                         "in": "query",
                         "description": "Description",
-                        "required": true
+                        "required": false
                     }
                 ],
                 "responses": {
