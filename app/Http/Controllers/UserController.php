@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Traits\MicroserviceTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use OpenApi\Annotations as OA;
 
 class UserController extends Controller
 {
@@ -103,19 +104,8 @@ class UserController extends Controller
      *      tags={"Users"},
      *      summary="Delete a user",
      *      description="Soft delete a user",
-     *      @OA\Parameter(
-     *          name="id",
-     *          description="Account id",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="String"
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Account deleted"
-     *       ),
+     *      @OA\Parameter( name="id", description="User id", required=true, in="query" ),
+     *      @OA\Response( response=200, description="Account deleted" ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
      *      security={{"bearer_token":{}}}

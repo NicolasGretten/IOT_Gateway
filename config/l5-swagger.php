@@ -18,7 +18,7 @@ return [
                 /*
                  * Edit to include full URL in ui for assets
                 */
-                'use_absolute_path' => env('L5_SWAGGER_USE_ABSOLUTE_PATH', true),
+                'use_absolute_path' => env('/public/dist', true),
 
                 /*
                  * File name of the generated json documentation file
@@ -231,7 +231,8 @@ return [
          * Edit to trust the proxy's ip address - needed for AWS Load Balancer
          * string[]
         */
-        'proxy' => false,
+        'proxy' => [
+        ],
 
         /*
          * Configs plugin allows to fetch external configs instead of passing them to SwaggerUIBundle.

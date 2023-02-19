@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\MailCreatedJob;
 use App\Models\Account;
 use App\Traits\FiltersTrait;
 use App\Traits\IdTrait;
@@ -16,16 +17,18 @@ use Illuminate\Database\Eloquent\JsonEncodingException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use OpenApi\Annotations as OA;
 use PDOException;
 use Exception;
 use RobThree\Auth\TwoFactorAuthException;
 
 /**
- * @OA\Info(title="Account API Collect&Verything", version="0.1")
+ * @OA\Info(title="API Collect&Verything", version="0.1")
  */
 class AccountController extends Controller
 {
@@ -129,14 +132,14 @@ class AccountController extends Controller
      *      description="Create a new account",
      *      @OA\Parameter(name="first_name", description="First name", required=true, in="query"),
      *      @OA\Parameter(name="last_name", description="Last name", required=true, in="query"),
-     *      @OA\Parameter(name="gender", description="gender", required=true, in="query"),
+     *      @OA\Parameter(name="gender", description="male, female, other", required=true, in="query"),
      *      @OA\Parameter(name="phone", description="Phone number", required=true, in="query"),
-     *      @OA\Parameter(name="birthday", description="Birthday date", required=true, in="query", @OA\Schema(type="Date")),
+     *      @OA\Parameter(name="birthday", description="YYYY-MM-DD example : 1995-07-16", required=true, in="query", @OA\Schema(type="string", format="date")),
      *      @OA\Parameter(name="email", description="Email", required=true, in="query"),
-     *      @OA\Parameter(name="password", description="Password", required=true, in="query"),
+     *      @OA\Parameter(name="password", description="8 character min.", required=true, in="query"),
      *      @OA\Parameter(name="password_confirmation", description="Password confirmation", required=true, in="query"),
-     *      @OA\Parameter(name="locale", description="Locale needed for the account translations", required=true, in="query"),
-     *      @OA\Parameter(name="keep_logging", description="If the account stay logging", required=true, in="query", @OA\Schema(type="Boolean")),
+     *      @OA\Parameter(name="locale", description="fr or en", required=true, in="query"),
+     *      @OA\Parameter(name="keep_logging", description="If the account stay logging", required=true, in="query", @OA\Schema(type="string")),
      *      @OA\Response(response=201,description="Account created"),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found")
@@ -167,7 +170,7 @@ class AccountController extends Controller
 
             $account->id = $this->generateId('account', $account);
             $account->gender = $request->input('gender');
-            $account->accountNumber = $account->generateAccountNumber();
+            $account->account_number = $account->generateAccountNumber();
             $account->first_name = $request->input('first_name');
             $account->last_name = $request->input('last_name');
             $account->birthday = $request->input('birthday');
@@ -180,6 +183,12 @@ class AccountController extends Controller
             $account->save();
 
             DB::commit();
+
+            MailCreatedJob::dispatch([
+                'to' => $account->email,
+                'subject' => "Bienvenue chez Collect&Verything ". $account->first_name,
+                'template_id' => env('MAIL_TEMPLATE_WELCOME'),
+            ])->onQueue('email_created');
 
             return response()->json($account->fresh(), 201);
         }
@@ -207,18 +216,16 @@ class AccountController extends Controller
      *      tags={"Accounts"},
      *      summary="Patch an account",
      *      description="Update an account",
+     *      @OA\Parameter(name="id",description="Account id",required=true,in="path"),
      *      @OA\Parameter(name="first_name", description="First name", in="query"),
      *      @OA\Parameter(name="last_name", description="Last name", in="query"),
-     *      @OA\Parameter(name="gender", description="gender", in="query"),
+     *      @OA\Parameter(name="gender", description="male, female, other", in="query"),
      *      @OA\Parameter(name="phone", description="Phone number", in="query"),
-     *      @OA\Parameter(name="birthday", description="Birthday date", in="query"),
+     *      @OA\Parameter(name="birthday", description="YYYY-MM-DD example : 1995-07-16", required=false, in="query", @OA\Schema(type="string", format="date")),
      *      @OA\Parameter(name="email", description="Email", in="query"),
-     *      @OA\Parameter(name="locale", description="Locale needed for the account translations", in="query"),
+     *      @OA\Parameter(name="locale", description="fr or en", in="query"),
      *      @OA\Parameter(name="keep_logging", description="If the account stay logging", in="query"),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Account updated"
-     *       ),
+     *      @OA\Response(response=200,description="Account updated"),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
      *      security={{"bearer_token":{}}}
@@ -293,19 +300,8 @@ class AccountController extends Controller
      *      tags={"Accounts"},
      *      summary="Delete an account",
      *      description="Soft delete an account",
-     *      @OA\Parameter(
-     *          name="id",
-     *          description="Account id",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="String"
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Account deleted"
-     *       ),
+     *      @OA\Parameter(name="id",description="Account id",required=true,in="path"),
+     *      @OA\Response(response=200,description="Account deleted"),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
      *      security={{"bearer_token":{}}}
@@ -352,6 +348,7 @@ class AccountController extends Controller
      *      tags={"Accounts"},
      *      summary="Patch an account",
      *      description="Restore an account",
+     *      @OA\Parameter(name="id",description="Account id",required=true,in="path"),
      *      @OA\Response(response=200, description="successful operation"),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=403, description="Forbidden"),
@@ -413,19 +410,22 @@ class AccountController extends Controller
     public function checkIfEmailIsAvailable(Request $request): JsonResponse
     {
         try {
-            $request->validate([
-                'email' => 'required|email'
-            ]);
 
-            $resultSet = Account::select('accounts.*')
-                ->where('accounts.email', $request->email);
+            return Cache::tags('checkIfEmailIsAvailable')->remember('check-id-email-is-available-' . $request->input('email'), 600, function () use ($request) {
 
-            if(empty($resultSet->first())) {
-                return response()->json(['available' => true], 200);
-            }
+                $request->validate([
+                    'email' => 'required|email'
+                ]);
 
-            return response()->json(['available' => false], 200);
+                $resultSet = Account::select('accounts.*')
+                    ->where('accounts.email', $request->input('email'));
 
+                if(empty($resultSet->first())) {
+                    return response()->json(['available' => true]);
+                }
+
+                return response()->json(['available' => false]);
+            });
         }
         catch(ModelNotFoundException $e) {
             Bugsnag::notifyException($e);
@@ -578,6 +578,10 @@ class AccountController extends Controller
                 throw new AuthenticationException('You are unauthorized to access this resource.');
             }
 
+            if (!$account->role && !$account->role_id) {
+                throw new AuthenticationException('You are unauthorized to access this resource.');
+            }
+
             if (!Hash::check($request->input('password'), $account->password)) {
                 throw new AuthenticationException('You are unauthorized to access this resource.');
             }
@@ -639,7 +643,7 @@ class AccountController extends Controller
      *      operationId="me",
      *      tags={"Accounts"},
      *      summary="Get me information",
-     *      description="Me",
+     *      description="Use to get Me information",
      *      @OA\Response(response=200, description="successful operation"),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=403, description="Forbidden"),
@@ -784,16 +788,20 @@ class AccountController extends Controller
                 'email' => 'required|email',
             ]);
 
-            $resultSet = Account::select('*')
-                ->where('email', $request->email);
+            $getEmail = Cache::remember('post-text-' . $request->email, 10, function () use ($request) {
+                $resultSet = Account::select('*')
+                    ->where('email', $request->email);
 
-            $account = $resultSet->first();
+                $account = $resultSet->first();
 
-            if (empty($account)) {
-                throw new ModelNotFoundException('Employee not found.', 404);
-            }
+                if (empty($account)) {
+                    throw new ModelNotFoundException('Employee not found.', 404);
+                }
 
-            return response()->json($account, 200);
+                return response()->json($account);
+            });
+
+            return $getEmail;
 
         } catch(Exception $e){
             Bugsnag::notifyException($e);

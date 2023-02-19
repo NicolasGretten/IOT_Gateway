@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
          Account::factory()->create([
-            'id'=> '00000000-0000-0000-000000000000',
+            'id'=> 'account-00000000-0000-0000-000000000000',
             'account_number'=> 'MD545698872',
             'first_name' => 'John',
             'last_name' => 'Doe',

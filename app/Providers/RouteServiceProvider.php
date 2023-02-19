@@ -33,6 +33,11 @@ class RouteServiceProvider extends ServiceProvider
                 ->prefix('api')
                 ->group(base_path('routes/api.php'));
         });
+
+        if(env('APP_ENV') == 'production' || env('APP_ENV') == 'staging'){
+            resolve(\Illuminate\Routing\UrlGenerator::class)->forceScheme('https');
+            parent::boot();
+        }
     }
 
     /**

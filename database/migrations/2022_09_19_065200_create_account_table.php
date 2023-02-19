@@ -24,6 +24,8 @@ return new class extends Migration
             $table->string('gender');
             $table->string('phone');
             $table->string('locale');
+            $table->enum('role', ['ADMIN', 'SUPER_ADMIN', 'USER', 'STORE_OWNER', 'EMPLOYEE_STOCK', 'EMPLOYEE_ORDER'])->nullable();
+            $table->string('role_id')->nullable();
             $table->boolean('keep_logging')->default('1');
             $table->timestamp('last_login_at')->nullable();
             $table->text('password_forgotten_token')->nullable();

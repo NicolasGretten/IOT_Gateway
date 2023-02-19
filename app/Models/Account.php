@@ -11,12 +11,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Crypt;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
  * @method static where(string $string, mixed $accountId)
  * @method static select(string $string)
+ * @method static find($postId)
  * @property mixed email
  * @property mixed password
  * @property mixed locale
@@ -29,6 +31,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property mixed last_name
  * @property mixed first_name
  * @property Carbon|mixed last_login_at
+ * @property mixed|string|null $account_number
  */
 class Account extends Model implements AuthenticatableContract, AuthorizableContract, JWTSubject
 {
@@ -86,7 +89,7 @@ class Account extends Model implements AuthenticatableContract, AuthorizableCont
             str_pad($dd, 2, 0, STR_PAD_LEFT) .
             str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
 
-        $checkAvailability = Account::where('accountNumber', $nextAccountNumber)->withTrashed();
+        $checkAvailability = Account::where('account_number', $nextAccountNumber)->withTrashed();
 
         if ($checkAvailability->count() == 0) {
             return $nextAccountNumber;
@@ -126,5 +129,14 @@ class Account extends Model implements AuthenticatableContract, AuthorizableCont
         return [
             'profile' => (Crypt::encrypt($profile))
         ];
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::saving(function() {
+            Cache::tags('checkIfEmailIsAvailable')->flush();
+        });
     }
 }

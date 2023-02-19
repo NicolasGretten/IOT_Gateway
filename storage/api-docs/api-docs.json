@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Account API Collect&Verything",
+        "title": "API Collect&Verything",
         "version": "0.1"
     },
     "paths": {
@@ -56,10 +56,7 @@
                         "name": "id",
                         "in": "path",
                         "description": "Account id",
-                        "required": true,
-                        "schema": {
-                            "type": "String"
-                        }
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -88,6 +85,12 @@
                 "operationId": "update",
                 "parameters": [
                     {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Account id",
+                        "required": true
+                    },
+                    {
                         "name": "first_name",
                         "in": "query",
                         "description": "First name"
@@ -100,7 +103,7 @@
                     {
                         "name": "gender",
                         "in": "query",
-                        "description": "gender"
+                        "description": "male, female, other"
                     },
                     {
                         "name": "phone",
@@ -110,7 +113,12 @@
                     {
                         "name": "birthday",
                         "in": "query",
-                        "description": "Birthday date"
+                        "description": "YYYY-MM-DD example : 1995-07-16",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        }
                     },
                     {
                         "name": "email",
@@ -120,7 +128,7 @@
                     {
                         "name": "locale",
                         "in": "query",
-                        "description": "Locale needed for the account translations"
+                        "description": "fr or en"
                     },
                     {
                         "name": "keep_logging",
@@ -203,7 +211,7 @@
                     {
                         "name": "gender",
                         "in": "query",
-                        "description": "gender",
+                        "description": "male, female, other",
                         "required": true
                     },
                     {
@@ -215,10 +223,11 @@
                     {
                         "name": "birthday",
                         "in": "query",
-                        "description": "Birthday date",
+                        "description": "YYYY-MM-DD example : 1995-07-16",
                         "required": true,
                         "schema": {
-                            "type": "Date"
+                            "type": "string",
+                            "format": "date"
                         }
                     },
                     {
@@ -230,7 +239,7 @@
                     {
                         "name": "password",
                         "in": "query",
-                        "description": "Password",
+                        "description": "8 character min.",
                         "required": true
                     },
                     {
@@ -242,7 +251,7 @@
                     {
                         "name": "locale",
                         "in": "query",
-                        "description": "Locale needed for the account translations",
+                        "description": "fr or en",
                         "required": true
                     },
                     {
@@ -251,7 +260,7 @@
                         "description": "If the account stay logging",
                         "required": true,
                         "schema": {
-                            "type": "Boolean"
+                            "type": "string"
                         }
                     }
                 ],
@@ -276,6 +285,14 @@
                 "summary": "Patch an account",
                 "description": "Restore an account",
                 "operationId": "restore",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Account id",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -434,7 +451,7 @@
                     "Accounts"
                 ],
                 "summary": "Get me information",
-                "description": "Me",
+                "description": "Use to get Me information",
                 "operationId": "me",
                 "responses": {
                     "200": {
@@ -621,11 +638,8 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Account id",
-                        "required": true,
-                        "schema": {
-                            "type": "String"
-                        }
+                        "description": "Address id",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -653,6 +667,12 @@
                 "description": "Update an address",
                 "operationId": "update",
                 "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Address id",
+                        "required": true
+                    },
                     {
                         "name": "title",
                         "in": "query",
@@ -793,6 +813,2744 @@
                 }
             }
         },
+        "/api/admins/{id}": {
+            "get": {
+                "tags": [
+                    "Admins"
+                ],
+                "summary": "Get admin information",
+                "description": "Returns admin data",
+                "operationId": "retrieve",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Admin id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Admin not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Admins"
+                ],
+                "summary": "Delete a admin",
+                "description": "Soft delete a admin",
+                "operationId": "delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Admin id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Admin deleted"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Admins"
+                ],
+                "summary": "Patch a admin",
+                "description": "Update a admin",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Admin id"
+                    },
+                    {
+                        "name": "role",
+                        "in": "query",
+                        "description": "SUPER_ADMIN or ADMIN"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Admin updated"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/admins": {
+            "get": {
+                "tags": [
+                    "Admins"
+                ],
+                "summary": "Get all admins information",
+                "description": "Returns admin data",
+                "operationId": "list",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Admins"
+                ],
+                "summary": "Post a new admin",
+                "description": "Create a new admin",
+                "operationId": "create",
+                "parameters": [
+                    {
+                        "name": "role",
+                        "in": "query",
+                        "description": "SUPER_ADMIN or ADMIN",
+                        "required": true
+                    },
+                    {
+                        "name": "account_id",
+                        "in": "query",
+                        "description": "Admin's account",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Admin created"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/carts/{id}": {
+            "get": {
+                "tags": [
+                    "Carts"
+                ],
+                "summary": "Get cart information",
+                "description": "Returns cart data",
+                "operationId": "retrieve",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Cart id",
+                        "required": true
+                    },
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "User Id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Cart not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Carts"
+                ],
+                "summary": "Delete a cart",
+                "description": "Soft delete a cart",
+                "operationId": "delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Cart id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Cart deleted"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Carts"
+                ],
+                "summary": "Update a cart",
+                "description": "Update a cart",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Cart id",
+                        "required": true
+                    },
+                    {
+                        "name": "payment_method",
+                        "in": "query",
+                        "description": "Payment method",
+                        "required": false
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Status of cart",
+                        "required": false
+                    },
+                    {
+                        "name": "refund_at",
+                        "in": "query",
+                        "description": "Refund",
+                        "required": false
+                    },
+                    {
+                        "name": "paid_at",
+                        "in": "query",
+                        "description": "PAaid date",
+                        "required": false
+                    },
+                    {
+                        "name": "capture_at",
+                        "in": "query",
+                        "description": "Capture date",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Cart Updated"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/carts": {
+            "get": {
+                "tags": [
+                    "Carts"
+                ],
+                "summary": "Get all carts information",
+                "description": "Returns cart data, ADMIN Route",
+                "operationId": "list",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Carts"
+                ],
+                "summary": "Post a new cart",
+                "description": "Create a cart",
+                "operationId": "create",
+                "parameters": [
+                    {
+                        "name": "store_id",
+                        "in": "query",
+                        "description": "Store Id",
+                        "required": true
+                    },
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "User Id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Cart created"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/carts/users/{user_id}": {
+            "get": {
+                "tags": [
+                    "Carts"
+                ],
+                "summary": "Get all carts information by Users",
+                "description": "Returns cart data",
+                "operationId": "listUserId",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "User Id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/carts/stores/{store_id}": {
+            "get": {
+                "tags": [
+                    "Carts"
+                ],
+                "summary": "Get all carts information by store",
+                "description": "Returns cart data",
+                "operationId": "listStoreId",
+                "parameters": [
+                    {
+                        "name": "store_id",
+                        "in": "query",
+                        "description": "Store Id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/carts/{id}/confirm": {
+            "patch": {
+                "tags": [
+                    "Carts"
+                ],
+                "summary": "Confirm a cart",
+                "description": "Confirm a cart",
+                "operationId": "confirm",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Cart id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Cart Confirmed"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/carts/{id}/refund": {
+            "patch": {
+                "tags": [
+                    "Carts"
+                ],
+                "summary": "Refund a cart",
+                "description": "Refund a cart",
+                "operationId": "refund",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Cart id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Cart Confirmed"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/carts/{id}/contents/{cart_content_id}": {
+            "delete": {
+                "tags": [
+                    "Carts Contents"
+                ],
+                "summary": "Delete a cart content",
+                "description": "Soft delete a content",
+                "operationId": "removeContent",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Cart id",
+                        "required": true
+                    },
+                    {
+                        "name": "cart_content_id",
+                        "in": "query",
+                        "description": "Cart content id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Cart content deleted"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Carts Contents"
+                ],
+                "summary": "update a cart content",
+                "description": "Update a cart content",
+                "operationId": "updateContent",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Cart id",
+                        "required": true
+                    },
+                    {
+                        "name": "cart_content_id",
+                        "in": "query",
+                        "description": "Cart content id",
+                        "required": true
+                    },
+                    {
+                        "name": "quantity",
+                        "in": "query",
+                        "description": "Quantity",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Cart content deleted"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/employees/{id}": {
+            "get": {
+                "tags": [
+                    "Employees"
+                ],
+                "summary": "Get employee information",
+                "description": "Returns employee data",
+                "operationId": "retrieve",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Employee id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Account not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Employees"
+                ],
+                "summary": "Delete a employee",
+                "description": "Soft delete a employee",
+                "operationId": "delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Employee id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Employee deleted"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Employees"
+                ],
+                "summary": "Patch a employee",
+                "description": "Update a employee",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Employee id"
+                    },
+                    {
+                        "name": "role",
+                        "in": "query",
+                        "description": "EMPLOYEE_ORDER or EMPLOYEE_STOCK"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Employee updated"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/employees": {
+            "get": {
+                "tags": [
+                    "Employees"
+                ],
+                "summary": "Get all employees information",
+                "description": "Returns employee data",
+                "operationId": "list",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Employees"
+                ],
+                "summary": "Post a new employee",
+                "description": "Create a new employee",
+                "operationId": "create",
+                "parameters": [
+                    {
+                        "name": "role",
+                        "in": "query",
+                        "description": "EMPLOYEE_ORDER or EMPLOYEE_STOCK",
+                        "required": true
+                    },
+                    {
+                        "name": "store_id",
+                        "in": "query",
+                        "description": "Employee's store",
+                        "required": true
+                    },
+                    {
+                        "name": "account_id",
+                        "in": "query",
+                        "description": "Employee's account",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Employee created"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/images": {
+            "get": {
+                "tags": [
+                    "Images"
+                ],
+                "summary": "Get all images",
+                "description": "Returns images",
+                "operationId": "list",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Images"
+                ],
+                "summary": "Post a new image",
+                "description": "Create a new image",
+                "operationId": "upload",
+                "parameters": [
+                    {
+                        "name": "checksum",
+                        "in": "query",
+                        "description": "Checksum of the file",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "file": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Image uploaded"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/images/{id}": {
+            "get": {
+                "tags": [
+                    "Images"
+                ],
+                "summary": "Get an image",
+                "description": "Returns an image",
+                "operationId": "retrieve",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Image id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Account not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Images"
+                ],
+                "summary": "Delete an image",
+                "description": "Soft delete an image",
+                "operationId": "delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Image id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Image deleted"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/orders/{id}": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Get order information",
+                "description": "Returns order data",
+                "operationId": "retrieve",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Order id",
+                        "required": true
+                    },
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "User Id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Order not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Delete a order",
+                "description": "Soft delete a order",
+                "operationId": "delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Order id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Order deleted"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Update a order",
+                "description": "Update a order",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Order id",
+                        "required": true
+                    },
+                    {
+                        "name": "comment",
+                        "in": "query",
+                        "description": "Comment",
+                        "required": false
+                    },
+                    {
+                        "name": "store_slot_id",
+                        "in": "query",
+                        "description": "Store slot Id",
+                        "required": false
+                    },
+                    {
+                        "name": "state",
+                        "in": "query",
+                        "description": "State of order",
+                        "required": false
+                    },
+                    {
+                        "name": "available_at",
+                        "in": "query",
+                        "description": "State of order",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Order Updated"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/orders": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Get all orders information",
+                "description": "Returns order data, ADMIN Route",
+                "operationId": "list",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Post a new order",
+                "description": "Create a order",
+                "operationId": "create",
+                "parameters": [
+                    {
+                        "name": "store_id",
+                        "in": "query",
+                        "description": "Store Id",
+                        "required": true
+                    },
+                    {
+                        "name": "store_slot_id",
+                        "in": "query",
+                        "description": "Store slot Id",
+                        "required": false
+                    },
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "User Id",
+                        "required": true
+                    },
+                    {
+                        "name": "cart_id",
+                        "in": "query",
+                        "description": "Cart Id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Order created"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/orders/users/{user_id}": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Get all orders information by Users",
+                "description": "Returns order data",
+                "operationId": "listUserId",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "User Id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/orders/stores/{store_id}": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Get all orders information by store",
+                "description": "Returns order data",
+                "operationId": "listStoreId",
+                "parameters": [
+                    {
+                        "name": "store_id",
+                        "in": "query",
+                        "description": "Store Id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/categories/{id}": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Get category information",
+                "description": "Returns category data",
+                "operationId": "retrieve",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "fr or en",
+                        "required": false
+                    },
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Category id",
+                        "required": true
+                    },
+                    {
+                        "name": "store_id",
+                        "in": "query",
+                        "description": "Store Id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Category not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Delete a category",
+                "description": "Soft delete a category",
+                "operationId": "delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Category id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Category deleted"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/categories": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Get all categories information",
+                "description": "Returns category data",
+                "operationId": "list",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "fr or en",
+                        "required": false
+                    },
+                    {
+                        "name": "store_id",
+                        "in": "query",
+                        "description": "Store Id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Post a new category",
+                "description": "Create a category",
+                "operationId": "create",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "fr or en",
+                        "required": true
+                    },
+                    {
+                        "name": "text",
+                        "in": "query",
+                        "description": "Description",
+                        "required": true
+                    },
+                    {
+                        "name": "store_id",
+                        "in": "query",
+                        "description": "Store Id",
+                        "required": true
+                    },
+                    {
+                        "name": "default",
+                        "in": "query",
+                        "description": "Default",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Category created"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/categories/{id}/translate": {
+            "post": {
+                "tags": [
+                    "Categories Translations"
+                ],
+                "summary": "Post a new category translation",
+                "description": "Create a new translation",
+                "operationId": "addTranslation",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "fr or en",
+                        "required": true
+                    },
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Category id",
+                        "required": true
+                    },
+                    {
+                        "name": "text",
+                        "in": "query",
+                        "description": "Text",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Translation created"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Categories Translations"
+                ],
+                "summary": "Delete a category translation",
+                "description": "Soft delete a translation",
+                "operationId": "removeTranslation",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "fr or en",
+                        "required": true
+                    },
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Category id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Translation deleted"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/products/{id}": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Get product information",
+                "description": "Returns product data",
+                "operationId": "retrieve",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "Locale",
+                        "required": false
+                    },
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Product id",
+                        "required": true
+                    },
+                    {
+                        "name": "store_id",
+                        "in": "query",
+                        "description": "Store Id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Product not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Delete a product",
+                "description": "Soft delete a product",
+                "operationId": "delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Product id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Product deleted"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Patch a product",
+                "description": "Update a product",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Product id",
+                        "required": true
+                    },
+                    {
+                        "name": "available",
+                        "in": "query",
+                        "description": "available",
+                        "required": false
+                    },
+                    {
+                        "name": "category_id",
+                        "in": "query",
+                        "description": "Category Id",
+                        "required": false
+                    },
+                    {
+                        "name": "image_id",
+                        "in": "query",
+                        "description": "Image Id",
+                        "required": false
+                    },
+                    {
+                        "name": "reference",
+                        "in": "query",
+                        "description": "Reference",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Store updated"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/products": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Get all products information",
+                "description": "Returns product data",
+                "operationId": "list",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "Locale",
+                        "required": false
+                    },
+                    {
+                        "name": "store_id",
+                        "in": "query",
+                        "description": "Store Id",
+                        "required": true
+                    },
+                    {
+                        "name": "category_id",
+                        "in": "query",
+                        "description": "Category Id",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Post a new product",
+                "description": "Create a product",
+                "operationId": "create",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "Locale",
+                        "required": true
+                    },
+                    {
+                        "name": "label",
+                        "in": "query",
+                        "description": "Label",
+                        "required": true
+                    },
+                    {
+                        "name": "description",
+                        "in": "query",
+                        "description": "Description",
+                        "required": true
+                    },
+                    {
+                        "name": "reference",
+                        "in": "query",
+                        "description": "Reference",
+                        "required": false
+                    },
+                    {
+                        "name": "category_id",
+                        "in": "query",
+                        "description": "Category Id",
+                        "required": true
+                    },
+                    {
+                        "name": "store_id",
+                        "in": "query",
+                        "description": "Store Id",
+                        "required": true
+                    },
+                    {
+                        "name": "image_id",
+                        "in": "query",
+                        "description": "Image Id",
+                        "required": true
+                    },
+                    {
+                        "name": "available",
+                        "in": "query",
+                        "description": "Available",
+                        "required": true
+                    },
+                    {
+                        "name": "ht",
+                        "in": "query",
+                        "description": "HT",
+                        "required": true
+                    },
+                    {
+                        "name": "tva_rate",
+                        "in": "query",
+                        "description": "TVA rate",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Product created"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/products/{id}/translate": {
+            "post": {
+                "tags": [
+                    "Products Translations"
+                ],
+                "summary": "Post a new product translation",
+                "description": "Create a new translation",
+                "operationId": "addTranslation",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Product id",
+                        "required": true
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "Locale",
+                        "required": true
+                    },
+                    {
+                        "name": "label",
+                        "in": "query",
+                        "description": "Label",
+                        "required": false
+                    },
+                    {
+                        "name": "description",
+                        "in": "query",
+                        "description": "Description",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Translation created"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Products Translations"
+                ],
+                "summary": "Delete a product translation",
+                "description": "Soft delete a translation",
+                "operationId": "removeTranslation",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Product id",
+                        "required": true
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "Locale",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Translation deleted"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/products/{id}/price": {
+            "patch": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Patch a product price",
+                "description": "Update a product price",
+                "operationId": "updatePrice",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Product id",
+                        "required": true
+                    },
+                    {
+                        "name": "ht",
+                        "in": "query",
+                        "description": "HT, in cent example: 1€ = 100",
+                        "required": true
+                    },
+                    {
+                        "name": "tva_rate",
+                        "in": "query",
+                        "description": "TVA rate, in cent example: 10% = 1000",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Store updated"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/products/{id}/cart": {
+            "post": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Add a product to a shopping cart",
+                "description": "Send pub to cart API",
+                "operationId": "addToCart",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Product id",
+                        "required": true
+                    },
+                    {
+                        "name": "quantity",
+                        "in": "query",
+                        "description": "Quantity",
+                        "required": true
+                    },
+                    {
+                        "name": "cart_id",
+                        "in": "query",
+                        "description": "Cart Id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Added to Cart updated"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/stores/{id}/closings": {
+            "post": {
+                "tags": [
+                    "Stores Closings"
+                ],
+                "summary": "Post a new store closing",
+                "description": "Create a closing",
+                "operationId": "addClosing",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Store Id",
+                        "required": true
+                    },
+                    {
+                        "name": "from",
+                        "in": "query",
+                        "description": "From",
+                        "required": true
+                    },
+                    {
+                        "name": "to",
+                        "in": "query",
+                        "description": "To",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Closing created"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/stores/{id}/closings/{closing_id}": {
+            "delete": {
+                "tags": [
+                    "Stores Closings"
+                ],
+                "summary": "Delete a store closing",
+                "description": "Soft delete a closing",
+                "operationId": "removeClosing",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Store id",
+                        "required": true
+                    },
+                    {
+                        "name": "closing_id",
+                        "in": "query",
+                        "description": "Closing id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Closing deleted"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/stores/{id}": {
+            "get": {
+                "tags": [
+                    "Stores"
+                ],
+                "summary": "Get store information",
+                "description": "Returns store data",
+                "operationId": "retrieve",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Store id",
+                        "required": true
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "Locale",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Store not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Stores"
+                ],
+                "summary": "Delete a store",
+                "description": "Soft delete a store",
+                "operationId": "delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Store id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Store deleted"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Stores"
+                ],
+                "summary": "Patch a store",
+                "description": "Update a store",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Store id",
+                        "required": true
+                    },
+                    {
+                        "name": "account_id",
+                        "in": "query",
+                        "description": "Account Id",
+                        "required": false
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Store name",
+                        "required": false
+                    },
+                    {
+                        "name": "business_name",
+                        "in": "query",
+                        "description": "Store business Name",
+                        "required": false
+                    },
+                    {
+                        "name": "address_id",
+                        "in": "query",
+                        "description": "Address Id",
+                        "required": false
+                    },
+                    {
+                        "name": "phone",
+                        "in": "query",
+                        "description": "Store phone",
+                        "required": false
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Store email",
+                        "required": false
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "Store type",
+                        "required": false
+                    },
+                    {
+                        "name": "openings",
+                        "in": "query",
+                        "description": "Store openings json format",
+                        "required": false
+                    },
+                    {
+                        "name": "primary_color",
+                        "in": "query",
+                        "description": "Store primary color in hexa, example: #FFFFFF",
+                        "required": false
+                    },
+                    {
+                        "name": "secondary_color",
+                        "in": "query",
+                        "description": "Store secondary color in hexa, example: #FFFFFF",
+                        "required": false
+                    },
+                    {
+                        "name": "logo",
+                        "in": "query",
+                        "description": "Store logo, image Id",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Store updated"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/stores": {
+            "get": {
+                "tags": [
+                    "Stores"
+                ],
+                "summary": "Get all stores information",
+                "description": "Returns stores data",
+                "operationId": "list",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "Locale",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Stores"
+                ],
+                "summary": "Post a new store",
+                "description": "Create a store",
+                "operationId": "create",
+                "parameters": [
+                    {
+                        "name": "account_id",
+                        "in": "query",
+                        "description": "Account Id",
+                        "required": true
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Store name",
+                        "required": true
+                    },
+                    {
+                        "name": "business_name",
+                        "in": "query",
+                        "description": "Store business name",
+                        "required": true
+                    },
+                    {
+                        "name": "address_id",
+                        "in": "query",
+                        "description": "Address Id",
+                        "required": true
+                    },
+                    {
+                        "name": "phone",
+                        "in": "query",
+                        "description": "Store phone",
+                        "required": true
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Store email",
+                        "required": true
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "Store type",
+                        "required": true
+                    },
+                    {
+                        "name": "openings",
+                        "in": "query",
+                        "description": "Store openings json format",
+                        "required": false
+                    },
+                    {
+                        "name": "primary_color",
+                        "in": "query",
+                        "description": "Store primary color in hexa, example: #FFFFFF",
+                        "required": false
+                    },
+                    {
+                        "name": "secondary_color",
+                        "in": "query",
+                        "description": "Store secondary color in hexa, example: #FFFFFF",
+                        "required": false
+                    },
+                    {
+                        "name": "logo",
+                        "in": "query",
+                        "description": "Store logo, image Id",
+                        "required": false
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "fr or en",
+                        "required": true
+                    },
+                    {
+                        "name": "description",
+                        "in": "query",
+                        "description": "Description",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Store created"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/stores/{id}/images": {
+            "post": {
+                "tags": [
+                    "Stores Images"
+                ],
+                "summary": "Post a new store image",
+                "description": "Create a image",
+                "operationId": "addImage",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Store Id",
+                        "required": true
+                    },
+                    {
+                        "name": "image_id",
+                        "in": "query",
+                        "description": "Image Id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Image created"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/stores/{id}/images/{store_image_id}": {
+            "delete": {
+                "tags": [
+                    "Stores Images"
+                ],
+                "summary": "Delete a store image",
+                "description": "Soft delete a store image",
+                "operationId": "removeImage",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Store id",
+                        "required": true
+                    },
+                    {
+                        "name": "store_image_id",
+                        "in": "query",
+                        "description": "Image id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Image deleted"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/stores/{id}/medias": {
+            "post": {
+                "tags": [
+                    "Stores Medias"
+                ],
+                "summary": "Post a new store media",
+                "description": "Create a media",
+                "operationId": "addMedia",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Store Id",
+                        "required": true
+                    },
+                    {
+                        "name": "url",
+                        "in": "query",
+                        "description": "URL",
+                        "required": true
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "Media type",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Media created"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/stores/{id}/medias/{media_id}": {
+            "delete": {
+                "tags": [
+                    "Stores Medias"
+                ],
+                "summary": "Delete a store media",
+                "description": "Soft delete a media",
+                "operationId": "removeMedia",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Store id",
+                        "required": true
+                    },
+                    {
+                        "name": "media_id",
+                        "in": "query",
+                        "description": "Media id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Media deleted"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/stores/{id}/slots": {
+            "post": {
+                "tags": [
+                    "Stores Slots"
+                ],
+                "summary": "Post a new store slot",
+                "description": "Create a slot",
+                "operationId": "addSlot",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Store Id",
+                        "required": true
+                    },
+                    {
+                        "name": "day",
+                        "in": "query",
+                        "description": "Day",
+                        "required": true
+                    },
+                    {
+                        "name": "from",
+                        "in": "query",
+                        "description": "From",
+                        "required": true
+                    },
+                    {
+                        "name": "to",
+                        "in": "query",
+                        "description": "To"
+                    },
+                    {
+                        "name": "quantity",
+                        "in": "query",
+                        "description": "Quantity",
+                        "required": true
+                    },
+                    {
+                        "name": "available",
+                        "in": "query",
+                        "description": "Availability",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Account created"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/stores/{id}/slots/{slot_id}": {
+            "delete": {
+                "tags": [
+                    "Stores Slots"
+                ],
+                "summary": "Delete a store slot",
+                "description": "Soft delete a store slot",
+                "operationId": "removeSlot",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Store id",
+                        "required": true
+                    },
+                    {
+                        "name": "slot_id",
+                        "in": "query",
+                        "description": "Slot id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Slot deleted"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Stores Slots"
+                ],
+                "summary": "Update a store slot",
+                "description": "update the availability and the quantity of a store slot",
+                "operationId": "updateSlot",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Store id",
+                        "required": true
+                    },
+                    {
+                        "name": "slot_id",
+                        "in": "query",
+                        "description": "Slot id",
+                        "required": true
+                    },
+                    {
+                        "name": "quantity",
+                        "in": "query",
+                        "description": "Quantity",
+                        "required": false
+                    },
+                    {
+                        "name": "available",
+                        "in": "query",
+                        "description": "Availability",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Slot updated"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/stores/{id}/translations": {
+            "post": {
+                "tags": [
+                    "Stores Translations"
+                ],
+                "summary": "Post a new store translation",
+                "description": "Create a new translation",
+                "operationId": "addTranslation",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Store id",
+                        "required": true
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "fr or en",
+                        "required": true
+                    },
+                    {
+                        "name": "description",
+                        "in": "query",
+                        "description": "Description",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Translation created"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Stores Translations"
+                ],
+                "summary": "Delete a store translation",
+                "description": "Soft delete a translation",
+                "operationId": "removeTranslation",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Store id",
+                        "required": true
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "fr or en",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Translation deleted"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
         "/api/users/{id}": {
             "get": {
                 "tags": [
@@ -842,12 +3600,9 @@
                 "parameters": [
                     {
                         "name": "id",
-                        "in": "path",
-                        "description": "Account id",
-                        "required": true,
-                        "schema": {
-                            "type": "String"
-                        }
+                        "in": "query",
+                        "description": "User id",
+                        "required": true
                     }
                 ],
                 "responses": {
