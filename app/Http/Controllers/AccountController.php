@@ -482,6 +482,15 @@ class AccountController extends Controller
 
             DB::commit();
 
+            MailCreatedJob::dispatch([
+                'to' => $account->email,
+                'subject' => "Votre récupération de mot de passe ",
+                'template_id' => env('MAIL_TEMPLATE_PASSWORD_FORGOTTEN'),
+                'variables' => [
+                    'token' => $account->password_forgotten_token
+                ]
+            ])->onQueue('email_created');
+
             return response()->json([
                 'token_duration' => $account->password_forgotten_token_limit,
                 'id' => $account->id
