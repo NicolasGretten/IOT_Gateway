@@ -114,7 +114,7 @@
                         "name": "birthday",
                         "in": "query",
                         "description": "YYYY-MM-DD example : 1995-07-16",
-                        "required": true,
+                        "required": false,
                         "schema": {
                             "type": "string",
                             "format": "date"
@@ -3416,13 +3416,13 @@
                         "name": "quantity",
                         "in": "query",
                         "description": "Quantity",
-                        "required": true
+                        "required": false
                     },
                     {
                         "name": "available",
                         "in": "query",
                         "description": "Availability",
-                        "required": true
+                        "required": false
                     }
                 ],
                 "responses": {

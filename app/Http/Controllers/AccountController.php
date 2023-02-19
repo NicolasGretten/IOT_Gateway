@@ -221,7 +221,7 @@ class AccountController extends Controller
      *      @OA\Parameter(name="last_name", description="Last name", in="query"),
      *      @OA\Parameter(name="gender", description="male, female, other", in="query"),
      *      @OA\Parameter(name="phone", description="Phone number", in="query"),
-     *      @OA\Parameter(name="birthday", description="YYYY-MM-DD example : 1995-07-16", required=true, in="query", @OA\Schema(type="string", format="date")),
+     *      @OA\Parameter(name="birthday", description="YYYY-MM-DD example : 1995-07-16", required=false, in="query", @OA\Schema(type="string", format="date")),
      *      @OA\Parameter(name="email", description="Email", in="query"),
      *      @OA\Parameter(name="locale", description="fr or en", in="query"),
      *      @OA\Parameter(name="keep_logging", description="If the account stay logging", in="query"),
@@ -420,7 +420,6 @@ class AccountController extends Controller
                 $resultSet = Account::select('accounts.*')
                     ->where('accounts.email', $request->input('email'));
 
-                var_dump('request');
                 if(empty($resultSet->first())) {
                     return response()->json(['available' => true]);
                 }
