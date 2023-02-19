@@ -17,6 +17,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 /**
  * @method static where(string $string, mixed $accountId)
  * @method static select(string $string)
+ * @method static find($postId)
  * @property mixed email
  * @property mixed password
  * @property mixed locale

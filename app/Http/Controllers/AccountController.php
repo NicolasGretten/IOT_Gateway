@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\JsonEncodingException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -409,19 +410,22 @@ class AccountController extends Controller
     public function checkIfEmailIsAvailable(Request $request): JsonResponse
     {
         try {
-            $request->validate([
-                'email' => 'required|email'
-            ]);
 
-            $resultSet = Account::select('accounts.*')
-                ->where('accounts.email', $request->email);
+            return Cache::remember('post-text-' . $request->input('email'), 10, function () use ($request) {
 
-            if(empty($resultSet->first())) {
-                return response()->json(['available' => true], 200);
-            }
+                $request->validate([
+                    'email' => 'required|email'
+                ]);
 
-            return response()->json(['available' => false], 200);
+                $resultSet = Account::select('accounts.*')
+                    ->where('accounts.email', $request->input('email'));
 
+                if(empty($resultSet->first())) {
+                    return response()->json(['available' => true]);
+                }
+
+                return response()->json(['available' => false]);
+            });
         }
         catch(ModelNotFoundException $e) {
             Bugsnag::notifyException($e);
@@ -784,16 +788,20 @@ class AccountController extends Controller
                 'email' => 'required|email',
             ]);
 
-            $resultSet = Account::select('*')
-                ->where('email', $request->email);
+            $getEmail = Cache::remember('post-text-' . $request->email, 10, function () use ($request) {
+                $resultSet = Account::select('*')
+                    ->where('email', $request->email);
 
-            $account = $resultSet->first();
+                $account = $resultSet->first();
 
-            if (empty($account)) {
-                throw new ModelNotFoundException('Employee not found.', 404);
-            }
+                if (empty($account)) {
+                    throw new ModelNotFoundException('Employee not found.', 404);
+                }
 
-            return response()->json($account, 200);
+                return response()->json($account);
+            });
+
+            return $getEmail;
 
         } catch(Exception $e){
             Bugsnag::notifyException($e);
