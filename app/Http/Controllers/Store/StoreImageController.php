@@ -23,7 +23,8 @@ class StoreImageController extends Controller
      *      @OA\Parameter(name="image_id", description="Image Id", required=true, in="query"),
      *      @OA\Response(response=201,description="Image created"),
      *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found")
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      security={{"bearer_token":{}}}
      * )
      */
     public function addImage(Request $request): JsonResponse
@@ -38,21 +39,12 @@ class StoreImageController extends Controller
      *      tags={"Stores Images"},
      *      summary="Delete a store image",
      *      description="Soft delete a store image",
-     *      @OA\Parameter(
-     *          name="id",
-     *          description="Store id",
-     *          required=true,
-     *          in="query",
-     *      ),
-     *     @OA\Parameter(
-     *          name="store_image_id",
-     *          description="Image id",
-     *          required=true,
-     *          in="query",
-     *      ),
+     *      @OA\Parameter(name="id",description="Store id",required=true,in="query",),
+     *      @OA\Parameter(name="store_image_id",description="Image id",required=true,in="query",),
      *      @OA\Response(response=200, description="Image deleted"),
      *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found")
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      security={{"bearer_token":{}}}
      * )
      */
     public function removeImage(Request $request): JsonResponse

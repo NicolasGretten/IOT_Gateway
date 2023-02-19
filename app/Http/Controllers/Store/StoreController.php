@@ -19,7 +19,7 @@ class StoreController extends Controller
      *      tags={"Stores"},
      *      summary="Get store information",
      *      description="Returns store data",
-     *      @OA\Parameter(name="id",description="Store id", required=true, in="query"),
+     *      @OA\Parameter(name="id",description="Store id", required=true, in="path"),
      *      @OA\Parameter(name="locale",description="Locale", required=false, in="query"),
      *      @OA\Response(response=200, description="successful operation"),
      *      @OA\Response(response=400, description="Bad request"),
@@ -68,15 +68,16 @@ class StoreController extends Controller
      *      @OA\Parameter(name="phone", description="Store phone", required=true, in="query"),
      *      @OA\Parameter(name="email", description="Store email", required=true, in="query"),
      *      @OA\Parameter(name="type", description="Store type", required=true, in="query"),
-     *      @OA\Parameter(name="openings", description="Store openings", required=false, in="query"),
-     *      @OA\Parameter(name="primary_color", description="Store primary color", required=false, in="query"),
-     *      @OA\Parameter(name="secondary_color", description="Store secondary color", required=false, in="query"),
-     *      @OA\Parameter(name="logo", description="Store logo", required=false, in="query"),
-     *      @OA\Parameter(name="locale", description="Locale", required=true, in="query"),
+     *      @OA\Parameter(name="openings", description="Store openings json format", required=false, in="query"),
+     *      @OA\Parameter(name="primary_color", description="Store primary color in hexa, example: #FFFFFF", required=false, in="query"),
+     *      @OA\Parameter(name="secondary_color", description="Store secondary color in hexa, example: #FFFFFF", required=false, in="query"),
+     *      @OA\Parameter(name="logo", description="Store logo, image Id", required=false, in="query"),
+     *      @OA\Parameter(name="locale", description="fr or en", required=true, in="query"),
      *      @OA\Parameter(name="description", description="Description", required=true, in="query"),
      *      @OA\Response(response=201,description="Store created"),
      *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found")
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      security={{"bearer_token":{}}}
      * )
      */
     public function create(Request $request): JsonResponse
@@ -99,16 +100,14 @@ class StoreController extends Controller
      *      @OA\Parameter(name="phone", description="Store phone", required=false, in="query"),
      *      @OA\Parameter(name="email", description="Store email", required=false, in="query"),
      *      @OA\Parameter(name="type", description="Store type", required=false, in="query"),
-     *      @OA\Parameter(name="openings", description="Store openings", required=false, in="query"),
-     *      @OA\Parameter(name="primary_color", description="Store primary color", required=false, in="query"),
-     *      @OA\Parameter(name="secondary_color", description="Store secondary color", required=false, in="query"),
-     *      @OA\Parameter(name="logo", description="Store logo", required=false, in="query"),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Store updated"
-     *       ),
+     *      @OA\Parameter(name="openings", description="Store openings json format", required=false, in="query"),
+     *      @OA\Parameter(name="primary_color", description="Store primary color in hexa, example: #FFFFFF", required=false, in="query"),
+     *      @OA\Parameter(name="secondary_color", description="Store secondary color in hexa, example: #FFFFFF", required=false, in="query"),
+     *      @OA\Parameter(name="logo", description="Store logo, image Id", required=false, in="query"),
+     *      @OA\Response(response=200, description="Store updated"),
      *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found")
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      security={{"bearer_token":{}}}
      * )
      */
     public function update(Request $request): JsonResponse
@@ -123,18 +122,11 @@ class StoreController extends Controller
      *      tags={"Stores"},
      *      summary="Delete a store",
      *      description="Soft delete a store",
-     *      @OA\Parameter(
-     *          name="id",
-     *          description="Store id",
-     *          required=true,
-     *          in="query",
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Store deleted"
-     *       ),
+     *      @OA\Parameter(name="id",description="Store id",required=true,in="query"),
+     *      @OA\Response(response=200,description="Store deleted"),
      *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found")
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      security={{"bearer_token":{}}}
      * )
      */
     public function delete(Request $request): JsonResponse

@@ -35,7 +35,8 @@ class StoreSlotController extends Controller
      *      @OA\Parameter(name="available", description="Availability", required=true, in="query"),
      *      @OA\Response(response=201,description="Account created"),
      *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found")
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      security={{"bearer_token":{}}}
      * )
      */
     public function addSlot(Request $request): JsonResponse
@@ -50,23 +51,14 @@ class StoreSlotController extends Controller
      *      tags={"Stores Slots"},
      *      summary="Update a store slot",
      *      description="update the availability and the quantity of a store slot",
-     *      @OA\Parameter(
-     *          name="id",
-     *          description="Store id",
-     *          required=true,
-     *          in="query",
-     *      ),
-     *     @OA\Parameter(
-     *          name="slot_id",
-     *          description="Slot id",
-     *          required=true,
-     *          in="query",
-     *      ),
-     *      @OA\Parameter(name="quantity", description="Quantity", required=true, in="query"),
-     *      @OA\Parameter(name="available", description="Availability", required=true, in="query"),
+     *      @OA\Parameter(name="id",description="Store id",required=true,in="query"),
+     *      @OA\Parameter(name="slot_id",description="Slot id",required=true,in="query"),
+     *      @OA\Parameter(name="quantity", description="Quantity", required=false, in="query"),
+     *      @OA\Parameter(name="available", description="Availability", required=false, in="query"),
      *      @OA\Response(response=200, description="Slot updated"),
      *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found")
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      security={{"bearer_token":{}}}
      * )
      */
     public function updateSlot(Request $request): JsonResponse
@@ -95,7 +87,8 @@ class StoreSlotController extends Controller
      *      ),
      *      @OA\Response(response=200, description="Slot deleted"),
      *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found")
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      security={{"bearer_token":{}}}
      * )
      */
     public function removeSlot(Request $request): JsonResponse

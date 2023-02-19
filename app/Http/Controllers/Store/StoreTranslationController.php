@@ -20,11 +20,12 @@ class StoreTranslationController extends Controller
      *      summary="Post a new store translation",
      *      description="Create a new translation",
      *      @OA\Parameter(name="id", description="Store id", required=true, in="query"),
-     *      @OA\Parameter(name="locale", description="Locale", required=true, in="query"),
+     *      @OA\Parameter(name="locale", description="fr or en", required=true, in="query"),
      *      @OA\Parameter(name="description", description="Description", required=true, in="query"),
      *      @OA\Response(response=201,description="Translation created"),
      *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found")
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      security={{"bearer_token":{}}}
      * )
      */
     public function addTranslation(Request $request): JsonResponse
@@ -39,21 +40,12 @@ class StoreTranslationController extends Controller
      *      tags={"Stores Translations"},
      *      summary="Delete a store translation",
      *      description="Soft delete a translation",
-     *      @OA\Parameter(
-     *          name="id",
-     *          description="Store id",
-     *          required=true,
-     *          in="query",
-     *      ),
-     *     @OA\Parameter(
-     *          name="locale",
-     *          description="Locale",
-     *          required=true,
-     *          in="query",
-     *      ),
+     *      @OA\Parameter(name="id",description="Store id",required=true,in="query"),
+     *      @OA\Parameter(name="locale", description="fr or en", required=true, in="query"),
      *      @OA\Response(response=200, description="Translation deleted"),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
+     *      security={{"bearer_token":{}}}
      * )
      */
     public function removeTranslation(Request $request): JsonResponse

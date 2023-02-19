@@ -56,6 +56,7 @@ class ImageController extends Controller
      *      @OA\Response(response=201,description="Image uploaded"),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
+     *      security={{"bearer_token":{}}},
      *      @OA\RequestBody(
      *       @OA\MediaType(
      *           mediaType="multipart/form-data",
@@ -72,8 +73,7 @@ class ImageController extends Controller
      *           ),
      *       )
      *     ),
-     * ),
-     *      security={{"bearer_token":{}}}
+     * )
      */
     public function upload(Request $request): JsonResponse
     {
@@ -87,7 +87,7 @@ class ImageController extends Controller
      *      tags={"Images"},
      *      summary="Get an image",
      *      description="Returns an image",
-     *      @OA\Parameter(name="id",description="Image id",required=true,in="query"),
+     *      @OA\Parameter(name="id",description="Image id",required=true,in="path"),
      *      @OA\Response(response=200, description="successful operation"),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Account not found."),
@@ -107,19 +107,8 @@ class ImageController extends Controller
      *      tags={"Images"},
      *      summary="Delete an image",
      *      description="Soft delete an image",
-     *      @OA\Parameter(
-     *          name="id",
-     *          description="Image id",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="String"
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Image deleted"
-     *       ),
+     *      @OA\Parameter(name="id",description="Image id",required=true,in="path"),
+     *      @OA\Response(response=200,description="Image deleted"),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
      *      security={{"bearer_token":{}}}
