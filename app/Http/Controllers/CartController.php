@@ -125,7 +125,7 @@ class CartController extends Controller
      *      description="Update a cart",
      *      @OA\Parameter(name="id",description="Cart id",required=true,in="query",),
      *      @OA\Parameter(name="payment_method",description="Payment method",required=false,in="query"),
-     *      @OA\Parameter(name="status",description="Status of cart",required=false,in="query"),
+     *      @OA\Parameter(name="status",description="PENDING, CONFIRM, REFUND, ABORT",required=false,in="query"),
      *      @OA\Parameter(name="refund_at",description="Refund",required=false,in="query"),
      *      @OA\Parameter(name="paid_at",description="PAaid date",required=false,in="query"),
      *      @OA\Parameter(name="capture_at",description="Capture date",required=false,in="query"),
