@@ -1140,7 +1140,7 @@
                     {
                         "name": "status",
                         "in": "query",
-                        "description": "Status of cart",
+                        "description": "PENDING, CONFIRM, REFUND, ABORT",
                         "required": false
                     },
                     {
@@ -2100,6 +2100,2180 @@
                 ]
             }
         },
+        "/api/users/stripe/{id}/charges": {
+            "get": {
+                "tags": [
+                    "Charges"
+                ],
+                "summary": "List all the user charges",
+                "description": "List all the user charges",
+                "operationId": "list",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "User id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Payment not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            }
+        },
+        "/api/users/stripe/{id}/charges/{charge_id}": {
+            "get": {
+                "tags": [
+                    "Charges"
+                ],
+                "summary": "Retrieve a charge",
+                "description": "Retrieve a charge",
+                "operationId": "retrieve",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "User id",
+                        "required": true
+                    },
+                    {
+                        "name": "charge_id",
+                        "in": "query",
+                        "description": "Charge Id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Payment not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            }
+        },
+        "/api/stores/wallets/{id}/external-accounts": {
+            "get": {
+                "tags": [
+                    "External Account"
+                ],
+                "summary": "List all the bank accounts",
+                "description": "List all the bank account of the connected account",
+                "operationId": "list",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Wallet Id",
+                        "required": true
+                    },
+                    {
+                        "name": "object",
+                        "in": "query",
+                        "description": "Object type",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Payment not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "External Account"
+                ],
+                "summary": "Create a new bank account",
+                "description": "Create a new bank account for the connected account.",
+                "operationId": "create",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Wallet Id",
+                        "required": true
+                    },
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "description": "Card Token or Bank account Token",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Payment not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            }
+        },
+        "/api/stores/wallets/{id}/external-accounts/{external_account_id}": {
+            "get": {
+                "tags": [
+                    "External Account"
+                ],
+                "summary": "Retrieve a bank account",
+                "description": "Retrieve a specific bank account",
+                "operationId": "retrieve",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Wallet Id",
+                        "required": true
+                    },
+                    {
+                        "name": "external_account_id",
+                        "in": "query",
+                        "description": "Card ID or Bank account ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Payment not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "External Account"
+                ],
+                "summary": "Delete a bank account",
+                "description": "Delete a bank account.",
+                "operationId": "delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Wallet Id",
+                        "required": true
+                    },
+                    {
+                        "name": "external_account_id",
+                        "in": "query",
+                        "description": "Card ID or Bank account ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Payment not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "External Account"
+                ],
+                "summary": "Update a bank account",
+                "description": "Update an existing bank account.",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Wallet Id",
+                        "required": true
+                    },
+                    {
+                        "name": "external_account_id",
+                        "in": "query",
+                        "description": "Card ID or Bank account ID",
+                        "required": true
+                    },
+                    {
+                        "name": "default_for_currency",
+                        "in": "query",
+                        "description": "For card and bank_account.When set to true, this becomes the default external account for its currency",
+                        "required": false
+                    },
+                    {
+                        "name": "account_holder_name",
+                        "in": "query",
+                        "description": "For band_account. The name of the person or business that owns the bank account",
+                        "required": false
+                    },
+                    {
+                        "name": "account_holder_type",
+                        "in": "query",
+                        "description": "For band_account. The type of entity that holds the account. This can be either individual or company.",
+                        "required": false
+                    },
+                    {
+                        "name": "address_city",
+                        "in": "query",
+                        "description": "For card. City/District/Suburb/Town/Village.",
+                        "required": false
+                    },
+                    {
+                        "name": "address_country",
+                        "in": "query",
+                        "description": "For card. Billing address country, if provided when creating card.",
+                        "required": false
+                    },
+                    {
+                        "name": "address_line1",
+                        "in": "query",
+                        "description": " For card. Address line 1 (Street address/PO Box/Company name).",
+                        "required": false
+                    },
+                    {
+                        "name": "address_line2",
+                        "in": "query",
+                        "description": "For card. Address line 2 (Apartment/Suite/Unit/Building). ",
+                        "required": false
+                    },
+                    {
+                        "name": "address_state",
+                        "in": "query",
+                        "description": "For card. State/County/Province/Region.",
+                        "required": false
+                    },
+                    {
+                        "name": "address_zip",
+                        "in": "query",
+                        "description": "For card. ZIP or postal code.",
+                        "required": false
+                    },
+                    {
+                        "name": "exp_month",
+                        "in": "query",
+                        "description": "For card. Two digit number representing the card’s expiration month",
+                        "required": false
+                    },
+                    {
+                        "name": "exp_year",
+                        "in": "query",
+                        "description": "For card. Four digit number representing the card’s expiration year.",
+                        "required": false
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "For card. Cardholder name.",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Payment not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            }
+        },
+        "/api/users/stripe/{id}/invoices": {
+            "get": {
+                "tags": [
+                    "Invoices"
+                ],
+                "summary": "List all invoices",
+                "description": "List all user's invoices.",
+                "operationId": "list",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Customer id",
+                        "required": true
+                    },
+                    {
+                        "name": "including_pending",
+                        "in": "query",
+                        "description": "Including pending invoice",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Payment not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            }
+        },
+        "/api/users/stripe/{id}/invoices/{invoice_id}": {
+            "get": {
+                "tags": [
+                    "Invoices"
+                ],
+                "summary": "Retrieve an invoices",
+                "description": "Retrieve an invoices.",
+                "operationId": "retrieve",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Customer id",
+                        "required": true
+                    },
+                    {
+                        "name": "invoice_id",
+                        "in": "query",
+                        "description": "Invoice Id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Payment not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            }
+        },
+        "/api/users/stripe/{id}/invoices/preview": {
+            "get": {
+                "tags": [
+                    "Invoices"
+                ],
+                "summary": "Preview prorate",
+                "description": "Preview prorate.",
+                "operationId": "preview",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Customer id",
+                        "required": true
+                    },
+                    {
+                        "name": "new_price",
+                        "in": "query",
+                        "description": "new price",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Payment not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            }
+        },
+        "/api/payment-intent/{payment_intent_id}": {
+            "get": {
+                "tags": [
+                    "Payment Intent"
+                ],
+                "summary": "Retrieve a payment intent",
+                "description": "Retrieve a payment intent.",
+                "operationId": "retrieve",
+                "parameters": [
+                    {
+                        "name": "payment_intent_id",
+                        "in": "query",
+                        "description": "Payment Intent Id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Payment not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            }
+        },
+        "/api/users/stripe/{id}/payments-methods": {
+            "get": {
+                "tags": [
+                    "Payment Methods"
+                ],
+                "summary": "List all payments methods of a user",
+                "description": "List all payments method.",
+                "operationId": "list",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Customer id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Payment not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Payment Methods"
+                ],
+                "summary": "Add a new payments method to a user",
+                "description": "Add a new payments method.",
+                "operationId": "create",
+                "parameters": [
+                    {
+                        "name": "payment_method",
+                        "in": "query",
+                        "description": "Payment Method",
+                        "required": true
+                    },
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Customer id ",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Payment not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            }
+        },
+        "/api/users/stripe/{id}/payments-methods/{payment_method_id}": {
+            "get": {
+                "tags": [
+                    "Payment Methods"
+                ],
+                "summary": "Retrieve a payments method",
+                "description": "Retrieve a specific payments method by his ID.",
+                "operationId": "retrieve",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Customer id",
+                        "required": true
+                    },
+                    {
+                        "name": "payment_method_id",
+                        "in": "query",
+                        "description": "Payment method Id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Payment not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Payment Methods"
+                ],
+                "summary": "Delete a payments method",
+                "description": "Delete a payments method only if the payments method is not the default payments method.",
+                "operationId": "delete",
+                "parameters": [
+                    {
+                        "name": "payment_method_id",
+                        "in": "query",
+                        "description": "Payment Method Id ",
+                        "required": true
+                    },
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Customer id ",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Payment not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Payment Methods"
+                ],
+                "summary": "Update the default payments method",
+                "description": "Update the default payments method.",
+                "operationId": "updateDefaultPaymentMethod",
+                "parameters": [
+                    {
+                        "name": "payment_method_id",
+                        "in": "query",
+                        "description": "Payment Method Id ",
+                        "required": true
+                    },
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Customer id ",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Payment not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            }
+        },
+        "/api/users/stripe/{id}/payments-methods/default-payments-method": {
+            "get": {
+                "tags": [
+                    "Payment Methods"
+                ],
+                "summary": "Retrieve the default payments method",
+                "description": "Retrieve the default payments method.",
+                "operationId": "defaultPaymentMethod",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Customer id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Payment not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            }
+        },
+        "/api/users/stripe/{id}/payments-methods/get-setup-intent": {
+            "get": {
+                "tags": [
+                    "Payment Methods"
+                ],
+                "summary": "Get setup Intent",
+                "description": "Get setup Intent.",
+                "operationId": "getSetupIntent",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Customer id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Payment not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            }
+        },
+        "/api/users/stripe/{id}/payments-methods/confirm-setup-intent": {
+            "post": {
+                "tags": [
+                    "Payment Methods"
+                ],
+                "summary": "Confirm setup Intent",
+                "description": "Confirm setup Intent.",
+                "operationId": "confirmSetupIntent",
+                "parameters": [
+                    {
+                        "name": "payment_method",
+                        "in": "query",
+                        "description": "Payment Method",
+                        "required": true
+                    },
+                    {
+                        "name": "seti",
+                        "in": "query",
+                        "description": "Seti",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Payment not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            }
+        },
+        "/api/stores/wallets/{id}/persons": {
+            "get": {
+                "tags": [
+                    "Persons"
+                ],
+                "summary": "List all Person",
+                "description": "List all person.",
+                "operationId": "list",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Wallet Id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Payment not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Persons"
+                ],
+                "summary": "Create a person",
+                "description": "Create a person.",
+                "operationId": "create",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Wallet Id",
+                        "required": true
+                    },
+                    {
+                        "name": "person_token",
+                        "in": "query",
+                        "description": "Person token",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Payment not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            }
+        },
+        "/api/stores/wallets/{id}/persons/{person_id}": {
+            "get": {
+                "tags": [
+                    "Persons"
+                ],
+                "summary": "Retrieve a person",
+                "description": "Retrieve a person.",
+                "operationId": "retrieve",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Wallet Id",
+                        "required": true
+                    },
+                    {
+                        "name": "person_id",
+                        "in": "query",
+                        "description": "Person ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Payment not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            }
+        },
+        "/api/tokens/{token_id}": {
+            "get": {
+                "tags": [
+                    "Tokens"
+                ],
+                "summary": "Retrieve a token",
+                "description": "Retrieve a token by his Id.",
+                "operationId": "retrieve",
+                "parameters": [
+                    {
+                        "name": "token_id",
+                        "in": "query",
+                        "description": "Token ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Payment not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            }
+        },
+        "/api/tokens/account": {
+            "post": {
+                "tags": [
+                    "Tokens"
+                ],
+                "summary": "Create an account token",
+                "description": "Create an account token",
+                "operationId": "accountToken",
+                "parameters": [
+                    {
+                        "name": "tos",
+                        "in": "query",
+                        "description": "Terms of service",
+                        "required": true
+                    },
+                    {
+                        "name": "city",
+                        "in": "query",
+                        "description": "City",
+                        "required": false
+                    },
+                    {
+                        "name": "country",
+                        "in": "query",
+                        "description": "Country/ Two letter caps",
+                        "required": false
+                    },
+                    {
+                        "name": "line1",
+                        "in": "query",
+                        "description": "Address line 1",
+                        "required": false
+                    },
+                    {
+                        "name": "line2",
+                        "in": "query",
+                        "description": "Address line 2",
+                        "required": false
+                    },
+                    {
+                        "name": "postal_code",
+                        "in": "query",
+                        "description": "Postal code",
+                        "required": false
+                    },
+                    {
+                        "name": "state",
+                        "in": "query",
+                        "description": "State",
+                        "required": false
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Name",
+                        "required": false
+                    },
+                    {
+                        "name": "phone",
+                        "in": "query",
+                        "description": "Phone number",
+                        "required": false
+                    },
+                    {
+                        "name": "registration_number",
+                        "in": "query",
+                        "description": "Registration Number",
+                        "required": false
+                    },
+                    {
+                        "name": "tax_id",
+                        "in": "query",
+                        "description": "Tax Number",
+                        "required": false
+                    },
+                    {
+                        "name": "vat_id",
+                        "in": "query",
+                        "description": " VAt Number",
+                        "required": false
+                    },
+                    {
+                        "name": "directors_provided",
+                        "in": "query",
+                        "description": "If director have been provided",
+                        "required": false
+                    },
+                    {
+                        "name": "executives_provided",
+                        "in": "query",
+                        "description": "If director have been provided ",
+                        "required": false
+                    },
+                    {
+                        "name": "owners_provided",
+                        "in": "query",
+                        "description": "If director have been provided",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Payment not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            }
+        },
+        "/api/tokens/person": {
+            "post": {
+                "tags": [
+                    "Tokens"
+                ],
+                "summary": "Create a person token",
+                "description": "Create a person token.",
+                "operationId": "personToken",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Email",
+                        "required": true
+                    },
+                    {
+                        "name": "first_name",
+                        "in": "query",
+                        "description": "First Name",
+                        "required": true
+                    },
+                    {
+                        "name": "last_name",
+                        "in": "query",
+                        "description": "Last Name",
+                        "required": true
+                    },
+                    {
+                        "name": "maiden_name",
+                        "in": "query",
+                        "description": "Maiden Name",
+                        "required": false
+                    },
+                    {
+                        "name": "gender",
+                        "in": "query",
+                        "description": "Gender",
+                        "required": false
+                    },
+                    {
+                        "name": "nationality",
+                        "in": "query",
+                        "description": "Nationality / 2 Letter caps ",
+                        "required": true
+                    },
+                    {
+                        "name": "phone",
+                        "in": "query",
+                        "description": "Phone number",
+                        "required": true
+                    },
+                    {
+                        "name": "director",
+                        "in": "query",
+                        "description": "If director of the company",
+                        "required": true
+                    },
+                    {
+                        "name": "executive",
+                        "in": "query",
+                        "description": "If executive of the company",
+                        "required": true
+                    },
+                    {
+                        "name": "owner",
+                        "in": "query",
+                        "description": "If owner of the company",
+                        "required": true
+                    },
+                    {
+                        "name": "percent_ownership",
+                        "in": "query",
+                        "description": "Percent ownership of the company if owner",
+                        "required": true
+                    },
+                    {
+                        "name": "representative",
+                        "in": "query",
+                        "description": "If representative of the company ",
+                        "required": true
+                    },
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "description": "Title in the company",
+                        "required": true
+                    },
+                    {
+                        "name": "day",
+                        "in": "query",
+                        "description": "Day of birth",
+                        "required": true
+                    },
+                    {
+                        "name": "month",
+                        "in": "query",
+                        "description": "Month of birth ",
+                        "required": true
+                    },
+                    {
+                        "name": "year",
+                        "in": "query",
+                        "description": "Year of birth  ",
+                        "required": true
+                    },
+                    {
+                        "name": "city",
+                        "in": "query",
+                        "description": "City",
+                        "required": true
+                    },
+                    {
+                        "name": "country",
+                        "in": "query",
+                        "description": "Country ",
+                        "required": true
+                    },
+                    {
+                        "name": "line1",
+                        "in": "query",
+                        "description": "Address line 1",
+                        "required": true
+                    },
+                    {
+                        "name": "line2",
+                        "in": "query",
+                        "description": "Address line 2",
+                        "required": false
+                    },
+                    {
+                        "name": "postal_code",
+                        "in": "query",
+                        "description": "Postal code ",
+                        "required": true
+                    },
+                    {
+                        "name": "state",
+                        "in": "query",
+                        "description": "State",
+                        "required": true
+                    },
+                    {
+                        "name": "additional_document_back",
+                        "in": "query",
+                        "description": "Additional document back",
+                        "required": false
+                    },
+                    {
+                        "name": "additional_document_front",
+                        "in": "query",
+                        "description": "Additional document front",
+                        "required": false
+                    },
+                    {
+                        "name": "document_back ",
+                        "in": "query",
+                        "description": "Document back",
+                        "required": false
+                    },
+                    {
+                        "name": "document_front",
+                        "in": "query",
+                        "description": "  Document front",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Payment not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            }
+        },
+        "/api/tokens/bank-account": {
+            "post": {
+                "tags": [
+                    "Tokens"
+                ],
+                "summary": "Create a bank account token",
+                "description": "Create a bank account token.",
+                "operationId": "bankAccountToken",
+                "parameters": [
+                    {
+                        "name": "country            ",
+                        "in": "query",
+                        "description": "The country in which the bank account is located.                                                 ",
+                        "required": true
+                    },
+                    {
+                        "name": "currency           ",
+                        "in": "query",
+                        "description": "The currency the bank account is in. This must be a country/currency pairing that Stripe supports.",
+                        "required": true
+                    },
+                    {
+                        "name": "account_holder_name",
+                        "in": "query",
+                        "description": "The name of the person or business that owns the bank account.                                    ",
+                        "required": false
+                    },
+                    {
+                        "name": "account_holder_type",
+                        "in": "query",
+                        "description": "The type of entity that holds the account. This can be either individual or company.              ",
+                        "required": false
+                    },
+                    {
+                        "name": "account_number     ",
+                        "in": "query",
+                        "description": "The account number for the bank account, in string form. Must be a checking account.              ",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Payment not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            }
+        },
+        "/api/tokens/card": {
+            "post": {
+                "tags": [
+                    "Tokens"
+                ],
+                "summary": "Create a card token",
+                "description": "Create a card token.",
+                "operationId": "cardToken",
+                "parameters": [
+                    {
+                        "name": "exp_month      ",
+                        "in": "query",
+                        "description": "Two-digit number representing the card's expiration month.                                                                           ",
+                        "required": true
+                    },
+                    {
+                        "name": "exp_year       ",
+                        "in": "query",
+                        "description": "Two- or four-digit number representing the card's expiration year.                                                                   ",
+                        "required": true
+                    },
+                    {
+                        "name": "number         ",
+                        "in": "query",
+                        "description": "The card number, as a string without any separators.                                                                                 ",
+                        "required": true
+                    },
+                    {
+                        "name": "currency       ",
+                        "in": "query",
+                        "description": "The currency.                                                                                                                        ",
+                        "required": false
+                    },
+                    {
+                        "name": "cvc            ",
+                        "in": "query",
+                        "description": "Card security code. Highly recommended to always include this value, but it's required only for accounts based in European countries.",
+                        "required": true
+                    },
+                    {
+                        "name": "name           ",
+                        "in": "query",
+                        "description": "Cardholder's full name.                                                                                                              ",
+                        "required": false
+                    },
+                    {
+                        "name": "address_line1  ",
+                        "in": "query",
+                        "description": "Address line 1 (Street address / PO Box / Company name).                                                                             ",
+                        "required": false
+                    },
+                    {
+                        "name": "address_line2  ",
+                        "in": "query",
+                        "description": "Address line 2 (Apartment / Suite / Unit / Building).                                                                                ",
+                        "required": false
+                    },
+                    {
+                        "name": "address_city   ",
+                        "in": "query",
+                        "description": "City / District / Suburb / Town / Village.                                                                                           ",
+                        "required": false
+                    },
+                    {
+                        "name": "address_state  ",
+                        "in": "query",
+                        "description": "State / County / Province / Region.                                                                                                  ",
+                        "required": false
+                    },
+                    {
+                        "name": "address_zip    ",
+                        "in": "query",
+                        "description": "ZIP or postal code.                                                                                                                  ",
+                        "required": false
+                    },
+                    {
+                        "name": "address_country",
+                        "in": "query",
+                        "description": "Billing address country, if provided.                                                                                                ",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Payment not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            }
+        },
+        "/api/users/stripe/{id}": {
+            "get": {
+                "tags": [
+                    "Users Stripe"
+                ],
+                "summary": "Retrieve a UserStripe",
+                "description": "Retrieve a user by his ID",
+                "operationId": "retrieve",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "User id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Payment not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Users Stripe"
+                ],
+                "summary": "Delete a user",
+                "description": "Delete a user",
+                "operationId": "delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "UserStripe id ",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Payment not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Users Stripe"
+                ],
+                "summary": "Update a user",
+                "description": "Update a user",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "UserStripe id ",
+                        "required": true
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Email",
+                        "required": true
+                    },
+                    {
+                        "name": "city",
+                        "in": "query",
+                        "description": "City",
+                        "required": false
+                    },
+                    {
+                        "name": "country",
+                        "in": "query",
+                        "description": "Country/ Two letter caps ",
+                        "required": false
+                    },
+                    {
+                        "name": "line1",
+                        "in": "query",
+                        "description": "Address line 1",
+                        "required": false
+                    },
+                    {
+                        "name": "line2",
+                        "in": "query",
+                        "description": "Address line 2",
+                        "required": false
+                    },
+                    {
+                        "name": "postal_code",
+                        "in": "query",
+                        "description": "Postal code ",
+                        "required": false
+                    },
+                    {
+                        "name": "state",
+                        "in": "query",
+                        "description": "State ",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Payment not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            }
+        },
+        "/api/users/stripe/": {
+            "post": {
+                "tags": [
+                    "Users Stripe"
+                ],
+                "summary": "Create a Stripe User",
+                "description": "Create a Stripe User",
+                "operationId": "create",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Email",
+                        "required": true
+                    },
+                    {
+                        "name": "city",
+                        "in": "query",
+                        "description": "City",
+                        "required": false
+                    },
+                    {
+                        "name": "country",
+                        "in": "query",
+                        "description": "Country/ Two letter caps ",
+                        "required": false
+                    },
+                    {
+                        "name": "line1",
+                        "in": "query",
+                        "description": "Address line 1",
+                        "required": false
+                    },
+                    {
+                        "name": "line2",
+                        "in": "query",
+                        "description": "Address line 2",
+                        "required": false
+                    },
+                    {
+                        "name": "postal_code",
+                        "in": "query",
+                        "description": "Postal code ",
+                        "required": false
+                    },
+                    {
+                        "name": "state",
+                        "in": "query",
+                        "description": "State ",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Payment not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            }
+        },
+        "/api/users/stripe/{id}/check-payment-account": {
+            "get": {
+                "tags": [
+                    "Users Stripe"
+                ],
+                "summary": "Check payment account id",
+                "description": "Check payment account id",
+                "operationId": "checkPaymentAccount",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "UserStripe id ",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Payment not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            }
+        },
+        "/api/stores/wallets/{id}": {
+            "get": {
+                "tags": [
+                    "Wallets"
+                ],
+                "summary": "Retrieve an account",
+                "description": "Retrieve an account by his Id.",
+                "operationId": "retrieve",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": " Wallet Id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Payment not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Wallets"
+                ],
+                "summary": "Delete a a connected account",
+                "description": "Delete a connected account by his Id.",
+                "operationId": "delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": " Wallet Id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Payment not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Wallets"
+                ],
+                "summary": "Update an account",
+                "description": "Update an account.",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "id                              ",
+                        "in": "query",
+                        "description": "Wallet Id                             ",
+                        "required": true
+                    },
+                    {
+                        "name": "account_token                          ",
+                        "in": "query",
+                        "description": "Account Token Id                      ",
+                        "required": true
+                    },
+                    {
+                        "name": "mcc                                    ",
+                        "in": "query",
+                        "description": "MCC number who correspond to a domain ",
+                        "required": true
+                    },
+                    {
+                        "name": "product_description                    ",
+                        "in": "query",
+                        "description": "Description of the product            ",
+                        "required": true
+                    },
+                    {
+                        "name": "country                                ",
+                        "in": "query",
+                        "description": "Country                               ",
+                        "required": true
+                    },
+                    {
+                        "name": "city                                   ",
+                        "in": "query",
+                        "description": "City                                  ",
+                        "required": true
+                    },
+                    {
+                        "name": "line1                                  ",
+                        "in": "query",
+                        "description": "Line 1                                ",
+                        "required": true
+                    },
+                    {
+                        "name": "line2                                  ",
+                        "in": "query",
+                        "description": "Line 2                                ",
+                        "required": true
+                    },
+                    {
+                        "name": "postal_code                            ",
+                        "in": "query",
+                        "description": "Postal Code                           ",
+                        "required": true
+                    },
+                    {
+                        "name": "state                                  ",
+                        "in": "query",
+                        "description": "State                                 ",
+                        "required": true
+                    },
+                    {
+                        "name": "name                                   ",
+                        "in": "query",
+                        "description": "Business Name                         ",
+                        "required": true
+                    },
+                    {
+                        "name": "registration_number                    ",
+                        "in": "query",
+                        "description": "Registration Number                   ",
+                        "required": true
+                    },
+                    {
+                        "name": "tax_id                                 ",
+                        "in": "query",
+                        "description": "Tax Id                                ",
+                        "required": true
+                    },
+                    {
+                        "name": "vat_id                                 ",
+                        "in": "query",
+                        "description": "Vat Id                                ",
+                        "required": true
+                    },
+                    {
+                        "name": "email                                  ",
+                        "in": "query",
+                        "description": "Email                                 ",
+                        "required": true
+                    },
+                    {
+                        "name": "phone                                  ",
+                        "in": "query",
+                        "description": "Phone number                          ",
+                        "required": true
+                    },
+                    {
+                        "name": "url                                    ",
+                        "in": "query",
+                        "description": "Website Url                           ",
+                        "required": true
+                    },
+                    {
+                        "name": "bank_account_ownership_verification_1  ",
+                        "in": "query",
+                        "description": "File                                  ",
+                        "required": false
+                    },
+                    {
+                        "name": "bank_account_ownership_verification_2  ",
+                        "in": "query",
+                        "description": "File                                  ",
+                        "required": false
+                    },
+                    {
+                        "name": "company_license_1                      ",
+                        "in": "query",
+                        "description": "File                                  ",
+                        "required": false
+                    },
+                    {
+                        "name": "company_license_2                      ",
+                        "in": "query",
+                        "description": "File                                  ",
+                        "required": false
+                    },
+                    {
+                        "name": "company_memorandum_of_association_1    ",
+                        "in": "query",
+                        "description": "File                                  ",
+                        "required": false
+                    },
+                    {
+                        "name": "company_memorandum_of_association_2    ",
+                        "in": "query",
+                        "description": "File                                  ",
+                        "required": false
+                    },
+                    {
+                        "name": "company_ministerial_decree_1           ",
+                        "in": "query",
+                        "description": "File                                  ",
+                        "required": false
+                    },
+                    {
+                        "name": "company_ministerial_decree_2           ",
+                        "in": "query",
+                        "description": "File                                  ",
+                        "required": false
+                    },
+                    {
+                        "name": "company_registration_verification_1    ",
+                        "in": "query",
+                        "description": "File                                  ",
+                        "required": false
+                    },
+                    {
+                        "name": "company_registration_verification_2    ",
+                        "in": "query",
+                        "description": "File                                  ",
+                        "required": false
+                    },
+                    {
+                        "name": "company_tax_id_verification_1          ",
+                        "in": "query",
+                        "description": "File                                  ",
+                        "required": false
+                    },
+                    {
+                        "name": "company_tax_id_verification_2          ",
+                        "in": "query",
+                        "description": "File                                  ",
+                        "required": false
+                    },
+                    {
+                        "name": "external_account_country               ",
+                        "in": "query",
+                        "description": "Country account country               ",
+                        "required": false
+                    },
+                    {
+                        "name": "external_account_currency              ",
+                        "in": "query",
+                        "description": "Currency                              ",
+                        "required": false
+                    },
+                    {
+                        "name": "account_number                         ",
+                        "in": "query",
+                        "description": "Account Number                        ",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Payment not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            }
+        },
+        "/api/stores/wallets/": {
+            "post": {
+                "tags": [
+                    "Wallets"
+                ],
+                "summary": "Create an account",
+                "description": "Create a new account.",
+                "operationId": "create",
+                "parameters": [
+                    {
+                        "name": "account_token                        ",
+                        "in": "query",
+                        "description": "Account token Id                     ",
+                        "required": true
+                    },
+                    {
+                        "name": "mcc                                  ",
+                        "in": "query",
+                        "description": "MCC number who correspond to a domain",
+                        "required": true
+                    },
+                    {
+                        "name": "product_description                  ",
+                        "in": "query",
+                        "description": "Description of the product           ",
+                        "required": true
+                    },
+                    {
+                        "name": "country                              ",
+                        "in": "query",
+                        "description": "Country                              ",
+                        "required": true
+                    },
+                    {
+                        "name": "city                                 ",
+                        "in": "query",
+                        "description": "City                                 ",
+                        "required": true
+                    },
+                    {
+                        "name": "line1                                ",
+                        "in": "query",
+                        "description": "Line 1                               ",
+                        "required": true
+                    },
+                    {
+                        "name": "line2                                ",
+                        "in": "query",
+                        "description": "Line 2                               ",
+                        "required": true
+                    },
+                    {
+                        "name": "postal_code                          ",
+                        "in": "query",
+                        "description": "Postal Code                          ",
+                        "required": true
+                    },
+                    {
+                        "name": "state                                ",
+                        "in": "query",
+                        "description": "State                                ",
+                        "required": true
+                    },
+                    {
+                        "name": "name                                 ",
+                        "in": "query",
+                        "description": "Business Name                        ",
+                        "required": true
+                    },
+                    {
+                        "name": "registration_number                  ",
+                        "in": "query",
+                        "description": "Registration Number                  ",
+                        "required": true
+                    },
+                    {
+                        "name": "tax_id                               ",
+                        "in": "query",
+                        "description": "Tax Id                               ",
+                        "required": true
+                    },
+                    {
+                        "name": "vat_id                               ",
+                        "in": "query",
+                        "description": "Vat Id                               ",
+                        "required": true
+                    },
+                    {
+                        "name": "email                                ",
+                        "in": "query",
+                        "description": "Email                                ",
+                        "required": true
+                    },
+                    {
+                        "name": "phone                                ",
+                        "in": "query",
+                        "description": "Phone number                         ",
+                        "required": true
+                    },
+                    {
+                        "name": "url                                  ",
+                        "in": "query",
+                        "description": "Website Url                          ",
+                        "required": true
+                    },
+                    {
+                        "name": "bank_account_ownership_verification_1",
+                        "in": "query",
+                        "description": "File                                 ",
+                        "required": false
+                    },
+                    {
+                        "name": "bank_account_ownership_verification_2",
+                        "in": "query",
+                        "description": "File                                 ",
+                        "required": false
+                    },
+                    {
+                        "name": "company_license_1                    ",
+                        "in": "query",
+                        "description": "File                                 ",
+                        "required": false
+                    },
+                    {
+                        "name": "company_license_2                    ",
+                        "in": "query",
+                        "description": "File                                 ",
+                        "required": false
+                    },
+                    {
+                        "name": "company_memorandum_of_association_1  ",
+                        "in": "query",
+                        "description": "File                                 ",
+                        "required": false
+                    },
+                    {
+                        "name": "company_memorandum_of_association_2  ",
+                        "in": "query",
+                        "description": "File                                 ",
+                        "required": false
+                    },
+                    {
+                        "name": "company_ministerial_decree_1         ",
+                        "in": "query",
+                        "description": "File                                 ",
+                        "required": false
+                    },
+                    {
+                        "name": "company_ministerial_decree_2         ",
+                        "in": "query",
+                        "description": "File                                 ",
+                        "required": false
+                    },
+                    {
+                        "name": "company_registration_verification_1  ",
+                        "in": "query",
+                        "description": "File                                 ",
+                        "required": false
+                    },
+                    {
+                        "name": "company_registration_verification_2  ",
+                        "in": "query",
+                        "description": "File                                 ",
+                        "required": false
+                    },
+                    {
+                        "name": "company_tax_id_verification_1        ",
+                        "in": "query",
+                        "description": "File                                 ",
+                        "required": false
+                    },
+                    {
+                        "name": "company_tax_id_verification_2        ",
+                        "in": "query",
+                        "description": "File                                 ",
+                        "required": false
+                    },
+                    {
+                        "name": "external_account_country             ",
+                        "in": "query",
+                        "description": "Country account country              ",
+                        "required": true
+                    },
+                    {
+                        "name": "external_account_currency            ",
+                        "in": "query",
+                        "description": "Currency                             ",
+                        "required": true
+                    },
+                    {
+                        "name": "account_number                       ",
+                        "in": "query",
+                        "description": "Account Number                       ",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Payment not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            }
+        },
         "/api/categories/{id}": {
             "get": {
                 "tags": [
@@ -3014,6 +5188,12 @@
                         "required": false
                     },
                     {
+                        "name": "url",
+                        "in": "query",
+                        "description": "URL",
+                        "required": true
+                    },
+                    {
                         "name": "type",
                         "in": "query",
                         "description": "Store type",
@@ -3147,6 +5327,30 @@
                         "name": "type",
                         "in": "query",
                         "description": "Store type",
+                        "required": true
+                    },
+                    {
+                        "name": "url",
+                        "in": "query",
+                        "description": "URL",
+                        "required": true
+                    },
+                    {
+                        "name": "registration_number",
+                        "in": "query",
+                        "description": "Registration number",
+                        "required": true
+                    },
+                    {
+                        "name": "tax_id",
+                        "in": "query",
+                        "description": "Tax Number",
+                        "required": true
+                    },
+                    {
+                        "name": "vat_id",
+                        "in": "query",
+                        "description": "Vat Number",
                         "required": true
                     },
                     {

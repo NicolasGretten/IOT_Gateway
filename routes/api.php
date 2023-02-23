@@ -7,6 +7,16 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\Payment\UserStripeController;
+use App\Http\Controllers\Payment\WalletController;
+use App\Http\Controllers\Payment\ChargeController;
+use App\Http\Controllers\Payment\ExternalAccountController;
+use App\Http\Controllers\Payment\InvoiceController;
+use App\Http\Controllers\Payment\PaymentIntentController;
+use App\Http\Controllers\Payment\PersonController;
+use App\Http\Controllers\Payment\PaymentMethodController;
+use App\Http\Controllers\Payment\TokenController;
+use App\Http\Controllers\Payment\WebhookController;
 use App\Http\Controllers\Product\CategoryController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Store\StoreClosingController;
@@ -163,4 +173,71 @@ Route::controller(OrderController::class)->group(function () {
     Route::post('orders/', 'create')->middleware('auth');
     Route::patch('orders/{id}', 'update')->middleware('auth');
     Route::delete('orders/{id}', 'delete')->middleware('auth');
+});
+
+Route::controller(WalletController::class)->group(function () {
+    Route::get('stores/wallets/{id}', 'retrieve');
+    Route::post('stores/wallets/', 'create');
+    Route::patch('stores/wallets/{id}', 'update');
+    Route::delete('stores/wallets/{id}', 'delete');
+});
+
+Route::controller(PersonController::class)->group(function () {
+    Route::get('stores/wallets/{id}/persons/{person_id}', 'retrieve');
+    Route::post('stores/wallets/{id}/persons/', 'create');
+    Route::get('stores/wallets/{id}/persons/', 'list');
+});
+
+Route::controller(ExternalAccountController::class)->group(function () {
+    Route::get('stores/wallets/{id}/external-accounts/{external_account_id}', 'retrieve');
+    Route::get('stores/wallets/{id}/external-accounts', 'list');
+    Route::post('stores/wallets/{id}/external-accounts', 'create');
+    Route::patch('stores/wallets/{id}/external-accounts/{external_account_id}', 'update');
+    Route::delete('stores/wallets/{id}/external-accounts/{external_account_id}', 'delete');
+});
+
+Route::controller(UserStripeController::class)->group(function () {
+    Route::get('users/stripe/{id}', 'retrieve');
+    Route::get('users/stripe/{id}/check-payment-account', 'checkPaymentAccount');
+    Route::post('users/stripe/', 'create');
+    Route::patch('users/stripe/{id}', 'update');
+    Route::delete('users/stripe/{id}', 'delete');
+});
+
+Route::controller(ChargeController::class)->group(function () {
+    Route::get('users/stripe/{id}/charges', 'list');
+    Route::get('users/stripe/{id}/charges/{charge_id}', 'retrieve');
+});
+
+Route::controller(InvoiceController::class)->group(function () {
+    Route::get('users/stripe/{id}/invoices', 'list');
+    Route::get('users/stripe/{id}/invoices/preview', 'preview');
+    Route::get('users/stripe/{id}/invoices/{invoice_id}', 'retrieve');
+});
+
+Route::controller(PaymentMethodController::class)->group(function () {
+    Route::get('users/stripe/{id}/payments-methods', 'list');
+    Route::get('users/stripe/{id}/payments-methods/get-setup-intent', 'getSetupIntent');
+    Route::post('users/stripe/{id}/payments-methods/confirm-setup-intent', 'confirmSetupIntent');
+    Route::get('users/stripe/{id}/payments-methods/default-payments-method', 'defaultPaymentMethod');
+    Route::get('users/stripe/{id}/payments-methods/{payment_method_id}', 'retrieve');
+    Route::post('users/stripe/{id}/payments-methods', 'create');
+    Route::patch('users/stripe/{id}/payments-methods', 'updateDefaultPaymentMethod');
+    Route::delete('users/stripe/{id}/payments-methods', 'delete');
+});
+
+Route::controller(PaymentIntentController::class)->group(function () {
+    Route::get('payment-intent/{payment_intent_id}', 'retrieve');
+});
+
+Route::controller(TokenController::class)->group(function () {
+    Route::get('tokens/{token_id}', 'retrieve');
+    Route::post('tokens/account', 'accountToken');
+    Route::post('tokens/person', 'personToken');
+    Route::post('tokens/bank-account', 'bankAccountToken');
+    Route::post('tokens/card', 'cardToken');
+});
+
+Route::controller(WebhookController::class)->group(function () {
+    Route::post('/stripe/webhook', 'handleWebhook');
 });
