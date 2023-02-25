@@ -13,7 +13,7 @@ class SubscriptionController extends Controller
     use MicroserviceTrait;
 
     /**
-     * @OA\Get(
+     * @OA\Post(
      *     path="/api/users/{id}/subscriptions",
      *      operationId="create",
      *      tags={"Subscriptions"},

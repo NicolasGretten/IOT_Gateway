@@ -3025,7 +3025,7 @@
             }
         },
         "/api/users/{id}/subscriptions": {
-            "get": {
+            "post": {
                 "tags": [
                     "Subscriptions"
                 ],
