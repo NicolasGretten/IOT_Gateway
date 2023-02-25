@@ -40,7 +40,7 @@ trait MicroserviceTrait
                     "X-Forwarded-Port" => $request->header('X-Forwarded-Port'),
                     "X-Forwarded-Proto" => $request->header('X-Forwarded-Proto'),
                     "X-Real-Ip" => $request->header('X-Real-Ip')
-                ])->post($uri . $request->getRequestUri(), $request)->body();
+                ])->get($uri . $request->getRequestUri(), $request)->body();
             } else {
                 $response = match ($request->method()) {
                     'POST' => Http::withHeaders([
