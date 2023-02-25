@@ -15,7 +15,7 @@ class SubscriptionController extends Controller
     /**
      * @OA\Get(
      *     path="/api/users/{id}/subscriptions",
-     *      operationId="retrieve",
+     *      operationId="create",
      *      tags={"Subscriptions"},
      *      summary="Create a Subscription",
      *      description="Create a Subscription",
@@ -49,7 +49,7 @@ class SubscriptionController extends Controller
      *      @OA\Response(response=500, description="Servor Error"),
      * )
      */
-    public function update(Request $request): ?Subscription
+    public function update(Request $request)
     {
         return $this->uri($request, env("PAYMENT_API"));
     }
