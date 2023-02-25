@@ -27,8 +27,19 @@ trait MicroserviceTrait
                 Log::alert("Stripe-Signature =================== " . $request->header('Stripe-Signature'));
                 Log::alert("User-Agent =================== " . $request->header('User-Agent'));
                 $response = Http::withHeaders([
+                    "Accept" => $request->header('Accept'),
+                    "Cache-Control" => $request->header('Cache-Control'),
+                    "Connection" => $request->header('Connection'),
+                    "Content-Length" => $request->header('Content-Length'),
+                    "Content-Type" => $request->header('Content-Type'),
+                    "Host" => $request->header('Host'),
                     "Stripe-Signature" => $request->header('Stripe-Signature'),
-                    "User-Agent" => $request->header('User-Agent')
+                    "User-Agent" => $request->header('User-Agent'),
+                    "X-Forwarded-For" => $request->header('X-Forwarded-For'),
+                    "X-Forwarded-Host" => $request->header('X-Forwarded-Host'),
+                    "X-Forwarded-Port" => $request->header('X-Forwarded-Port'),
+                    "X-Forwarded-Proto" => $request->header('X-Forwarded-Proto'),
+                    "X-Real-Ip" => $request->header('X-Real-Ip')
                 ])->post($uri . $request->getRequestUri(), $request)->body();
             } else {
                 $response = match ($request->method()) {
