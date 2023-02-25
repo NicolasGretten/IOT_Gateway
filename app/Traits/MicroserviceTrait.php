@@ -24,7 +24,9 @@ trait MicroserviceTrait
 
             } else if($uri === env('PAYMENT_API')){
                 Log::alert("REQUEST =================== " . $request);
-                Http::withHeaders($request->header())->post($uri . $request->getRequestUri(), $request->request->all())->body();
+                Log::alert("Stripe Signature =================== " . $request['Stripe-Signature']);
+                Log::alert("User Agent =================== " . $request['User-Agent']);
+                $response = Http::withHeaders($request->header())->post($uri . $request->getRequestUri(), $request->request->all())->body();
             } else {
                 $response = match ($request->method()) {
                     'POST' => Http::withHeaders([
