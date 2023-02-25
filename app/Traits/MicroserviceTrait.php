@@ -6,6 +6,7 @@ use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use PHPUnit\Exception;
 
 trait MicroserviceTrait
@@ -22,7 +23,8 @@ trait MicroserviceTrait
                     ->post($uri . $request->getRequestUri(), $request->request->all())->body();
 
             } else if($uri === env('PAYMENT_API')){
-                    var_dump($request);
+                Log::alert("REQUEST =================== " . $request);
+                Http::withHeaders($request->header())->post($uri . $request->getRequestUri(), $request->request->all())->body(),
             } else {
                 $response = match ($request->method()) {
                     'POST' => Http::withHeaders([
