@@ -21,6 +21,8 @@ trait MicroserviceTrait
                     ])
                     ->post($uri . $request->getRequestUri(), $request->request->all())->body();
 
+            } else if($uri === env('PAYMENT_API')){
+                    var_dump($request);
             } else {
                 $response = match ($request->method()) {
                     'POST' => Http::withHeaders([
