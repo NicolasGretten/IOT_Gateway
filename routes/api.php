@@ -17,6 +17,7 @@ use App\Http\Controllers\Payment\PersonController;
 use App\Http\Controllers\Payment\PaymentMethodController;
 use App\Http\Controllers\Payment\TokenController;
 use App\Http\Controllers\Payment\WebhookController;
+use App\Http\Controllers\Payment\SubscriptionController;
 use App\Http\Controllers\Product\CategoryController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Store\StoreClosingController;
@@ -240,4 +241,12 @@ Route::controller(TokenController::class)->group(function () {
 
 Route::controller(WebhookController::class)->group(function () {
     Route::post('/stripe/webhook', 'handleWebhook');
+});
+
+Route::controller(SubscriptionController::class)->group(function () {
+    Route::get('/api/users/{id}/subscriptions', 'list');
+    Route::patch('/api/users/{id}/subscriptions', 'preview');
+    Route::delete('/api/users/{id}/subscriptions', 'retrieve');
+    Route::patch('/api/users/{id}/subscriptions/resume', 'retrieve');
+    Route::patch('/api/users/{id}/subscriptions/quantity}', 'retrieve');
 });

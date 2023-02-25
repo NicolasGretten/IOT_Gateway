@@ -4,94 +4,115 @@ namespace App\Http\Controllers\Payment;
 
 use App\Http\Controllers\Controller;
 use App\Traits\MicroserviceTrait;
+use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use OpenApi\Annotations as OA;
 
 class SubscriptionController extends Controller
 {
     use MicroserviceTrait;
 
     /**
-     * Create a new subscription
-     *
-     * Create a new subscription.
-     *
-     * @param $payload
-     * @return JsonResponse
+     * @OA\Get(
+     *     path="/api/users/{id}/subscriptions",
+     *      operationId="retrieve",
+     *      tags={"Subscriptions"},
+     *      summary="Create a Subscription",
+     *      description="Create a Subscription",
+     *      @OA\Parameter(name="id",description="User id", required=true, in="query"),
+     *      @OA\Parameter(name="plan",description="Subscription plan: default", required=true, in="query"),
+     *      @OA\Response(response=200, description="successful operation"),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Payment not found."),
+     *      @OA\Response(response=409, description="Conflict"),
+     *      @OA\Response(response=500, description="Servor Error"),
+     * )
      */
-    public function create($payload): JsonResponse
+    public function create(Request $request): JsonResponse
     {
         return $this->uri($request, env("PAYMENT_API"));
     }
 
     /**
-     * Update a subscription
-     *
-     * Update a subscription by swapping the plan.
-     *
-     * @param $payload
-     * @return Subscription|null
+     * @OA\Patch(
+     *     path="/api/users/{id}/subscriptions",
+     *      operationId="update",
+     *      tags={"Subscriptions"},
+     *      summary="Update a Subscription",
+     *      description="Update a Subscription",
+     *      @OA\Parameter(name="id",description="User id", required=true, in="query"),
+     *      @OA\Parameter(name="plan",description="Subscription plan", required=true, in="query"),
+     *      @OA\Response(response=200, description="successful operation"),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Payment not found."),
+     *      @OA\Response(response=409, description="Conflict"),
+     *      @OA\Response(response=500, description="Servor Error"),
+     * )
      */
-    public function update($payload): ?Subscription
+    public function update(Request $request): ?Subscription
     {
         return $this->uri($request, env("PAYMENT_API"));
     }
 
     /**
-     * Delete a subscription
-     *
-     * Delete a subscription.
-     *
-     * @group Subscriptions
-     *
-     * @urlParam id        required    Customer ID         Example: cus_JL3EpIjK0AsHy3
-     *
-     * @bodyParam subscription_name required    Subscription name   Example: abonnement professionnels
-     *
-     * @responseFile /responses/subscriptions/delete.json
-     *
-     * @param $payload
-     * @return JsonResponse
+     * @OA\Delete(
+     *     path="/api/users/{id}/subscriptions",
+     *      operationId="delete",
+     *      tags={"Subscriptions"},
+     *      summary="Delete a Subscription",
+     *      description="Delete a Subscription",
+     *      @OA\Parameter(name="id",description="User id", required=true, in="query"),
+     *      @OA\Response(response=200, description="successful operation"),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Payment not found."),
+     *      @OA\Response(response=409, description="Conflict"),
+     *      @OA\Response(response=500, description="Servor Error"),
+     * )
      */
-    public function delete($payload): JsonResponse
+    public function delete(Request $request): JsonResponse
     {
         return $this->uri($request, env("PAYMENT_API"));
 
     }
 
     /**
-     * Resume a subscription
-     *
-     * Resume a previously deleted subscription.
-     *
-     * @group Subscriptions
-     *
-     * @urlParam id        required    Customer ID         Example: cus_JL3EpIjK0AsHy3
-     *
-     * @bodyParam subscription_name required    Subscription name   Example: abonnement professionnels
-     *
-     * @responseFile /responses/subscriptions/resume.json
-     *
-     * @param $payload
-     * @return JsonResponse
+     * @OA\Patch(
+     *     path="/api/users/{id}/subscriptions/resume",
+     *      operationId="resume",
+     *      tags={"Subscriptions"},
+     *      summary="Resume a Subscription",
+     *      description="Resume a Subscription",
+     *      @OA\Parameter(name="id",description="User id", required=true, in="query"),
+     *      @OA\Response(response=200, description="successful operation"),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Payment not found."),
+     *      @OA\Response(response=409, description="Conflict"),
+     *      @OA\Response(response=500, description="Servor Error"),
+     * )
      */
-    public function resume($payload): JsonResponse
+    public function resume(Request $request): JsonResponse
     {
         return $this->uri($request, env("PAYMENT_API"));
     }
 
     /**
-     * @param $payload
-     * @return JsonResponse
+     * @OA\Patch(
+     *     path="/api/users/{id}/subscriptions/quantity",
+     *      operationId="quantity",
+     *      tags={"Subscriptions"},
+     *      summary="Update quantity of a Subscription",
+     *      description="Update quantity of a Subscription",
+     *      @OA\Parameter(name="id",description="User id", required=true, in="query"),
+     *      @OA\Parameter(name="quantity",description="Quantity of subscription", required=true, in="query"),
+     *      @OA\Response(response=200, description="successful operation"),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Payment not found."),
+     *      @OA\Response(response=409, description="Conflict"),
+     *      @OA\Response(response=500, description="Servor Error"),
+     * )
      */
-    public function quantity($payload): JsonResponse
+    public function quantity(Request $request): JsonResponse
     {
-        return $this->uri($request, env("PAYMENT_API"));
-    }
-
-    /*
-     * Return a user by his Id.
-     */
-    public function findCustomer($payload){
         return $this->uri($request, env("PAYMENT_API"));
     }
 }
