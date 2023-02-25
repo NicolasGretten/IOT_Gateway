@@ -244,9 +244,9 @@ Route::controller(WebhookController::class)->group(function () {
 });
 
 Route::controller(SubscriptionController::class)->group(function () {
-    Route::get('/api/users/{id}/subscriptions', 'list');
-    Route::patch('/api/users/{id}/subscriptions', 'preview');
-    Route::delete('/api/users/{id}/subscriptions', 'retrieve');
-    Route::patch('/api/users/{id}/subscriptions/resume', 'retrieve');
-    Route::patch('/api/users/{id}/subscriptions/quantity}', 'retrieve');
+    Route::get('/api/users/{id}/subscriptions', 'create');
+    Route::patch('/api/users/{id}/subscriptions', 'update');
+    Route::delete('/api/users/{id}/subscriptions', 'delete');
+    Route::patch('/api/users/{id}/subscriptions/resume', 'resume');
+    Route::patch('/api/users/{id}/subscriptions/quantity}', 'quantity');
 });
