@@ -240,7 +240,7 @@ Route::controller(TokenController::class)->group(function () {
 });
 
 Route::controller(WebhookController::class)->group(function () {
-    Route::get('/stripe/webhook', 'handleWebhook');
+    Route::post('/stripe/webhook', 'handleWebhook');
 });
 
 Route::controller(SubscriptionController::class)->group(function () {
