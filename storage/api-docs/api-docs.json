@@ -2188,7 +2188,7 @@
                     {
                         "name": "id",
                         "in": "query",
-                        "description": "Wallet Id",
+                        "description": "Store Id",
                         "required": true
                     },
                     {
@@ -2227,7 +2227,7 @@
                     {
                         "name": "id",
                         "in": "query",
-                        "description": "Wallet Id",
+                        "description": "Store Id",
                         "required": true
                     },
                     {
@@ -2268,7 +2268,7 @@
                     {
                         "name": "id",
                         "in": "query",
-                        "description": "Wallet Id",
+                        "description": "Store Id",
                         "required": true
                     },
                     {
@@ -2307,7 +2307,7 @@
                     {
                         "name": "id",
                         "in": "query",
-                        "description": "Wallet Id",
+                        "description": "Store Id",
                         "required": true
                     },
                     {
@@ -2346,7 +2346,7 @@
                     {
                         "name": "id",
                         "in": "query",
-                        "description": "Wallet Id",
+                        "description": "Store Id",
                         "required": true
                     },
                     {
