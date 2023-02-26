@@ -3562,13 +3562,13 @@
                 "operationId": "bankAccountToken",
                 "parameters": [
                     {
-                        "name": "country            ",
+                        "name": "country",
                         "in": "query",
-                        "description": "The country in which the bank account is located.                                                 ",
+                        "description": "The country in which the bank account is located.",
                         "required": true
                     },
                     {
-                        "name": "currency           ",
+                        "name": "currency",
                         "in": "query",
                         "description": "The currency the bank account is in. This must be a country/currency pairing that Stripe supports.",
                         "required": true
@@ -3576,19 +3576,19 @@
                     {
                         "name": "account_holder_name",
                         "in": "query",
-                        "description": "The name of the person or business that owns the bank account.                                    ",
+                        "description": "The name of the person or business that owns the bank account.",
                         "required": false
                     },
                     {
                         "name": "account_holder_type",
                         "in": "query",
-                        "description": "The type of entity that holds the account. This can be either individual or company.              ",
+                        "description": "The type of entity that holds the account. This can be either individual or company.",
                         "required": false
                     },
                     {
-                        "name": "account_number     ",
+                        "name": "account_number",
                         "in": "query",
-                        "description": "The account number for the bank account, in string form. Must be a checking account.              ",
+                        "description": "The account number for the bank account, in string form. Must be a checking account.",
                         "required": true
                     }
                 ],
@@ -3621,75 +3621,75 @@
                 "operationId": "cardToken",
                 "parameters": [
                     {
-                        "name": "exp_month      ",
+                        "name": "exp_month",
                         "in": "query",
-                        "description": "Two-digit number representing the card's expiration month.                                                                           ",
+                        "description": "Two-digit number representing the card's expiration month.",
                         "required": true
                     },
                     {
-                        "name": "exp_year       ",
+                        "name": "exp_year",
                         "in": "query",
-                        "description": "Two- or four-digit number representing the card's expiration year.                                                                   ",
+                        "description": "Two- or four-digit number representing the card's expiration year.",
                         "required": true
                     },
                     {
-                        "name": "number         ",
+                        "name": "number",
                         "in": "query",
-                        "description": "The card number, as a string without any separators.                                                                                 ",
+                        "description": "The card number, as a string without any separators.",
                         "required": true
                     },
                     {
-                        "name": "currency       ",
+                        "name": "currency",
                         "in": "query",
-                        "description": "The currency.                                                                                                                        ",
+                        "description": "The currency.",
                         "required": false
                     },
                     {
-                        "name": "cvc            ",
+                        "name": "cvc",
                         "in": "query",
                         "description": "Card security code. Highly recommended to always include this value, but it's required only for accounts based in European countries.",
                         "required": true
                     },
                     {
-                        "name": "name           ",
+                        "name": "name",
                         "in": "query",
-                        "description": "Cardholder's full name.                                                                                                              ",
+                        "description": "Cardholder's full name.",
                         "required": false
                     },
                     {
-                        "name": "address_line1  ",
+                        "name": "address_line1",
                         "in": "query",
-                        "description": "Address line 1 (Street address / PO Box / Company name).                                                                             ",
+                        "description": "Address line 1 (Street address / PO Box / Company name).",
                         "required": false
                     },
                     {
-                        "name": "address_line2  ",
+                        "name": "address_line2",
                         "in": "query",
-                        "description": "Address line 2 (Apartment / Suite / Unit / Building).                                                                                ",
+                        "description": "Address line 2 (Apartment / Suite / Unit / Building).",
                         "required": false
                     },
                     {
-                        "name": "address_city   ",
+                        "name": "address_city",
                         "in": "query",
-                        "description": "City / District / Suburb / Town / Village.                                                                                           ",
+                        "description": "City / District / Suburb / Town / Village.",
                         "required": false
                     },
                     {
-                        "name": "address_state  ",
+                        "name": "address_state",
                         "in": "query",
-                        "description": "State / County / Province / Region.                                                                                                  ",
+                        "description": "State / County / Province / Region.",
                         "required": false
                     },
                     {
-                        "name": "address_zip    ",
+                        "name": "address_zip",
                         "in": "query",
-                        "description": "ZIP or postal code.                                                                                                                  ",
+                        "description": "ZIP or postal code.",
                         "required": false
                     },
                     {
                         "name": "address_country",
                         "in": "query",
-                        "description": "Billing address country, if provided.                                                                                                ",
+                        "description": "Billing address country, if provided.",
                         "required": false
                     }
                 ],
