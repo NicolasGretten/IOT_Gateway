@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Payment;
 
+use App\Jobs\WebhookJob;
 use App\Traits\MicroserviceTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -19,13 +20,10 @@ class WebhookController
     {
         if(!empty($request)) {
             $payload = json_decode($request->getContent(), true);
-            $method = 'handle'.Str::studly(str_replace('.', '_', $payload['type']));
 
-            if (method_exists($this, $method)) {
-                return $this->{$method}($payload);
-            }
+            WebhookJob::dispatch($payload)->onQueue('webhook');
 
-            return $this->webhookError(['error' => $payload['type'] . ' ('. $method .') method not found.']);
+            return $this->webhookSuccess($payload);
         }
 
         return $this->webhookError(['error' => 'Request empty.']);
