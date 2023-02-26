@@ -18,7 +18,7 @@ class WebhookController
     public function handleWebhook(Request $request): JsonResponse
     {
         if(!empty($request)) {
-            $payload = $request->getContent();
+            $payload = json_decode($request->getContent(), true);
             $method = 'handle'.Str::studly(str_replace('.', '_', $payload['type']));
 
             if (method_exists($this, $method)) {
