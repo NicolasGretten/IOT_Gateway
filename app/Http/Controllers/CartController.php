@@ -129,6 +129,7 @@ class CartController extends Controller
      *      @OA\Parameter(name="refund_at",description="Refund",required=false,in="query"),
      *      @OA\Parameter(name="paid_at",description="PAaid date",required=false,in="query"),
      *      @OA\Parameter(name="capture_at",description="Capture date",required=false,in="query"),
+     *      @OA\Parameter(name="store_slot_id",description="Pick up slot",required=false,in="query"),
      *      @OA\Response(response=200,description="Cart Updated"),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found")

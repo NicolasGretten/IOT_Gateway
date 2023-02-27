@@ -1160,6 +1160,12 @@
                         "in": "query",
                         "description": "Capture date",
                         "required": false
+                    },
+                    {
+                        "name": "store_slot_id",
+                        "in": "query",
+                        "description": "Pick up slot",
+                        "required": false
                     }
                 ],
                 "responses": {
