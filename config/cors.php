@@ -30,9 +30,9 @@ return [
 //    'max_age' => 0,
 //
 //    'supports_credentials' => false,
-    'allowed_origins' => ['https://staging.cheznicolas.collectandverything.fr'],
-    'allowed_methods' => ['GET', 'POST', 'PUT', 'DELETE'],
-    'allowed_headers' => ['Content-Type', 'Authorization'],
+    'allowed_origins' => ['*'],
+    'allowed_methods' => ['*'],
+    'allowed_headers' => ['*'],
 
 
 ];
