@@ -15,20 +15,24 @@ return [
     |
     */
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie'],
+//    'paths' => ['api/*', 'sanctum/csrf-cookie'],
+//
+//    'allowed_methods' => ['*'],
+//
+//    'allowed_origins' => ['*'],
+//
+//    'allowed_origins_patterns' => [],
+//
+//    'allowed_headers' => ['*'],
+//
+//    'exposed_headers' => [],
+//
+//    'max_age' => 0,
+//
+//    'supports_credentials' => false,
+    'allowed_origins' => ['https://staging.cheznicolas.collectandverything.fr'],
+    'allowed_methods' => ['GET', 'POST', 'PUT', 'DELETE'],
+    'allowed_headers' => ['Content-Type', 'Authorization'],
 
-    'allowed_methods' => ['*'],
-
-    'allowed_origins' => ['*'],
-
-    'allowed_origins_patterns' => [],
-
-    'allowed_headers' => ['*'],
-
-    'exposed_headers' => [],
-
-    'max_age' => 0,
-
-    'supports_credentials' => false,
 
 ];

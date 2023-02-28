@@ -9,6 +9,7 @@
         "ext-json": "*",
         "ext-pdo": "*",
         "astrotomic/laravel-translatable": "^11.8",
+        "barryvdh/laravel-cors": "^3.0",
         "bugsnag/bugsnag-laravel": "^2.0",
         "darkaonline/l5-swagger": "*",
         "doctrine/dbal": "^2.0",
