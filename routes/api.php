@@ -254,7 +254,7 @@ Route::controller(SubscriptionController::class)->group(function () {
 
 Route::controller(BillController::class)->group(function () {
     Route::get('bills/{id}', 'retrieve');
-    Route::get('bills/carts/{cart_id}', 'retrieve');
+    Route::get('bills/carts/{cart_id}', 'retrieveByCartId');
     Route::get('bills/', 'list');
     Route::get('bills/users/{user_id}', 'listUserId');
     Route::get('bills/stores/{store_id}', 'listStoreId');
