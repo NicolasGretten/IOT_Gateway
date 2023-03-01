@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BillController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ImageController;
@@ -249,4 +250,14 @@ Route::controller(SubscriptionController::class)->group(function () {
     Route::delete('users/{id}/subscriptions', 'delete');
     Route::patch('users/{id}/subscriptions/resume', 'resume');
     Route::patch('users/{id}/subscriptions/quantity}', 'quantity');
+});
+
+Route::controller(BillController::class)->group(function () {
+    Route::get('bills/{id}', 'retrieve');
+    Route::get('bills/carts/{cart_id}', 'retrieve');
+    Route::get('bills/', 'list');
+    Route::get('bills/users/{user_id}', 'listUserId');
+    Route::get('bills/stores/{store_id}', 'listStoreId');
+    Route::delete('bills/{id}', 'delete');
+    Route::get('bills/{id}/pdf', 'generatePdf');
 });

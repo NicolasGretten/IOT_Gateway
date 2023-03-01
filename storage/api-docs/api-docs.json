@@ -1050,6 +1050,244 @@
                 ]
             }
         },
+        "/api/bills/{id}": {
+            "get": {
+                "tags": [
+                    "Bills"
+                ],
+                "summary": "Get bill information",
+                "description": "Returns bill data",
+                "operationId": "retrieve",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Bill id",
+                        "required": true
+                    },
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "User Id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Bill not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Bills"
+                ],
+                "summary": "Delete a bill",
+                "description": "Soft delete a bill",
+                "operationId": "delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Bill id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Bill deleted"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/bills/carts/{cart_id}": {
+            "get": {
+                "tags": [
+                    "Bills"
+                ],
+                "summary": "Get bill information by cart",
+                "description": "Returns bill data",
+                "operationId": "retrieveByCartId",
+                "parameters": [
+                    {
+                        "name": "cart_id",
+                        "in": "query",
+                        "description": "Cart id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Bill not found."
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            }
+        },
+        "/api/bills": {
+            "get": {
+                "tags": [
+                    "Bills"
+                ],
+                "summary": "Get all bills information",
+                "description": "Returns bill data, ADMIN Route",
+                "operationId": "list",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            }
+        },
+        "/api/bills/users/{user_id}": {
+            "get": {
+                "tags": [
+                    "Bills"
+                ],
+                "summary": "Get all bills information by Users",
+                "description": "Returns bill data",
+                "operationId": "listUserId",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "User Id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            }
+        },
+        "/api/bills/stores/{store_id}": {
+            "get": {
+                "tags": [
+                    "Bills"
+                ],
+                "summary": "Get all bills information by store",
+                "description": "Returns bill data",
+                "operationId": "listStoreId",
+                "parameters": [
+                    {
+                        "name": "store_id",
+                        "in": "query",
+                        "description": "Store Id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            }
+        },
+        "/api/bills/{id}/pdf": {
+            "get": {
+                "tags": [
+                    "Bills"
+                ],
+                "summary": "generate a PDF",
+                "description": "Generate the bill in PDF",
+                "operationId": "generatePdf",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Bill id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Bill deleted"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
         "/api/carts/{id}": {
             "get": {
                 "tags": [
