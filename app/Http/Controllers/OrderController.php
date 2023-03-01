@@ -130,7 +130,7 @@ class OrderController extends Controller
      *      @OA\Parameter(name="id",description="Order id",required=true,in="query",),
      *      @OA\Parameter(name="comment",description="Comment",required=false,in="query"),
      *      @OA\Parameter(name="store_slot_id", description="Store slot Id", required=false, in="query"),
-     *      @OA\Parameter(name="state",description="State of order",required=false,in="query"),
+     *      @OA\Parameter(name="state",description="PENDING,PICKEDUP,AVAILABLE,ABORT,MISSING,LATE,INPROGRESS",required=false,in="query"),
      *      @OA\Parameter(name="available_at",description="State of order",required=false,in="query"),
      *      @OA\Response(response=200,description="Order Updated"),
      *      @OA\Response(response=400, description="Bad request"),

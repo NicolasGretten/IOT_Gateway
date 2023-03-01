@@ -1907,7 +1907,7 @@
                     {
                         "name": "state",
                         "in": "query",
-                        "description": "State of order",
+                        "description": "PENDING,PICKEDUP,AVAILABLE,ABORT,MISSING,LATE,INPROGRESS",
                         "required": false
                     },
                     {
