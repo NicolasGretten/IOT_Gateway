@@ -32,41 +32,45 @@ class ResponseMiddleware
      * Handle an incoming request.
      *
      * @param Request $request
-     * @param Closure                 $next
+     * @param Closure $next
      *
      * @return mixed
      * @throws Exception
      */
     public function handle($request, Closure $next)
     {
-        $request->headers->set('Accept', 'application/json');
+        if (str_contains($request->getRequestUri(), '/pdf')) {
+            return $response = $next($request);
+        } else {
+            $request->headers->set('Accept', 'application/json');
 
-        // Get the response
-        $response = $next($request);
+            // Get the response
+            $response = $next($request);
 
-        $body = $response->status() >= 400 ? ['error' => $response->original] : $response->original;
+            $body = $response->status() >= 400 ? ['error' => $response->original] : $response->original;
 
-        // Send response
-        $returnData = [
-            'timestamp' => Carbon::now()->getTimestamp(),
-            'signature' => md5(json_encode($body)),
-            'content' => [
-                'success' => $response->status() >= 400 ? false : true,
-                'async' => empty($response->headers->get('async')) ? false : (boolean) $response->headers->get('async') == true
-            ]
-        ];
+            // Send response
+            $returnData = [
+                'timestamp' => Carbon::now()->getTimestamp(),
+                'signature' => md5(json_encode($body)),
+                'content' => [
+                    'success' => $response->status() >= 400 ? false : true,
+                    'async' => empty($response->headers->get('async')) ? false : (boolean)$response->headers->get('async') == true
+                ]
+            ];
 
-        if(!empty($response->headers->get('pagination'))) {
-            $returnData['content']['pagination'] = json_decode($response->headers->get('pagination'));
+            if (!empty($response->headers->get('pagination'))) {
+                $returnData['content']['pagination'] = json_decode($response->headers->get('pagination'));
+            }
+
+            if (!empty($response->original)) {
+                $returnData['content']['body'] = $body;
+            }
+
+            /*
+             * if a route was called with a callback from a job
+             */
+            return response()->json($returnData, $response->status());
         }
-
-        if(! empty($response->original)) {
-            $returnData['content']['body'] = $body;
-        }
-
-        /*
-         * if a route was called with a callback from a job
-         */
-        return response()->json($returnData, $response->status());
     }
 }
