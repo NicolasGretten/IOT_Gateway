@@ -40,7 +40,7 @@ class ResponseMiddleware
     public function handle($request, Closure $next)
     {
         if (str_contains($request->getRequestUri(), '/pdf')) {
-            return $response = $next($request);
+            return $request;
         } else {
             $request->headers->set('Accept', 'application/json');
 
