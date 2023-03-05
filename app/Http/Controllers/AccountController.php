@@ -20,6 +20,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use OpenApi\Annotations as OA;
@@ -617,6 +618,28 @@ class AccountController extends Controller
 
             if (!auth('account')->attempt($credentials)) {
                 throw new AuthenticationException('You are unauthorized to access this resource.');
+            }
+
+            if(env('app_env') == "production") {
+                if(str_contains('user-', $account->role_id)){
+                    $userResponse = Http::get('http://user-nginx/api/users/' . $account->role_id);
+                    $userResponse = json_decode($userResponse, true);
+                    $store = $userResponse['content']['body']['store_id'];
+                }
+
+                if(str_contains('employee-', $account->role_id)){
+                    $employeeResponse = Http::get('http://employee-nginx/api/employees/' . $account->role_id);
+                    $employeeResponse = json_decode($employeeResponse, true);
+                    $store = $employeeResponse['content']['body']['store_id'];
+                }
+
+                if(str_contains('store-', $account->role_id)){
+                    $storeResponse = Http::get('http://store-nginx/api/stores/' . $account->role_id);
+                    $storeResponse = json_decode($storeResponse, true);
+                    $store = $storeResponse['content']['body']['id'];
+                }
+
+                $account->store_id = $store ?? null;
             }
 
             return response()->json($this->getToken($request, $account), 200);

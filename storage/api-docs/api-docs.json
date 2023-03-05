@@ -5624,7 +5624,7 @@
                         "name": "url",
                         "in": "query",
                         "description": "URL",
-                        "required": true
+                        "required": false
                     },
                     {
                         "name": "type",

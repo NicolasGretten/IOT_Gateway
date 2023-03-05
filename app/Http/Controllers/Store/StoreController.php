@@ -103,7 +103,7 @@ class StoreController extends Controller
      *      @OA\Parameter(name="address_id", description="Address Id", required=false, in="query"),
      *      @OA\Parameter(name="phone", description="Store phone", required=false, in="query"),
      *      @OA\Parameter(name="email", description="Store email", required=false, in="query"),
-     *      @OA\Parameter(name="url", description="URL", required=true, in="query"),
+     *      @OA\Parameter(name="url", description="URL", required=false, in="query"),
      *      @OA\Parameter(name="type", description="Store type", required=false, in="query"),
      *      @OA\Parameter(name="openings", description="Store openings json format", required=false, in="query"),
      *      @OA\Parameter(name="primary_color", description="Store primary color in hexa, example: #FFFFFF", required=false, in="query"),
