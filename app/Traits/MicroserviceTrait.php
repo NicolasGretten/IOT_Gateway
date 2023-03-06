@@ -14,7 +14,6 @@ trait MicroserviceTrait
     public function uri(Request $request, String $uri): JsonResponse
     {
         try{
-            dd($request);
             if($uri === env('IMAGE_API') && $request->hasFile('file') && $request->file('file')->isValid()){
                 $image = $request->file('file');
                 $response = Http::attach('file', file_get_contents($image), 'image.png')
