@@ -77,7 +77,7 @@ Route::controller(AddressController::class)->group(function () {
 
 Route::controller(StoreController::class)->group(function () {
     Route::get("stores/", 'list');
-    Route::post("stores/", 'create')->middleware('auth');
+    Route::post("stores/", 'create');
     Route::patch("stores/{id}", 'update')->middleware('auth');
     Route::delete("stores/{id}", 'delete')->middleware('auth');
     Route::get("stores/{id}", 'retrieve');
