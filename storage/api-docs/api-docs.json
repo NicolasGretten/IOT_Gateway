@@ -5235,6 +5235,50 @@
                 ]
             }
         },
+        "/api/products/all": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Get all products information ADMIN",
+                "description": "Returns product data",
+                "operationId": "listAll",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "Locale",
+                        "required": false
+                    },
+                    {
+                        "name": "category_id",
+                        "in": "query",
+                        "description": "Category Id",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    },
+                    "500": {
+                        "description": "Servor Error"
+                    }
+                }
+            }
+        },
         "/api/products/{id}/translate": {
             "post": {
                 "tags": [

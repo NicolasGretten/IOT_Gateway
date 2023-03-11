@@ -58,6 +58,28 @@ class ProductController extends Controller
     }
 
     /**
+     * @OA\Get(
+     *      path="/api/products/all",
+     *      operationId="listAll",
+     *      tags={"Products"},
+     *      summary="Get all products information ADMIN",
+     *      description="Returns product data",
+     *      @OA\Parameter(name="locale",description="Locale", required=false, in="query"),
+     *      @OA\Parameter(name="category_id",description="Category Id", required=false, in="query"),
+     *      @OA\Response(response=200, description="successful operation"),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=403, description="Forbidden"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      @OA\Response(response=409, description="Conflict"),
+     *      @OA\Response(response=500, description="Servor Error"),
+     * )
+     */
+    public function listAll(Request $request): JsonResponse
+    {
+        return $this->uri($request, env("PRODUCT_API"));
+    }
+
+    /**
      * @OA\Post(
      *      path="/api/products",
      *      operationId="create",
