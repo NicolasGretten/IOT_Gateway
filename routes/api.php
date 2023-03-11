@@ -143,7 +143,7 @@ Route::controller(CategoryController::class)->group(function () {
 
 Route::controller(ProductController::class)->group(function () {
     Route::get('products/{id}', 'retrieve');
-    Route::get('products/all', 'listAll')->middleware('auth');
+    Route::get('admin/products/', 'listAll')->middleware('auth');
     Route::get('products/', 'list');
     Route::post('products/', 'create')->middleware('auth');
     Route::delete('products/{id}', 'delete')->middleware('auth');
