@@ -5235,7 +5235,7 @@
                 ]
             }
         },
-        "/api/products/all": {
+        "/api/admin/products/": {
             "get": {
                 "tags": [
                     "Products"

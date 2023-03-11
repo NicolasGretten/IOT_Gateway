@@ -59,7 +59,7 @@ class ProductController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/api/products/all",
+     *      path="/api/admin/products/",
      *      operationId="listAll",
      *      tags={"Products"},
      *      summary="Get all products information ADMIN",
