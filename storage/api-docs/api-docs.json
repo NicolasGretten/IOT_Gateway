@@ -5276,7 +5276,12 @@
                     "500": {
                         "description": "Servor Error"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
             }
         },
         "/api/products/{id}/translate": {

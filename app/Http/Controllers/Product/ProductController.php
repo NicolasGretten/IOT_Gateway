@@ -72,6 +72,7 @@ class ProductController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      *      @OA\Response(response=409, description="Conflict"),
      *      @OA\Response(response=500, description="Servor Error"),
+     *      security={{"bearer_token":{}}}
      * )
      */
     public function listAll(Request $request): JsonResponse
