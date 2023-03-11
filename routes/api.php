@@ -144,8 +144,8 @@ Route::controller(CategoryController::class)->group(function () {
 Route::controller(ProductController::class)->group(function () {
     Route::get('products/{id}', 'retrieve');
     Route::get('products/', 'list');
-    Route::get('products/all', 'listAll');
     Route::post('products/', 'create')->middleware('auth');
+    Route::get('products/all', 'listAll')->middleware('auth');
     Route::delete('products/{id}', 'delete')->middleware('auth');
     Route::patch('products/{id}', 'update')->middleware('auth');
     Route::post('products/{id}/translate', 'addTranslation')->middleware('auth');
