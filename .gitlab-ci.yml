@@ -1,10 +1,14 @@
 stages:
   - staging-build
+  - staging-test
+  - staging-scan
   - staging-deploy
   - staging-clean
-  - prod-build
-  - prod-deploy
-  - prod-clean
+  - production-build
+  - production-test
+  - production-scan
+  - production-deploy
+  - production-clean
 
 staging-build-job:
   stage: staging-build
@@ -16,15 +20,46 @@ staging-build-job:
   script:
     - cd /home/admin/docker.collect.verything/api/ && sudo docker compose build --no-cache
 
+staging-test-job:
+  stage: staging-test
+  allow_failure: false
+  needs: [staging-build-job]
+  rules:
+    - if: $CI_COMMIT_BRANCH == "staging"
+  tags:
+    - staging
+  script:
+    - sudo docker run -d --name api-test-php collectandverything-api:latest
+    - sudo docker exec api-test-php /bin/bash -c 'phpcs --standard=PSR12 app/ > output.xml || true'
+    - sudo docker exec api-test-php /bin/bash -c 'php artisan test'
+    - sudo docker cp api-test-php:/var/www/output.xml phpcs-api.xml
+  after_script:
+    - sudo docker rm -f api-test-php
+  artifacts:
+    paths:
+      - "*.xml"
+
 staging-deploy-job:
   stage: staging-deploy
   allow_failure: false
+  needs: [staging-test-job]
   rules:
     - if: $CI_COMMIT_BRANCH == "staging"
   tags:
     - staging
   script:
     - cd /home/admin/docker.collect.verything/api/ && sudo docker compose up -d
+
+staging-scan-job:
+  stage: staging-scan
+  allow_failure: true
+  rules:
+    - if: $CI_COMMIT_BRANCH == "staging"
+  needs: [staging-build-job]
+  tags:
+    - staging
+  script:
+    - sudo trivy image --severity CRITICAL,HIGH collectandverything-api:latest
 
 staging-clean-job:
   stage: staging-clean
@@ -36,8 +71,8 @@ staging-clean-job:
   script:
     - sudo docker image prune --force
 
-prod-build-job:
-  stage: prod-build
+production-build-job:
+  stage: production-build
   allow_failure: false
   rules:
     - if: $CI_COMMIT_BRANCH == "production"
@@ -46,8 +81,39 @@ prod-build-job:
   script:
     - cd /home/admin/docker.collect.verything/api/ && sudo docker compose build --no-cache
 
-prod-deploy-job:
-  stage: prod-deploy
+production-test-job:
+  stage: production-test
+  allow_failure: false
+  needs: [production-build-job]
+  rules:
+    - if: $CI_COMMIT_BRANCH == "production"
+  tags:
+    - production
+  script:
+    - sudo docker run -d --name api-test-php collectandverything-api:latest
+    - sudo docker exec api-test-php /bin/bash -c 'phpcs --standard=PSR12 app/ > output.xml || true'
+    - sudo docker exec api-test-php /bin/bash -c 'php artisan test'
+    - sudo docker cp api-test-php:/var/www/output.xml phpcs-api.xml
+  after_script:
+    - sudo docker rm -f api-test-php
+  artifacts:
+    paths:
+      - "*.xml"
+
+production-scan-job:
+  stage: production-scan
+  needs: [production-build-job]
+  allow_failure: true
+  rules:
+    - if: $CI_COMMIT_BRANCH == "production"
+  tags:
+    - production
+  script:
+    - sudo trivy image --severity CRITICAL,HIGH collectandverything-api:latest
+
+production-deploy-job:
+  stage: production-deploy
+  needs: [production-test-job]
   allow_failure: false
   rules:
     - if: $CI_COMMIT_BRANCH == "production"
@@ -56,8 +122,8 @@ prod-deploy-job:
   script:
     - cd /home/admin/docker.collect.verything/api/ && sudo docker compose up -d
 
-prod-clean-job:
-  stage: prod-clean
+production-clean-job:
+  stage: production-clean
   allow_failure: false
   rules:
     - if: $CI_COMMIT_BRANCH == "production"
