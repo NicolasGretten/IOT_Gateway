@@ -23,7 +23,6 @@ trait MicroserviceTrait
                     ->post($uri . $request->getRequestUri(), $request->request->all())->body();
 
             } else if($uri === env('PAYMENT_API') && $request->header('Stripe-Signature') && $request->object == "event"){
-                dd('ok');
                 $response = Http::withHeaders([
                     "Accept" => $request->header('Accept'),
                     "Cache-Control" => $request->header('Cache-Control'),
@@ -56,7 +55,7 @@ trait MicroserviceTrait
                 };
             }
             $response = json_decode($response);
-            return response()->json($response->content->body);
+            return response()->json($response->content->body ?? []);
         } catch (Exception $e) {
             Bugsnag::notifyException($e);
             return response()->json($e->getMessage());
