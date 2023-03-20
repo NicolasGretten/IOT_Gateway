@@ -18,17 +18,83 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
          Account::factory()->create([
-            'id'=> 'account-00000000-0000-0000-000000000000',
-            'account_number'=> 'MD545698872',
-            'first_name' => 'John',
-            'last_name' => 'Doe',
-            'email' => 'john@doe.com',
+            'id'=> 'account-00000000-0000-0000-0000-000000000001',
+            'account_number'=> '000000000001',
+            'first_name' => 'Admin',
+            'last_name' => 'Admin',
+            'email' => 'admin@yopmail.com',
             'password' => app('hash')->make('12345678'),
             'birthday' => '1970-01-01',
             'gender' => 'male',
-            'phone' => '33602010302',
-            'locale' => 'fr-fr',
+            'phone' => '+33602010302',
+            'locale' => 'fr',
+            'role' => 'SUPER_ADMIN',
+            'role_id' => 'admin-00000000-0000-0000-0000-000000000001',
             'keep_logging' => '1',
          ]);
+
+        Account::factory()->create([
+            'id'=> 'account-00000000-0000-0000-0000-000000000002',
+            'account_number'=> '000000000002',
+            'first_name' => 'John',
+            'last_name' => 'Doe',
+            'email' => 'johnDoe@yopmail.com',
+            'password' => app('hash')->make('12345678'),
+            'birthday' => '1970-01-01',
+            'gender' => 'male',
+            'phone' => '+33602010301',
+            'locale' => 'fr',
+            'role' => 'USER',
+            'role_id' => 'user-00000000-0000-0000-0000-000000000001',
+            'keep_logging' => '1',
+        ]);
+
+        Account::factory()->create([
+            'id'=> 'account-00000000-0000-0000-0000-000000000003',
+            'account_number'=> '000000000003',
+            'first_name' => 'Store',
+            'last_name' => 'Owner1',
+            'email' => 'storeOwner@yopmail.com',
+            'password' => app('hash')->make('12345678'),
+            'birthday' => '1970-01-01',
+            'gender' => 'male',
+            'phone' => '+33602010307',
+            'locale' => 'fr',
+            'role' => 'STORE_OWNER',
+            'role_id' => 'store-00000000-0000-0000-0000-000000000001',
+            'keep_logging' => '1',
+        ]);
+
+        Account::factory()->create([
+            'id'=> 'account-00000000-0000-0000-0000-000000000004',
+            'account_number'=> '000000000004',
+            'first_name' => 'Store',
+            'last_name' => 'Owner2',
+            'email' => 'storeOwner2@yopmail.com',
+            'password' => app('hash')->make('12345678'),
+            'birthday' => '1970-01-01',
+            'gender' => 'male',
+            'phone' => '+33602010308',
+            'locale' => 'fr',
+            'role' => 'STORE_OWNER',
+            'role_id' => 'store-00000000-0000-0000-0000-000000000002',
+            'keep_logging' => '1',
+        ]);
+
+        Account::factory()->create([
+            'id'=> 'account-00000000-0000-0000-0000-000000000005',
+            'account_number'=> '000000000005',
+            'first_name' => 'Jane',
+            'last_name' => 'Doe',
+            'email' => 'janeDoe@yopmail.com',
+            'password' => app('hash')->make('12345678'),
+            'birthday' => '1970-01-01',
+            'gender' => 'female',
+            'phone' => '+33602010341',
+            'locale' => 'fr',
+            'role' => 'USER',
+            'role_id' => 'user-00000000-0000-0000-0000-000000000002',
+            'keep_logging' => '1',
+        ]);
     }
 }
