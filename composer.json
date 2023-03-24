@@ -20,7 +20,8 @@
         "robthree/twofactorauth": "^1.7",
         "tymon/jwt-auth": "dev-develop",
         "vladimir-yuldashev/laravel-queue-rabbitmq": "^13.1",
-        "zircote/swagger-php": "*"
+        "zircote/swagger-php": "*",
+        "laravel/sanctum": "^3.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
