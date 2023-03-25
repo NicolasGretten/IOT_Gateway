@@ -1,11 +1,13 @@
 stages:
   - staging-build
   - staging-test
+  - staging-code-quality
   - staging-scan
   - staging-deploy
   - staging-clean
   - production-build
   - production-test
+  - production-code-quality
   - production-scan
   - production-deploy
   - production-clean
@@ -18,7 +20,7 @@ staging-build-job:
   tags:
     - staging
   script:
-    - cd /home/admin/docker.collect.verything/api/ && sudo docker compose build --no-cache
+    - cd /home/admin/docker.collect.verything/api && sudo -E docker compose build --no-cache
 
 staging-test-job:
   stage: staging-test
@@ -29,9 +31,22 @@ staging-test-job:
   tags:
     - staging
   script:
-    - sudo docker run -d --name api-test-php collectandverything-api:latest
+    - sudo docker run -d --network=collectandverything --name api-test-php collectandverything-api:latest
+    - sudo docker exec api-test-php /bin/bash -c 'php artisan test'
+  after_script:
+    - sudo docker rm -f api-test-php
+
+staging-code-quality-job:
+  stage: staging-code-quality
+  allow_failure: false
+  needs: [staging-build-job]
+  rules:
+    - if: $CI_COMMIT_BRANCH == "staging"
+  tags:
+    - staging
+  script:
+    - sudo docker run -d --network=collectandverything --name api-test-php collectandverything-api:latest
     - sudo docker exec api-test-php /bin/bash -c 'phpcs --standard=PSR12 app/ > output.xml || true'
-    - sudo docker exec api-test-php /bin/bash -c 'php artisan test || true'
     - sudo docker cp api-test-php:/var/www/output.xml phpcs-api.xml
   after_script:
     - sudo docker rm -f api-test-php
@@ -48,7 +63,7 @@ staging-deploy-job:
   tags:
     - staging
   script:
-    - cd /home/admin/docker.collect.verything/api/ && sudo docker compose up -d
+    - cd /home/admin/docker.collect.verything/api && sudo -E docker compose up -d
 
 staging-scan-job:
   stage: staging-scan
@@ -79,7 +94,7 @@ production-build-job:
   tags:
     - production
   script:
-    - cd /home/admin/docker.collect.verything/api/ && sudo docker compose build --no-cache
+    - cd /home/admin/docker.collect.verything/api && sudo -E docker compose build --no-cache
 
 production-test-job:
   stage: production-test
@@ -90,9 +105,22 @@ production-test-job:
   tags:
     - production
   script:
-    - sudo docker run -d --name api-test-php collectandverything-api:latest
-    - sudo docker exec api-test-php /bin/bash -c 'phpcs --standard=PSR12 app/ > output.xml || true'
+    - sudo docker run -d --network=collectandverything --name api-test-php collectandverything-api:latest
     - sudo docker exec api-test-php /bin/bash -c 'php artisan test'
+  after_script:
+    - sudo docker rm -f api-test-php
+
+production-code-quality-job:
+  stage: production-code-quality
+  allow_failure: false
+  needs: [production-build-job]
+  rules:
+    - if: $CI_COMMIT_BRANCH == "production"
+  tags:
+    - production
+  script:
+    - sudo docker run -d --network=collectandverything --name api-test-php collectandverything-api:latest
+    - sudo docker exec api-test-php /bin/bash -c 'phpcs --standard=PSR12 app/ > output.xml || true'
     - sudo docker cp api-test-php:/var/www/output.xml phpcs-api.xml
   after_script:
     - sudo docker rm -f api-test-php
@@ -100,27 +128,27 @@ production-test-job:
     paths:
       - "*.xml"
 
+production-deploy-job:
+  stage: production-deploy
+  allow_failure: false
+  needs: [production-test-job]
+  rules:
+    - if: $CI_COMMIT_BRANCH == "production"
+  tags:
+    - production
+  script:
+    - cd /home/admin/docker.collect.verything/api && sudo -E docker compose up -d
+
 production-scan-job:
   stage: production-scan
-  needs: [production-build-job]
   allow_failure: true
   rules:
     - if: $CI_COMMIT_BRANCH == "production"
+  needs: [production-build-job]
   tags:
     - production
   script:
     - sudo trivy image --severity CRITICAL,HIGH collectandverything-api:latest
-
-production-deploy-job:
-  stage: production-deploy
-  needs: [production-test-job]
-  allow_failure: false
-  rules:
-    - if: $CI_COMMIT_BRANCH == "production"
-  tags:
-    - production
-  script:
-    - cd /home/admin/docker.collect.verything/api/ && sudo docker compose up -d
 
 production-clean-job:
   stage: production-clean
