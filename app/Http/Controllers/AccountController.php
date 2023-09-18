@@ -38,7 +38,7 @@ class AccountController extends Controller
     /**
      * @OA\Get(
      *      path="/api/accounts/{id}",
-     *      operationId="retrieve",
+     *      operationId="retrieveAccount",
      *      tags={"Accounts"},
      *      summary="Get account information",
      *      description="Returns account data",
@@ -51,7 +51,7 @@ class AccountController extends Controller
      *      security={{"bearer_token":{}}}
      * )
      */
-    public function retrieve(Request $request): JsonResponse
+    public function retrieveAccount(Request $request): JsonResponse
     {
         try {
             $resultSet = Account::select('*')
@@ -79,7 +79,7 @@ class AccountController extends Controller
     /**
      * @OA\Get(
      *      path="/api/accounts",
-     *      operationId="list",
+     *      operationId="listAccount",
      *      tags={"Accounts"},
      *      summary="Get all account information",
      *      description="Returns accounts data",
@@ -92,7 +92,7 @@ class AccountController extends Controller
      *      security={{"bearer_token":{}}}
      * )
      */
-    public function list(Request $request): JsonResponse
+    public function listAccount(Request $request): JsonResponse
     {
         try {
             $request->validate([
@@ -127,7 +127,7 @@ class AccountController extends Controller
     /**
      * @OA\Post(
      *      path="/api/accounts",
-     *      operationId="create",
+     *      operationId="createAccount",
      *      tags={"Accounts"},
      *      summary="Post a new account",
      *      description="Create a new account",
@@ -146,7 +146,7 @@ class AccountController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found")
      * )
      */
-    public function create(Request $request): JsonResponse
+    public function createAccount(Request $request): JsonResponse
     {
         try {
             $request->merge([
@@ -213,7 +213,7 @@ class AccountController extends Controller
     /**
      * @OA\Patch (
      *      path="/api/accounts/{id}",
-     *      operationId="update",
+     *      operationId="updateAccount",
      *      tags={"Accounts"},
      *      summary="Patch an account",
      *      description="Update an account",
@@ -232,7 +232,7 @@ class AccountController extends Controller
      *      security={{"bearer_token":{}}}
      * )
      */
-    public function update(Request $request): JsonResponse
+    public function updateAccount(Request $request): JsonResponse
     {
         try {
             $request->validate([
@@ -297,7 +297,7 @@ class AccountController extends Controller
     /**
      * @OA\Delete  (
      *      path="/api/accounts/{id}",
-     *      operationId="delete",
+     *      operationId="deleteAccount",
      *      tags={"Accounts"},
      *      summary="Delete an account",
      *      description="Soft delete an account",
@@ -308,7 +308,7 @@ class AccountController extends Controller
      *      security={{"bearer_token":{}}}
      * )
      */
-    public function delete(Request $request): JsonResponse
+    public function deleteAccount(Request $request): JsonResponse
     {
         try {
             DB::beginTransaction();
@@ -445,7 +445,7 @@ class AccountController extends Controller
     /**
      * @OA\Post(
      *      path="/api/accounts/password-forgotten",
-     *      operationId="checkIfEmailIsAvailable",
+     *      operationId="passwordForgotten",
      *      tags={"Accounts"},
      *      summary="Get an email verification",
      *      description="Check if email is available",
