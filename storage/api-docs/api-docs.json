@@ -647,7 +647,7 @@
         "/api/movements/run": {
             "post": {
                 "tags": [
-                    "Movements"
+                    "Movement"
                 ],
                 "summary": "Run the car",
                 "description": "Run the car forward",
@@ -667,7 +667,7 @@
         "/api/movements/stop": {
             "post": {
                 "tags": [
-                    "Movements"
+                    "Movement"
                 ],
                 "summary": "Stop the car",
                 "description": "Stop the car",
@@ -685,9 +685,9 @@
             }
         },
         "/api/movements/backward": {
-            "post": {
+            "get": {
                 "tags": [
-                    "Movements"
+                    "Movement"
                 ],
                 "summary": "backward the car",
                 "description": "backward the car",
@@ -705,9 +705,9 @@
             }
         },
         "/api/movements/forward": {
-            "post": {
+            "get": {
                 "tags": [
-                    "Movements"
+                    "Movement"
                 ],
                 "summary": "forward the car",
                 "description": "forward the car",
@@ -725,9 +725,9 @@
             }
         },
         "/api/movements/exit": {
-            "post": {
+            "get": {
                 "tags": [
-                    "Movements"
+                    "Movement"
                 ],
                 "summary": "exit the car",
                 "description": "exit the car",
