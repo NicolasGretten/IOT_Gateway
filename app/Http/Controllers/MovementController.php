@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 use Exception;
 use OpenApi\Annotations as OA;
 
-class MovementsController extends Controller
+class MovementController extends Controller
 {
     /**
      * @OA\Post(
