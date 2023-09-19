@@ -1,6 +1,6 @@
 FROM iot-php
 
-ADD conf/supervisor/supervisord.conf /etc/supervisor/
+ADD docker/conf/supervisor/supervisord.conf /etc/supervisor/
 
 # Copy existing application directory permissions
 RUN chown -R www-data:www-data /var/www
