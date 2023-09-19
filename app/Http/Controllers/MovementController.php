@@ -13,27 +13,48 @@ use Illuminate\Http\Request;
 use Exception;
 use OpenApi\Annotations as OA;
 
-class MovementController extends Controller
+class MovementsController extends Controller
 {
     /**
      * @OA\Post(
-     *      path="/api/movements/run",
-     *      operationId="run",
-     *      tags={"Movement"},
-     *      summary="Run the car",
-     *      description="Run the car forward",
+     *      path="/api/movements/left",
+     *      operationId="left",
+     *      tags={"Movements"},
+     *      summary="Go left",
+     *      description="Move the car to the left",
      *      @OA\Response(response=200, description="successful operation"),
      *      security={{"bearer_token":{}}}
      * )
      */
-    public function run(Request $request): JsonResponse
+    public function left(Request $request): JsonResponse
     {
         try {
-            RunJob::dispatch([
-                'command' => "run",
-            ])->onQueue('run');
+            RunJob::dispatch("left")->onQueue('left');
 
-            return response()->json("RUN", 200);
+            return response()->json("Go left");
+        } catch (Exception $e) {
+
+            return response()->json($e->getMessage(), 500);
+        }
+    }
+
+    /**
+     * @OA\Post(
+     *      path="/api/movements/right",
+     *      operationId="right",
+     *      tags={"Movements"},
+     *      summary="Go right",
+     *      description="Move the car to the right",
+     *      @OA\Response(response=200, description="successful operation"),
+     *      security={{"bearer_token":{}}}
+     * )
+     */
+    public function right(Request $request): JsonResponse
+    {
+        try {
+            RunJob::dispatch("right")->onQueue('right');
+
+            return response()->json("Go right");
         } catch (Exception $e) {
 
             return response()->json($e->getMessage(), 500);
@@ -44,7 +65,7 @@ class MovementController extends Controller
      * @OA\Post(
      *      path="/api/movements/stop",
      *      operationId="stop",
-     *      tags={"Movement"},
+     *      tags={"Movements"},
      *      summary="Stop the car",
      *      description="Stop the car",
      *      @OA\Response(response=200, description="successful operation"),
@@ -66,10 +87,10 @@ class MovementController extends Controller
     }
 
     /**
-     * @OA\Get(
+     * @OA\Post(
      *      path="/api/movements/backward",
      *      operationId="backward",
-     *      tags={"Movement"},
+     *      tags={"Movements"},
      *      summary="backward the car",
      *      description="backward the car",
      *      @OA\Response(response=200, description="successful operation"),
@@ -91,10 +112,10 @@ class MovementController extends Controller
     }
 
     /**
-     * @OA\Get(
+     * @OA\Post(
      *      path="/api/movements/forward",
      *      operationId="forward",
-     *      tags={"Movement"},
+     *      tags={"Movements"},
      *      summary="forward the car",
      *      description="forward the car",
      *      @OA\Response(response=200, description="successful operation"),
@@ -116,10 +137,10 @@ class MovementController extends Controller
     }
 
     /**
-     * @OA\Get(
+     * @OA\Post(
      *      path="/api/movements/exit",
      *      operationId="exit",
-     *      tags={"Movement"},
+     *      tags={"Movements"},
      *      summary="exit the car",
      *      description="exit the car",
      *      @OA\Response(response=200, description="successful operation"),

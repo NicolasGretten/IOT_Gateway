@@ -1,34 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
-use App\Http\Controllers\AddressController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\BillController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\EmployeeController;
-use App\Http\Controllers\ImageController;
 use App\Http\Controllers\MovementController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\Payment\UserStripeController;
-use App\Http\Controllers\Payment\WalletController;
-use App\Http\Controllers\Payment\ChargeController;
-use App\Http\Controllers\Payment\ExternalAccountController;
-use App\Http\Controllers\Payment\InvoiceController;
-use App\Http\Controllers\Payment\PaymentIntentController;
-use App\Http\Controllers\Payment\PersonController;
-use App\Http\Controllers\Payment\PaymentMethodController;
-use App\Http\Controllers\Payment\TokenController;
-use App\Http\Controllers\Payment\WebhookController;
-use App\Http\Controllers\Payment\SubscriptionController;
-use App\Http\Controllers\Product\CategoryController;
-use App\Http\Controllers\Product\ProductController;
-use App\Http\Controllers\Store\StoreClosingController;
-use App\Http\Controllers\Store\StoreController;
-use App\Http\Controllers\Store\StoreImageController;
-use App\Http\Controllers\Store\StoreMediaController;
-use App\Http\Controllers\Store\StoreSlotController;
-use App\Http\Controllers\Store\StoreTranslationController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -60,7 +33,8 @@ Route::controller(AccountController::class)->group(function () {
 });
 
 Route::controller(MovementController::class)->group(function () {
-    Route::post("movements/run", 'run');
+    Route::post("movements/left", 'left');
+    Route::post("movements/right", 'right');
     Route::post("movements/stop", 'stop');
     Route::post("movements/backward", 'backward');
     Route::post("movements/forward", 'forward');

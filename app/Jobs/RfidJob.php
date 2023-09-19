@@ -11,7 +11,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class StoreOwnerUpdatedJob implements ShouldQueue
+class RfidJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     private $data;
@@ -22,7 +22,7 @@ class StoreOwnerUpdatedJob implements ShouldQueue
      */
     public function __construct($data)
     {
-       $this->data = $data;
+        $this->data = $data;
     }
 
     /**
@@ -33,12 +33,13 @@ class StoreOwnerUpdatedJob implements ShouldQueue
     public function handle()
     {
         try{
-            $data = json_decode(json_encode($this->data), true);
-            $account = Account::where('id', $data['account_id'])->first();
-            if(!empty($account) && $account->role !== $data['role']){
-                $account->role = $data['role'];
-                $account->save();
-            }
+//            $data = json_decode(json_encode($this->data), true);
+//            $account = Account::where('id', $data['account_id'])->first();
+//            if(!empty($account) && $account->role !== $data['role']){
+//                $account->role = $data['role'];
+//                $account->save();
+//            }
+            print("RFID JOB");
         }
         catch (\Exception $e){
 

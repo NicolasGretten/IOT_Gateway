@@ -185,12 +185,6 @@ class AccountController extends Controller
 
             DB::commit();
 
-            RunJob::dispatch([
-                'to' => $account->email,
-                'subject' => "Bienvenue chez Collect&Verything ". $account->first_name,
-                'template_id' => env('MAIL_TEMPLATE_WELCOME'),
-            ])->onQueue('email_created');
-
             return response()->json($account->fresh(), 201);
         }
         catch (PDOException $e) {
@@ -503,11 +497,7 @@ class AccountController extends Controller
 
             return response()->json($e->getMessage(), $e->getCode());
         }
-        catch (ValidationException $e) {
-
-            return response()->json($e->getMessage(), 409);
-        }
-        catch (Exception $e) {
+        catch (ValidationException|Exception $e) {
 
             return response()->json($e->getMessage(), 409);
         }
@@ -835,7 +825,7 @@ class AccountController extends Controller
                 'email' => 'required|email',
             ]);
 
-            $getEmail = Cache::remember('post-text-' . $request->email, 10, function () use ($request) {
+            return Cache::remember('post-text-' . $request->email, 10, function () use ($request) {
                 $resultSet = Account::select('*')
                     ->where('email', $request->email);
 
@@ -847,8 +837,6 @@ class AccountController extends Controller
 
                 return response()->json($account);
             });
-
-            return $getEmail;
 
         } catch(Exception $e){
 
