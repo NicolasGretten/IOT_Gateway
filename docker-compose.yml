@@ -5,13 +5,13 @@ services:
         build:
             context: ./docker
             dockerfile: /nginx/dockerfile
-        image: 'collectandverything-nginx'
+        image: 'iot-nginx'
         restart: unless-stopped
         tty: true
         volumes:
             - './docker/conf/nginx/nginx.conf:/etc/nginx/nginx.conf'
         networks:
-            - collectandverything
+            - iot
     php-fpm:
         container_name: api-php
         build:
@@ -19,12 +19,12 @@ services:
             dockerfile: /php/dockerfile
         volumes:
             - './:/var/www'
-        image: 'collectandverything-api:latest'
+        image: 'iot-api:latest'
         restart: unless-stopped
         tty: true
         working_dir: /var/www
         networks:
-            - collectandverything
+            - iot
 networks:
-    collectandverything:
+    iot:
         external: true

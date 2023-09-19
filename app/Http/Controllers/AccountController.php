@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Jobs\MailCreatedJob;
+set_time_limit(0);
+use App\Jobs\RunJob;
 use App\Models\Account;
 use App\Traits\FiltersTrait;
 use App\Traits\IdTrait;
@@ -68,10 +68,10 @@ class AccountController extends Controller
             return response()->json($account, 200);
         }
         catch (ValidationException | ModelNotFoundException $e) {
-            Bugsnag::notifyException($e);
+
             return response()->json($e->getMessage(), 409);
         } catch (Exception $e) {
-            Bugsnag::notifyException($e);
+
             return response()->json($e->getMessage(), 500);
         }
     }
@@ -108,18 +108,18 @@ class AccountController extends Controller
             return response()->json($resultSet->get(), 200, ['pagination' => $this->pagination]);
         }
         catch (PDOException $e) {
-            Bugsnag::notifyException($e);
+
             throw new PDOException($e);
         }
         catch (ValidationException | ModelNotFoundException $e) {
-            Bugsnag::notifyException($e);
+
             return response()->json($e->getMessage(), 409);
         } catch (AuthenticationException $e) {
-            Bugsnag::notifyException($e);
+
             return response()->json($e->getMessage(), 403);
         }
         catch (Exception $e) {
-            Bugsnag::notifyException($e);
+
             return response()->json($e->getMessage(), 500);
         }
     }
@@ -185,7 +185,7 @@ class AccountController extends Controller
 
             DB::commit();
 
-            MailCreatedJob::dispatch([
+            RunJob::dispatch([
                 'to' => $account->email,
                 'subject' => "Bienvenue chez Collect&Verything ". $account->first_name,
                 'template_id' => env('MAIL_TEMPLATE_WELCOME'),
@@ -194,18 +194,18 @@ class AccountController extends Controller
             return response()->json($account->fresh(), 201);
         }
         catch (PDOException $e) {
-            Bugsnag::notifyException($e);
+
             throw new PDOException($e);
         }
         catch (ModelNotFoundException $e) {
-            Bugsnag::notifyException($e);
+
             return response()->json($e->getMessage(), 409);
         }
         catch (JsonEncodingException $e) {
-            Bugsnag::notifyException($e);
+
             return response()->json($e->getMessage(), $e->getCode());
         } catch (DecryptException | Exception $e) {
-            Bugsnag::notifyException($e);
+
             return response()->json($e->getMessage(), 500);
         }
     }
@@ -273,23 +273,23 @@ class AccountController extends Controller
             return response()->json($account->fresh(), 200);
         }
         catch (PDOException $e) {
-            Bugsnag::notifyException($e);
+
             throw new PDOException($e);
         }
         catch (ModelNotFoundException | JsonEncodingException $e) {
-            Bugsnag::notifyException($e);
+
             return response()->json($e->getMessage(), $e->getCode());
         }
         catch (ValidationException $e) {
-            Bugsnag::notifyException($e);
+
             return response()->json($e->getMessage(), 409);
         }
         catch (AuthenticationException $e) {
-            Bugsnag::notifyException($e);
+
             return response()->json($e->getMessage(), 403);
         }
         catch (Exception $e) {
-            Bugsnag::notifyException($e);
+
             return response()->json($e->getMessage(), 500);
         }
     }
@@ -329,15 +329,15 @@ class AccountController extends Controller
             return response()->json($account->fresh(), 200);
         }
         catch (PDOException $e) {
-            Bugsnag::notifyException($e);
+
             throw new PDOException($e);
         }
         catch (ModelNotFoundException $e) {
-            Bugsnag::notifyException($e);
+
             return response()->json($e->getMessage(), $e->getCode());
         }
         catch (ValidationException | Exception $e) {
-            Bugsnag::notifyException($e);
+
             return response()->json($e->getMessage(), 409);
         }
     }
@@ -378,15 +378,15 @@ class AccountController extends Controller
             return response()->json($account->fresh(), 200);
         }
         catch (PDOException $e) {
-            Bugsnag::notifyException($e);
+
             throw new PDOException($e);
         }
         catch (ModelNotFoundException $e) {
-            Bugsnag::notifyException($e);
+
             return response()->json($e->getMessage(), $e->getCode());
         }
         catch (ValidationException | Exception $e) {
-            Bugsnag::notifyException($e);
+
             return response()->json($e->getMessage(), 409);
         }
     }
@@ -429,15 +429,15 @@ class AccountController extends Controller
             });
         }
         catch(ModelNotFoundException $e) {
-            Bugsnag::notifyException($e);
+
             return response()->json($e->getMessage(), 404);
         }
         catch(ValidationException $e) {
-            Bugsnag::notifyException($e);
+
             return response()->json($e->getMessage(), 409);
         }
         catch(Exception $e) {
-            Bugsnag::notifyException($e);
+
             return response()->json($e->getMessage(), 500);
         }
     }
@@ -483,7 +483,7 @@ class AccountController extends Controller
 
             DB::commit();
 
-            MailCreatedJob::dispatch([
+            RunJob::dispatch([
                 'to' => $account->email,
                 'subject' => "Votre token : " . $account->password_forgotten_token,
                 'template_id' => env('MAIL_TEMPLATE_PASSWORD_FORGOTTEN'),
@@ -496,19 +496,19 @@ class AccountController extends Controller
 
         }
         catch (PDOException $e) {
-            Bugsnag::notifyException($e);
+
             throw new PDOException($e);
         }
         catch (ModelNotFoundException $e) {
-            Bugsnag::notifyException($e);
+
             return response()->json($e->getMessage(), $e->getCode());
         }
         catch (ValidationException $e) {
-            Bugsnag::notifyException($e);
+
             return response()->json($e->getMessage(), 409);
         }
         catch (Exception $e) {
-            Bugsnag::notifyException($e);
+
             return response()->json($e->getMessage(), 409);
         }
     }
@@ -559,15 +559,15 @@ class AccountController extends Controller
             return response()->json($account->fresh(), 200);
         }
         catch (PDOException $e) {
-            Bugsnag::notifyException($e);
+
             throw new PDOException($e);
         }
         catch (ModelNotFoundException $e) {
-            Bugsnag::notifyException($e);
+
             return response()->json($e->getMessage(), $e->getCode());
         }
         catch (ValidationException | Exception $e) {
-            Bugsnag::notifyException($e);
+
             return response()->json($e->getMessage(), 409);
         }
     }
@@ -645,11 +645,11 @@ class AccountController extends Controller
             return response()->json($this->getToken($request, $account), 200);
         }
         catch (PDOException $e) {
-            Bugsnag::notifyException($e);
+
             throw new PDOException($e);
         }
         catch (TwoFactorAuthException | AuthenticationException | Exception $e) {
-            Bugsnag::notifyException($e);
+
             return response()->json($e->getMessage(), 409);
         }
     }
@@ -679,7 +679,7 @@ class AccountController extends Controller
             return $response;
         }
         catch (AuthenticationException $e) {
-            Bugsnag::notifyException($e);
+
             return false;
         }
     }
@@ -712,11 +712,11 @@ class AccountController extends Controller
             return response()->json($account, 200);
         }
         catch (AuthenticationException $e) {
-            Bugsnag::notifyException($e);
+
             return response()->json($e->getMessage(), 401);
         }
         catch (Exception $e) {
-            Bugsnag::notifyException($e);
+
             return response()->json($e->getMessage(), 500);
         }
     }
@@ -756,19 +756,19 @@ class AccountController extends Controller
             return response()->json($response, 200);
         }
         catch (PDOException $e) {
-            Bugsnag::notifyException($e);
+
             throw new PDOException($e);
         }
         catch (ValidationException $e) {
-            Bugsnag::notifyException($e);
+
             return response()->json($e->getMessage(), 409);
         }
         catch (AuthenticationException $e) {
-            Bugsnag::notifyException($e);
+
             return response()->json($e->getMessage(), 401);
         }
         catch (Exception $e) {
-            Bugsnag::notifyException($e);
+
             return response()->json($e->getMessage(), 500);
         }
     }
@@ -803,11 +803,11 @@ class AccountController extends Controller
             return response()->json(['message' => 'Successfully logged out.'], 200);
         }
         catch (PDOException $e) {
-            Bugsnag::notifyException($e);
+
             throw new PDOException($e);
         }
         catch (AuthenticationException | Exception $e) {
-            Bugsnag::notifyException($e);
+
             return response()->json($e->getMessage(), 409);
         }
     }
@@ -851,7 +851,7 @@ class AccountController extends Controller
             return $getEmail;
 
         } catch(Exception $e){
-            Bugsnag::notifyException($e);
+
             return response()->json($e->getMessage(), 409);
         }
     }

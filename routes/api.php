@@ -7,6 +7,7 @@ use App\Http\Controllers\BillController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\MovementController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Payment\UserStripeController;
 use App\Http\Controllers\Payment\WalletController;
@@ -58,10 +59,10 @@ Route::controller(AccountController::class)->group(function () {
     Route::patch("accounts/{id}/restore", 'restore');
 });
 
-Route::controller(AddressController::class)->group(function () {
-    Route::get("addresses/", 'list')->middleware('auth');
-    Route::post("addresses/", 'create');
-    Route::patch("addresses/{id}", 'update')->middleware('auth');
-    Route::delete("addresses/{id}", 'delete')->middleware('auth');
-    Route::get("addresses/{id}", 'retrieve')->middleware('auth');
+Route::controller(MovementController::class)->group(function () {
+    Route::post("movements/run", 'run');
+    Route::post("movements/stop", 'stop');
+    Route::post("movements/backward", 'backward');
+    Route::post("movements/forward", 'forward');
+    Route::post("movements/exit", 'exit');
 });

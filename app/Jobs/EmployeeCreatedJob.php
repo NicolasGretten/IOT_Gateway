@@ -43,7 +43,7 @@ class EmployeeCreatedJob implements ShouldQueue
             }
         }
         catch (\Exception $e){
-            Bugsnag::notifyException($e);
+
         }
     }
 }

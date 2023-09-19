@@ -41,7 +41,7 @@ class UserUpdatedJob implements ShouldQueue
             }
         }
         catch (\Exception $e){
-            Bugsnag::notifyException($e);
+
         }
     }
 }

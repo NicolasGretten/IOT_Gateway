@@ -40,7 +40,7 @@ class StoreOwnerDeletedJob implements ShouldQueue
             }
         }
         catch (\Exception $e){
-            Bugsnag::notifyException($e);
+
         }
     }
 }

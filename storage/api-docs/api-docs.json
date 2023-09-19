@@ -644,131 +644,17 @@
                 }
             }
         },
-        "/api/addresses/{id}": {
-            "get": {
+        "/api/movements/run": {
+            "post": {
                 "tags": [
-                    "Addresses"
+                    "Movements"
                 ],
-                "summary": "Get address information",
-                "description": "Returns address data",
-                "operationId": "retrieve",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Address id",
-                        "required": true
-                    }
-                ],
+                "summary": "Run the car",
+                "description": "Run the car forward",
+                "operationId": "run",
                 "responses": {
                     "200": {
                         "description": "successful operation"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Account not found."
-                    },
-                    "409": {
-                        "description": "Conflict"
-                    },
-                    "500": {
-                        "description": "Servor Error"
-                    }
-                },
-                "security": [
-                    {
-                        "bearer_token": []
-                    }
-                ]
-            },
-            "delete": {
-                "tags": [
-                    "Addresses"
-                ],
-                "summary": "Delete a address",
-                "description": "Soft delete a address",
-                "operationId": "delete",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Address id",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Account deleted"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                },
-                "security": [
-                    {
-                        "bearer_token": []
-                    }
-                ]
-            },
-            "patch": {
-                "tags": [
-                    "Addresses"
-                ],
-                "summary": "Patch a address",
-                "description": "Update an address",
-                "operationId": "update",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Address id",
-                        "required": true
-                    },
-                    {
-                        "name": "title",
-                        "in": "query",
-                        "description": "Address title"
-                    },
-                    {
-                        "name": "address_line_1",
-                        "in": "query",
-                        "description": "Address line 1"
-                    },
-                    {
-                        "name": "address_line_2",
-                        "in": "query",
-                        "description": "Address line 2"
-                    },
-                    {
-                        "name": "zip_code",
-                        "in": "query",
-                        "description": "Zip code"
-                    },
-                    {
-                        "name": "city",
-                        "in": "query",
-                        "description": "City"
-                    },
-                    {
-                        "name": "country",
-                        "in": "query",
-                        "description": "Address country"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Account updated"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 },
                 "security": [
@@ -778,32 +664,17 @@
                 ]
             }
         },
-        "/api/addresses": {
-            "get": {
+        "/api/movements/stop": {
+            "post": {
                 "tags": [
-                    "Addresses"
+                    "Movements"
                 ],
-                "summary": "Get all addresses information",
-                "description": "Returns address data",
-                "operationId": "list",
+                "summary": "Stop the car",
+                "description": "Stop the car",
+                "operationId": "stop",
                 "responses": {
                     "200": {
                         "description": "successful operation"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    },
-                    "409": {
-                        "description": "Conflict"
-                    },
-                    "500": {
-                        "description": "Servor Error"
                     }
                 },
                 "security": [
@@ -811,62 +682,66 @@
                         "bearer_token": []
                     }
                 ]
-            },
+            }
+        },
+        "/api/movements/backward": {
             "post": {
                 "tags": [
-                    "Addresses"
+                    "Movements"
                 ],
-                "summary": "Post a new address",
-                "description": "Create a new address",
-                "operationId": "create",
-                "parameters": [
-                    {
-                        "name": "title",
-                        "in": "query",
-                        "description": "Address title",
-                        "required": true
-                    },
-                    {
-                        "name": "address_line_1",
-                        "in": "query",
-                        "description": "Address line 1",
-                        "required": true
-                    },
-                    {
-                        "name": "address_line_2",
-                        "in": "query",
-                        "description": "Address line 2"
-                    },
-                    {
-                        "name": "zip_code",
-                        "in": "query",
-                        "description": "Zip code",
-                        "required": true
-                    },
-                    {
-                        "name": "city",
-                        "in": "query",
-                        "description": "City",
-                        "required": true
-                    },
-                    {
-                        "name": "country",
-                        "in": "query",
-                        "description": "Address country",
-                        "required": true
-                    }
-                ],
+                "summary": "backward the car",
+                "description": "backward the car",
+                "operationId": "backward",
                 "responses": {
-                    "201": {
-                        "description": "Account created"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
+                    "200": {
+                        "description": "successful operation"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/movements/forward": {
+            "post": {
+                "tags": [
+                    "Movements"
+                ],
+                "summary": "forward the car",
+                "description": "forward the car",
+                "operationId": "forward",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/movements/exit": {
+            "post": {
+                "tags": [
+                    "Movements"
+                ],
+                "summary": "exit the car",
+                "description": "exit the car",
+                "operationId": "exit",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
             }
         }
     },

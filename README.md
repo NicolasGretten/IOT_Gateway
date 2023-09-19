@@ -191,7 +191,7 @@ class Controller extends BaseController
             return response()->json($resultSet, 200);
 
         } catch(Exception $e){
-            Bugsnag::notifyException($e);
+            
             return response()->json($e->getMessage(), 500);
         }
     }

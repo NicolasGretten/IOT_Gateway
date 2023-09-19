@@ -40,7 +40,7 @@ class AdminDeletedJob implements ShouldQueue
             }
         }
         catch (\Exception $e){
-            Bugsnag::notifyException($e);
+
         }
     }
 }

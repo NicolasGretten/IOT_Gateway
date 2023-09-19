@@ -57,7 +57,7 @@ trait MicroserviceTrait
             $response = json_decode($response);
             return response()->json($response->content->body ?? []);
         } catch (Exception $e) {
-            Bugsnag::notifyException($e);
+
             return response()->json($e->getMessage());
         }
     }

@@ -1,4 +1,4 @@
-FROM collectandverything-php
+FROM iot-php
 
 ADD conf/supervisor/supervisord.conf /etc/supervisor/
 
