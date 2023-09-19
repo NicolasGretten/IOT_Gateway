@@ -4,7 +4,7 @@ services:
         container_name: api-nginx
         build:
             context: ./docker
-            dockerfile: /nginx/dockerfile
+            dockerfile: /gateway/docker/nginx/Dockerfile
         image: 'iot-nginx'
         restart: unless-stopped
         tty: true
