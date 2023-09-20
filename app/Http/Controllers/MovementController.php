@@ -63,6 +63,29 @@ class MovementController extends Controller
 
     /**
      * @OA\Post(
+     *      path="/api/movements/start-engine",
+     *      operationId="startEngine",
+     *      tags={"Movements"},
+     *      summary="Start the engine",
+     *      description="Start engine",
+     *      @OA\Response(response=200, description="successful operation"),
+     *      security={{"bearer_token":{}}}
+     * )
+     */
+    public function startEngine(Request $request): JsonResponse
+    {
+        try {
+            RunJob::dispatch("start_engine")->onQueue('start_engine');
+
+            return response()->json("Start engine");
+        } catch (Exception $e) {
+
+            return response()->json($e->getMessage(), 500);
+        }
+    }
+
+    /**
+     * @OA\Post(
      *      path="/api/movements/stop",
      *      operationId="stop",
      *      tags={"Movements"},
