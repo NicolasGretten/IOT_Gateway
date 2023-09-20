@@ -10,6 +10,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class RfidJob implements ShouldQueue
 {
@@ -39,13 +40,13 @@ class RfidJob implements ShouldQueue
 //                $account->role = $data['role'];
 //                $account->save();
 //            }
-            print("RFID JOB");
+            Log::debug("RFID JOB");
             StartEngineJob::dispatch( "start_engine")->onQueue('start_engine');
 
 
         }
         catch (\Exception $e){
-            print($e);
+            Log::debug($e);
         }
     }
 }
