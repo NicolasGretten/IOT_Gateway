@@ -2,51 +2,27 @@
 
 namespace App\Jobs;
 
-use App\Models\Account;
-use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Log;
+use VladimirYuldashev\LaravelQueueRabbitMQ\Queue\Jobs\RabbitMQJob as BaseJob;
 
-class RfidJob implements ShouldQueue
+class RfidJob extends BaseJob
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-    private $data;
+
     /**
-     * Create a new job instance.
+     * Fire the job.
      *
      * @return void
      */
-    public function __construct($data)
+    public function fire()
     {
-        $this->data = $data;
+        $payload = $this->payload();
+
+        $class = RfidJobOld::class;
+        $method = 'handle';
+
+        ($this->instance = $this->resolve($class))->{$method}($this, $payload);
+
+        $this->delete();
     }
 
-    /**
-     * Execute the job.
-     *
-     * @return void
-     */
-    public function handle()
-    {
-        try{
-//            $data = json_decode(json_encode($this->data), true);
-//            $account = Account::where('id', $data['account_id'])->first();
-//            if(!empty($account) && $account->role !== $data['role']){
-//                $account->role = $data['role'];
-//                $account->save();
-//            }
-            Log::debug("RFID JOB");
-            StartEngineJob::dispatch( "start_engine")->onQueue('start_engine');
 
-
-        }
-        catch (\Exception $e){
-            Log::debug($e);
-        }
-    }
 }
