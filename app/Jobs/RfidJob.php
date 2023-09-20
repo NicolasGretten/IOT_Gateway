@@ -39,14 +39,13 @@ class RfidJob implements ShouldQueue
 //                $account->role = $data['role'];
 //                $account->save();
 //            }
-            StartEngineJob::dispatch([
-                'command' => "start_engine",
-            ])->onQueue('start_engine');
-
             print("RFID JOB");
+            StartEngineJob::dispatch( "start_engine")->onQueue('start_engine');
+
+
         }
         catch (\Exception $e){
-
+            print($e);
         }
     }
 }
