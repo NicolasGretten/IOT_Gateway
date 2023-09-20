@@ -39,4 +39,5 @@ Route::controller(MovementController::class)->group(function () {
     Route::post("movements/backward", 'backward');
     Route::post("movements/forward", 'forward');
     Route::post("movements/exit", 'exit');
+    Route::post("movements/start-engine", 'startEngine');
 });
