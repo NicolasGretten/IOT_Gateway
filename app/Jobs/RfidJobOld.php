@@ -23,6 +23,7 @@ class RfidJobOld implements ShouldQueue
      */
     public function __construct($data)
     {
+        Log::debug("RFID JOB OLD");
         $this->data = $data;
     }
 
