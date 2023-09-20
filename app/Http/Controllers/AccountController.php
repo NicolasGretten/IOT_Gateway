@@ -661,7 +661,8 @@ class AccountController extends Controller
 
             $response = auth('account')->user();
             $response['credentials'] = [
-                'token' => auth('account')->setTTL(env('JWT_TTL'))->attempt($credentials),
+                'token' => auth('account')->setTTL(env('ACCESS_TOKEN_JWT_TTL'))->attempt($credentials),
+                'refreshToken' => auth('account')->setTTL(env('REFRESH_TOKEN_JWT_TTL'))->attempt($credentials),
                 'tokenType' => 'bearer',
                 'expiresIn' => auth('account')->factory()->getTTL(),
             ];
