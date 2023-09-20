@@ -17,7 +17,10 @@ use Illuminate\Database\Eloquent\JsonEncodingException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
@@ -27,6 +30,8 @@ use OpenApi\Annotations as OA;
 use PDOException;
 use Exception;
 use RobThree\Auth\TwoFactorAuthException;
+use Tymon\JWTAuth\Http\Middleware\RefreshToken;
+use Tymon\JWTAuth\Token;
 
 /**
  * @OA\Info(title="API Collect&Verything", version="0.1")
@@ -579,7 +584,7 @@ class AccountController extends Controller
      *      @OA\Response(response=500, description="Servor Error"),
      * )
      */
-    public function signIn(Request $request): JsonResponse
+    public function signIn(Request $request): Response | JsonResponse
     {
         try {
             $request->validate([
@@ -629,10 +634,14 @@ class AccountController extends Controller
                     $store = $storeResponse['content']['body']['id'];
                 }
 
+                Cookie::queue(Cookie::make('name', 'value', 30));
+
                 $account->store_id = $store ?? null;
             }
 
-            return response()->json($this->getToken($request, $account), 200);
+            $response = new Response($this->getToken($request, $account));
+
+            return $response->withCookie(cookie('auth', $this->getToken($request, $account)));
         }
         catch (PDOException $e) {
 
@@ -731,7 +740,9 @@ class AccountController extends Controller
     public function refreshToken(Request $request): JsonResponse
     {
         try {
+
             $account = auth('account')->user();
+
 
             if (empty($account)) {
                 throw new AuthenticationException('You are unauthorized to access this resource.');
@@ -739,7 +750,7 @@ class AccountController extends Controller
 
             $response = auth('account')->user();
             $response['credentials'] = [
-                'token' => auth('account')->setTTL(env('JWT_TTL'))->refresh(),
+                'token' => auth('account')->setTTL(env('ACCESS_TOKEN_JWT_TTL'))->refresh(),
                 'token_type' => 'bearer',
                 'expires_in' => auth('account')->factory()->getTTL(),
             ];
