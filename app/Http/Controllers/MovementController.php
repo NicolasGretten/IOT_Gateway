@@ -5,6 +5,7 @@ set_time_limit(0);
 use App\Jobs\BackwardJob;
 use App\Jobs\ExitJob;
 use App\Jobs\ForwardJob;
+use App\Jobs\RfidJob;
 use App\Jobs\RunJob;
 use App\Jobs\StopJob;
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
@@ -148,6 +149,8 @@ class MovementController extends Controller
     public function forward(Request $request): JsonResponse
     {
         try {
+            $test = new \App\Jobs\RfidJobOld('test');
+            $test->handle();
             ForwardJob::dispatch([
                 'command' => "forward",
             ])->onQueue('forward');
