@@ -9,10 +9,12 @@ use App\Jobs\RfidJob;
 use App\Jobs\RunJob;
 use App\Jobs\StopJob;
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Exception;
 use OpenApi\Annotations as OA;
+use Pusher\Pusher;
 
 class ImageController extends Controller
 {
@@ -35,8 +37,16 @@ class ImageController extends Controller
                 'file' => 'string|required',
             ]);
 
+            $app_id = env('PUSHER_APP_ID');
+            $app_key = env('PUSHER_APP_KEY');
+            $app_secret = env('PUSHER_APP_SECRET');
+            $app_cluster = 'eu';
+
+            $pusher = new Pusher($app_key, $app_secret, $app_id, ['cluster' => $app_cluster]);
+            $pusher->trigger('image', 'image', 'hello world');
+
             return response()->json($request->file,200);
-        } catch (Exception $e) {
+        } catch (Exception | GuzzleException $e) {
 
             return response()->json($e->getMessage(), 500);
         }
