@@ -644,7 +644,7 @@
                 }
             }
         },
-        "/api/images/": {
+        "/api/images/upload": {
             "post": {
                 "tags": [
                     "Images"
@@ -652,6 +652,14 @@
                 "summary": "Upload an image",
                 "description": "Upload an image and send it to the front",
                 "operationId": "upload",
+                "parameters": [
+                    {
+                        "name": "file",
+                        "in": "query",
+                        "description": "BASE64",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -752,14 +760,6 @@
                 "summary": "backward the car",
                 "description": "backward the car",
                 "operationId": "backward",
-                "parameters": [
-                    {
-                        "name": "file",
-                        "in": "query",
-                        "description": "BASE64",
-                        "required": true
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "successful operation"

@@ -22,7 +22,7 @@ class ImageController extends Controller
      *      operationId="upload",
      *      tags={"Images"},
      *      summary="Upload an image",
-     *      description="Upload an image and send it to the front"
+     *      description="Upload an image and send it to the front",
      *      @OA\Parameter(name="file", description="BASE64", required=true, in="query"),
      *      @OA\Response(response=200, description="successful operation"),
      *      security={{"bearer_token":{}}}
