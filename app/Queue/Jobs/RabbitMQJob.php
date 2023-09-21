@@ -2,6 +2,7 @@
 
 namespace App\Queue\Jobs;
 
+use App\Jobs\ObstacleJob;
 use App\Jobs\RfidJob;
 use VladimirYuldashev\LaravelQueueRabbitMQ\Queue\Jobs\RabbitMQJob as BaseJob;
 
@@ -17,20 +18,31 @@ class RabbitMQJob extends BaseJob
     {
         $payload = $this->payload();
 
+        echo $this->getQueue();
+        echo '    ';
+        echo $payload['job'];
+
         $method = 'handle';
-        echo 'fire -';
 
         ($this->instance = $this->resolve($payload['job']))->{$method}($payload['data']);
-        echo 'done -';
 
         $this->delete();
     }
 
     public function payload()
     {
-        return [
-            'job'  => RfidJob::class,
-            'data' => json_decode($this->getRawBody(), true)
-        ];
+        return match ($this->getQueue()) {
+            'obstacle' => [
+                'job' => ObstacleJob::class,
+                'data' => json_decode($this->getRawBody(), true)
+            ],
+            'rfid' => [
+                'job' => RfidJob::class,
+                'data' => json_decode($this->getRawBody(), true)
+            ],
+            default => [
+
+            ],
+        };
     }
 }
