@@ -26,7 +26,7 @@ Route::controller(AccountController::class)->group(function () {
     Route::post("accounts/refresh-token", 'refreshToken')->middleware('auth');
     Route::get("accounts/me", 'me')->middleware('auth');
     Route::get("accounts/search", 'search');
-    Route::get("accounts/{id}", 'retrieveAccountAccount');
+    Route::get("accounts/{id}", 'retrieveAccount');
     Route::post("accounts/", 'createAccount');
     Route::patch("accounts/{id}", 'updateAccount')->middleware('auth');
     Route::delete("accounts/{id}", 'deleteAccount')->middleware('auth');
