@@ -2,16 +2,15 @@
 
 namespace App\Jobs;
 
-use App\Events\ChatMessageSent;
-use App\Models\Account;
-use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
+use App\Events\MyEvent;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Bus\Queueable;
 use Illuminate\Support\Facades\Log;
-use VladimirYuldashev\LaravelQueueRabbitMQ\Queue\Jobs\RabbitMQJob as BaseJob;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Pusher\Pusher;
 
 class ObstacleJob implements ShouldQueue
 {
@@ -34,18 +33,16 @@ class ObstacleJob implements ShouldQueue
     {
         try{
 
-//            DO WEBSOCKET SHIT
-            $channelName = 'chat.room1'; // Le nom du canal WebSocket où vous souhaitez envoyer le message
-            $messageData = [
-                'message' => 'Hello from Laravel!',
-            ];
+            $app_id = env('PUSHER_APP_ID');
+            $app_key = env('PUSHER_APP_KEY');
+            $app_secret = env('PUSHER_APP_SECRET');
+            $app_cluster = 'eu';
 
-            Log::debug("before event");
-            broadcast(new ChatMessageSent('test'))->toOthers();
-            Log::debug("after event");
+            $pusher = new Pusher($app_key, $app_secret, $app_id, ['cluster' => $app_cluster]);
+            $pusher->trigger('obstacle', 'obstacle', 'hello world');
 
         }
-        catch (\Exception $e){
+        catch (\Exception | GuzzleException $e){
             echo($e->getMessage());
         }
     }

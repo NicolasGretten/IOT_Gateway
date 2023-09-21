@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 set_time_limit(0);
+
+use App\Events\MyEvent;
 use App\Jobs\BackwardJob;
 use App\Jobs\ExitJob;
 use App\Jobs\ForwardJob;
@@ -9,10 +11,12 @@ use App\Jobs\RfidJob;
 use App\Jobs\RunJob;
 use App\Jobs\StopJob;
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Exception;
 use OpenApi\Annotations as OA;
+use Pusher\Pusher;
 
 class MovementController extends Controller
 {
@@ -33,7 +37,7 @@ class MovementController extends Controller
             RunJob::dispatch("left")->onQueue('left');
 
             return response()->json("Go left");
-        } catch (Exception $e) {
+        } catch (Exception | GuzzleException $e) {
 
             return response()->json($e->getMessage(), 500);
         }
