@@ -752,6 +752,14 @@
                 "summary": "backward the car",
                 "description": "backward the car",
                 "operationId": "backward",
+                "parameters": [
+                    {
+                        "name": "file",
+                        "in": "query",
+                        "description": "BASE64",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "successful operation"
