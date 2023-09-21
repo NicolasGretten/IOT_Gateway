@@ -150,8 +150,6 @@ class MovementController extends Controller
     public function forward(Request $request): JsonResponse
     {
         try {
-            $test = new \App\Jobs\RfidJobOld('test');
-            $test->handle();
             ForwardJob::dispatch([
                 'command' => "forward",
             ])->onQueue('forward');
