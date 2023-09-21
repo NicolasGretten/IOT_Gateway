@@ -117,7 +117,6 @@ class MovementController extends Controller
      *      tags={"Movements"},
      *      summary="backward the car",
      *      description="backward the car",
-     *      @OA\Parameter(name="file", description="BASE64", required=true, in="query"),
      *      @OA\Response(response=200, description="successful operation"),
      *      security={{"bearer_token":{}}}
      * )
