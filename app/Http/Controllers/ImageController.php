@@ -70,7 +70,7 @@ class ImageController extends Controller
     public function getImage(Request $request): JsonResponse
     {
         try {
-            $image = Image::find($request->id);
+            $image = Image::get()->latest();;
             $imageDelete = Image::find($request->id);
 
             $imageDelete->delete();

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @method static find(mixed $id)
+ * @method static get()
  */
 class Image extends Model
 {
