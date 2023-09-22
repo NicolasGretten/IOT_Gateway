@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @method static find(mixed $id)
  * @method static get()
+ * @method static orderBy(string $string, string $string1)
  */
 class Image extends Model
 {
