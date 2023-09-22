@@ -42,7 +42,7 @@ class ImageController extends Controller
             $image->image = $request->file;
             $image->save();
 
-            return response()->json($request->file,200);
+            return response()->json($image->id,200);
         } catch (Exception | GuzzleException $e) {
             return response()->json($e->getMessage(), 500);
         }
