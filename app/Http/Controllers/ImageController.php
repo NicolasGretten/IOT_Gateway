@@ -8,6 +8,7 @@ use App\Jobs\ForwardJob;
 use App\Jobs\RfidJob;
 use App\Jobs\RunJob;
 use App\Jobs\StopJob;
+use App\Models\Image;
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\JsonResponse;
@@ -37,15 +38,44 @@ class ImageController extends Controller
                 'file' => 'string|required',
             ]);
 
+            $image = new Image();
+            $image->file = $request->file;
+            $image->save();
+
             $app_id = env('PUSHER_APP_ID');
             $app_key = env('PUSHER_APP_KEY');
             $app_secret = env('PUSHER_APP_SECRET');
             $app_cluster = 'eu';
 
             $pusher = new Pusher($app_key, $app_secret, $app_id, ['cluster' => $app_cluster]);
-            $pusher->trigger('image', 'image', $request->file);
+            $pusher->trigger('image', 'image', $image->id);
 
             return response()->json($request->file,200);
+        } catch (Exception | GuzzleException $e) {
+            return response()->json($e->getMessage(), 500);
+        }
+    }
+
+    /**
+     * @OA\Get(
+     *      path="/api/images/{id}",
+     *      operationId="getImage",
+     *      tags={"Images"},
+     *      summary="Get an image",
+     *      description="Get an image",
+     *      @OA\Parameter(name="id", description="ID", required=true, in="query"),
+     *      @OA\Response(response=200, description="successful operation"),
+     *      security={{"bearer_token":{}}}
+     * )
+     */
+    public function getImage(Request $request): JsonResponse
+    {
+        try {
+            $image = Image::find($request->id);
+            $imageDelete = Image::find($request->id);
+
+            $imageDelete->delete();
+            return response()->json($image, 200);
         } catch (Exception | GuzzleException $e) {
             return response()->json($e->getMessage(), 500);
         }
