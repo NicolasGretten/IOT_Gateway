@@ -39,16 +39,8 @@ class ImageController extends Controller
             ]);
 
             $image = new Image();
-            $image->file = $request->file;
+            $image->image = $request->file;
             $image->save();
-
-            $app_id = env('PUSHER_APP_ID');
-            $app_key = env('PUSHER_APP_KEY');
-            $app_secret = env('PUSHER_APP_SECRET');
-            $app_cluster = 'eu';
-
-            $pusher = new Pusher($app_key, $app_secret, $app_id, ['cluster' => $app_cluster]);
-            $pusher->trigger('image', 'image', $image->id);
 
             return response()->json($request->file,200);
         } catch (Exception | GuzzleException $e) {
