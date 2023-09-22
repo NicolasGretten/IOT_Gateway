@@ -62,7 +62,6 @@ class ImageController extends Controller
      *      tags={"Images"},
      *      summary="Get an image",
      *      description="Get an image",
-     *      @OA\Parameter(name="id", description="ID", required=true, in="query"),
      *      @OA\Response(response=200, description="successful operation"),
      *      security={{"bearer_token":{}}}
      * )
