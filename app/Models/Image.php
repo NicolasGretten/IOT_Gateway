@@ -12,7 +12,6 @@ class Image extends Model
 {
     use HasFactory;
 
-    protected $dates = ['last_login_at', 'created_at, updated_at, deleted_at'];
     protected $connection = 'data';
     protected $table = 'images';
     protected $primaryKey = 'id';
