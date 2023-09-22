@@ -14,6 +14,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Support\Facades\Log;
 use OpenApi\Annotations as OA;
 use Pusher\Pusher;
 
@@ -34,9 +35,6 @@ class ImageController extends Controller
     public function upload(Request $request): JsonResponse
     {
         try {
-            $request->validate([
-                'file' => 'string|required',
-            ]);
 
             $image = new Image();
             $image->image = $request->file;
@@ -44,6 +42,7 @@ class ImageController extends Controller
 
             return response()->json($image->id,200);
         } catch (Exception | GuzzleException $e) {
+            Log::debug($e->getMessage());
             return response()->json($e->getMessage(), 500);
         }
     }
