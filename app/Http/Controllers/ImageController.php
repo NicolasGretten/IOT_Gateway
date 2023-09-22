@@ -43,11 +43,10 @@ class ImageController extends Controller
             $app_cluster = 'eu';
 
             $pusher = new Pusher($app_key, $app_secret, $app_id, ['cluster' => $app_cluster]);
-            $pusher->trigger('image', 'image', 'hello world');
+            $pusher->trigger('image', 'image', $request->file);
 
             return response()->json($request->file,200);
         } catch (Exception | GuzzleException $e) {
-
             return response()->json($e->getMessage(), 500);
         }
     }
