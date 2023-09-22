@@ -45,5 +45,6 @@ Route::controller(MovementController::class)->group(function () {
 
 Route::controller(ImageController::class)->group(function () {
     Route::post("images/upload", 'upload');
+    Route::post("images/{id}", 'getImage');
 });
 
